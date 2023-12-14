@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ViewAllTenantInfo from './components/tenant/ViewAllTenantInfo';
-import ViewAllLanlordInfo from './components/ViewAllLanlordInfo';
+import ViewAllLanlordInfo from './components/landlord/ViewAllLanlordInfo';
 import LoginPage from './components/LoginPage';
 import ViewPaymentHistory from './components/tenant/ViewPaymentHistory';
 import TenantPayment from './components/tenant/TenantPayment';
