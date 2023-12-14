@@ -6,6 +6,10 @@ export default function TenantPayment() {
         e.preventDefault();
         navigate("/tenant/dashboard");
     }
+    let addCard = (e) => {
+        e.preventDefault();
+        navigate("/tenant/newCard");
+    }
     let handleSubmit = (e) => {
         e.preventDefault();
     }
@@ -15,8 +19,8 @@ export default function TenantPayment() {
         <button onClick={backToDash}>Back to Dashboard</button>
         <br/><br/>
         <div>
-            <button>Add Bank Account</button>
-            <button>Add Credit/Debit Card</button>
+            {/* <button>Add Bank Account</button> */}
+            <button onClick={addCard}>Add Credit/Debit Card</button>
         </div>
         <h2>Enter Payment Details</h2>
         <form onSubmit={handleSubmit}>
@@ -28,7 +32,7 @@ export default function TenantPayment() {
                 Extra Payment Amount <input type="number" min="0" step="0.01" name="amt"/>
             </label>
             <br/>
-            <input type="submit" onClick={handleSubmit}/>
+            <input type="submit" value="Make Payment"/>
         </form>
         </>
     )

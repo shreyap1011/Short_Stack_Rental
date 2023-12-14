@@ -37,7 +37,7 @@ export default function LoginPage() {
             localStorage.setItem("username", enteredUsername);
 
             if (storedRole === 'tenant') {
-                navigate('/tenant');
+                navigate('/tenant/dashboard');
               } else if (storedRole === 'landlord') {
                 navigate('/landlord');
               } else {

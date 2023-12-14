@@ -65,6 +65,8 @@ export default function ViewAllTenantInfo() {
         // el.innerHTML = <TenantPayment/>
         navigate("/tenant/newPayment");
     }
+    let curr_total = 0;
+    let fut_total = 0;
     
     return(
         <>
@@ -82,6 +84,7 @@ export default function ViewAllTenantInfo() {
                 <h3>{getMonth(today.getMonth())} Monthly Charges</h3>
                 {
                     curr_charges.map((charge) => {
+                        curr_total += charge.amount;
                         return(
                             <>
                             <p>{charge.description}: ${charge.amount}</p>
@@ -89,12 +92,14 @@ export default function ViewAllTenantInfo() {
                         )
                     })
                 }
+                <p><b>TOTAL: ${curr_total}</b></p>
             </div>
 
             <div>
                 <h3>{getMonth(today.getMonth() + 1)} Monthly Charges</h3>
                 {
                     fut_charges.map((charge) => {
+                        fut_total += charge.amount;
                         return(
                             <>
                             <p>{charge.description}: ${charge.amount}</p>
@@ -102,6 +107,7 @@ export default function ViewAllTenantInfo() {
                         )
                     })
                 }
+                <p><b>TOTAL: ${fut_total}</b></p>
             </div>
         </div>
         </>
