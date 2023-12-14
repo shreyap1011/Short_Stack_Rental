@@ -58,7 +58,7 @@ public class Building {
 
     @Override
     public String toString() {
-        return "Building {" + 
+        return "Building{" + 
         "buildingID=" + buildingID + 
         ", addressID=" + addressID + 
         ", userID=" + userID + 
