@@ -7,7 +7,6 @@ import jakarta.persistence.Id;
 
 @Entity
 public class User {
-     // FIELDS
     // @id means id will auto generate
 
     @Id
