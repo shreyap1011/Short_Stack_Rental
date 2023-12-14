@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ViewAllTenantInfo from './components/tenant/ViewAllTenantInfo';
 import ViewAllLandlordInfo from './components/landlord/ViewAllLandlordInfo';
 import LoginPage from './components/LoginPage';
+import RegistrationPage from './components/RegistrationPage';
 import ViewPaymentHistory from './components/tenant/ViewPaymentHistory';
 import TenantPayment from './components/tenant/TenantPayment';
 import AddCard from './components/tenant/AddCard';
@@ -16,6 +17,7 @@ function App() {
       <BrowserRouter>
       <Routes>
           <Route path={"/"} element={<LoginPage/>} exact={true}/>
+          <Route path="/registration" element={<RegistrationPage/>}/>
           <Route path={"/landlord"} element={<ViewAllLandlordInfo />} exact={true}/>
           <Route path={"/tenant/dashboard"} element={<ViewAllTenantInfo />} exact={true}/>
           <Route path={"/tenant/paymentHistory"} element={<ViewPaymentHistory/>} exact={true}></Route>
