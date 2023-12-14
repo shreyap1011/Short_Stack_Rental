@@ -37,7 +37,7 @@ export default function LoginPage() {
             localStorage.setItem("username", enteredUsername);
 
             if (storedRole === 'tenant') {
-                navigate('/tenant');
+                navigate('/tenant/dashboard');
               } else if (storedRole === 'landlord') {
                 navigate('/landlord');
               } else {
@@ -59,6 +59,9 @@ export default function LoginPage() {
         console.error('Fetch Error:', error);
         alert('Error during login.');
       });
+
+     /* const handleRegistration = () => {
+      }*/
   };
   
 
@@ -83,6 +86,10 @@ export default function LoginPage() {
           </label>
         </div>
         <button onClick={handleLogin}>Login</button>
+                {/* Registration link */}
+        <p>
+          Don't have an account? <Link to="/registration">Register</Link>
+        </p>
       </div>
     </div>
   )
