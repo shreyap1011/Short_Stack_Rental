@@ -19,7 +19,7 @@
 
 
 /* Add styles for the entire login container */
-.login-container {
+.login-container, .registration-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,13 +28,14 @@
 }
 
 /* Style the login box */
-.login-box {
+.login-box, .registration-box {
   background-color: #f5f5f5;
+  align-items: center;
   border: 1px solid #ddd;
-  padding: 20px;
+  padding: 50px;
   border-radius: 8px;
  /* width: 300px;*/
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 6px 3px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 /* Style the input fields */
@@ -46,6 +47,7 @@ label {
 
 input {
   width: 100%;
+  align-items: center;
   padding: 8px;
   margin-bottom: 16px;
   border: 1px solid #ddd;
@@ -65,5 +67,71 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+/*image*/
+
+.container {
+  display: flex;
+}
+
+.building-container {
+  width: 50%;
+}
+
+.building-image {
+  width: 100%;
+  height: auto;
+}
+
+.login-container, .registration-container {
+  width: 50%;
+}
+
+
+
+.logo-image {
+  width: 300px; /* Adjust the width as needed */
+  height: auto;
+}
+
+
+
+/* Add styles for the user type buttons */
+.user-type-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Adjust the gap as needed */
+}
+
+/* Style for the landlord and tenant buttons */
+.user-type-button {
+  background-color: #17a2b8; /* Change to your preferred color */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-type-button:hover {
+  background-color: #138496; /* Change to your preferred color */
+}
+
+/* Style for the register button */
+.register-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.register-button:hover {
+  background-color: #0056b3;
+}
+
+
 
 

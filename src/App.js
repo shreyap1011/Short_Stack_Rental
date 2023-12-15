@@ -13,7 +13,6 @@ function App() {
   return (
     <div className="App">
       {/* <img src="./img/logo.png" alt="griddle"/> */}
-      <h1>griddle</h1>
       <BrowserRouter>
       <Routes>
           <Route path={"/"} element={<LoginPage/>} exact={true}/>

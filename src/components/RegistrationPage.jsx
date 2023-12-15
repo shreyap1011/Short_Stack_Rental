@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import buildingImage from '../img/building.jpg';
+import logoImage from '../img/logo.png';
 import '../App.css';
 
 const RegistrationContainer = () => {
@@ -32,40 +34,50 @@ const RegistrationContainer = () => {
   };
 
   return (
-    <div className="registration-container">
-      <div className="registration-box">
-        <h2>Registration</h2>
-        <div>
-          <label>
-            Username:
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-        </div>
-        <button onClick={handleRegistration}>Register</button>
+    <div className="container">
+        <div className="building-container">
+            <img src={buildingImage} alt="building Image" className="building-image" />
+         </div>
+        <div className="registration-container">
+
+        <img src={logoImage} alt="Griddle Logo" className="logo-image" />
+
+        <div className="registration-box">
+            <h2>Registration</h2>
+            <div>
+            <label>
+                Create Username:
+                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            </label>
+            </div>
+            <div>
+            <label>
+                Create Password:
+                <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                />
+            </label>
+            </div>
 
         {/* Switch between registration options */}
-        <p>
-          Register as:
-          <button onClick={switchRegistrationOption}>
-            {registrationOption === 'tenant' ? 'Landlord' : 'Tenant'}
-          </button>
+        <p className="user-type-buttons">
+            <button className="user-type-button">
+                Landlord
+            </button>
+            <button className="user-type-button">
+                Tenant
+            </button>
         </p>
+        <button className="register-button" onClick={handleRegistration}> Register</button>
 
-        {/* Back to login link */}
-        <p>
-          Already have an account? <Link to="/">Login</Link>
-        </p>
-      </div>
+            {/* Back to login link */}
+            <p>
+            Already have an account? <Link to="/">Login</Link>
+            </p>
+        </div>
+        </div>
     </div>
   );
 };

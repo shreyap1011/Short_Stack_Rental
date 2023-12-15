@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import buildingImage from '../img/building.jpg';
+import logoImage from '../img/logo.png';
 import '../App.css';
 
 export default function LoginPage() {
@@ -66,30 +68,49 @@ export default function LoginPage() {
   
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <h2>Login</h2>
-        <div>
-          <label>
-            Username:
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-          </label>
+    <div>
+      {/* Header */}
+
+
+      {/* Main container */}
+      <div className="container">
+        {/* Building image */}
+        <div className="building-container">
+          <img src={buildingImage} alt="building Image" className="building-image" />
         </div>
-        <div>
-          <label>
-            Password:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
+    
+
+
+        {/* Login container */}
+        <div className="login-container">
+       
+        <img src={logoImage} alt="Griddle Logo" className="logo-image" />
+     
+          <div className="login-box">
+            <h2>Login</h2>
+            <div>
+              <label>
+                Username:
+                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+              </label>
+            </div>
+            <div>
+              <label>
+                Password:
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </label>
+            </div>
+            <button onClick={handleLogin}>Login</button>
+            {/* Registration link */}
+            <p>
+              Don't have an account? <Link to="/registration">Register</Link>
+            </p>
+          </div>
         </div>
-        <button onClick={handleLogin}>Login</button>
-                {/* Registration link */}
-        <p>
-          Don't have an account? <Link to="/registration">Register</Link>
-        </p>
       </div>
     </div>
   )
