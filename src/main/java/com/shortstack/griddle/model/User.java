@@ -16,7 +16,13 @@ public class User {
     private String username;
     private String password;
 
-     
+     // possibility: 
+        // public enum Role {
+        //     Tenant, Landlord
+        // }
+
+        // @Enumerated(EnumType.STRING)
+        // private Role role;
 
     private Boolean isLandlord;
 
