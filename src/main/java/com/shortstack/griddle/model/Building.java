@@ -37,11 +37,11 @@ public class Building {
         this.addressID = addressID;
     }
 
-    public Integer landlordID() {
+    public Integer getLandlordID() {
         return landlordID;
     }
 
-    public void setlandlordID(Integer landlordID) {
+    public void setLandlordID(Integer landlordID) {
         this.landlordID = landlordID;
     }
 
