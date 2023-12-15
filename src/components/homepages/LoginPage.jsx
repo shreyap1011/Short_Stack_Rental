@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import buildingImage from '../img/building.jpg';
-import logoImage from '../img/logo.png';
-import '../App.css';
+import buildingImage from '../../img/building.jpg';
+import logoImage from '../../img/logo.png';
+import '../../App.css';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -87,7 +87,7 @@ export default function LoginPage() {
         <img src={logoImage} alt="Griddle Logo" className="logo-image" />
      
           <div className="login-box">
-            <h2>Login</h2>
+            <h2>Tenant Login</h2>
             <div>
               <label>
                 Username:

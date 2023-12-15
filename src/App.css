@@ -17,6 +17,37 @@
   color: #61dafb;
 }
 
+.landing-page {
+  color: rgb(115, 37, 37);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.landing-page h1{
+  font-size: 50px;
+}
+.landing-page p {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.landing-page img{
+  height: 200px;
+  width: auto;
+}
+
+.landing-page button {
+  width: 250px;
+  background-color: rgb(93, 45, 11);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  transition: transform 0.2s ease;
+}
+
+.landing-page button:hover {
+  background-color: rgb(206, 157, 122);
+  color: black;
+  transform: scale(1.1);
+}
+
 
 /* Add styles for the entire login container */
 .login-container, .registration-container {
@@ -134,4 +165,31 @@ button:hover {
 
 
 
+/*landing page css*/
+.landing-page {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./img/landingPage.png'); /* Replace with the path to your image */
+  background-size: cover;
+  opacity: 60%;
+  filter: blur(10px); /* Adjust the blur intensity */
+  z-index: -1; /* Place the background image behind other elements */
+}
+
+.logo-image {
+  width: 150px; /* Adjust the width as needed */
+  margin-bottom: 20px; /* Adjust the margin as needed */
+}

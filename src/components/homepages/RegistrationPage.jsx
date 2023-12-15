@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import buildingImage from '../img/building.jpg';
-import logoImage from '../img/logo.png';
-import '../App.css';
+import buildingImage from '../../img/building.jpg';
+import logoImage from '../../img/logo.png';
+import '../../App.css';
 
 const RegistrationContainer = () => {
   const [username, setUsername] = useState('');
@@ -43,7 +43,7 @@ const RegistrationContainer = () => {
         <img src={logoImage} alt="Griddle Logo" className="logo-image" />
 
         <div className="registration-box">
-            <h2>Registration</h2>
+            <h2>Tenant Registration</h2>
             <div>
             <label>
                 Create Username:
