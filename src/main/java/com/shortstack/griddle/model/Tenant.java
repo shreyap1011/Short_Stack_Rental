@@ -21,8 +21,7 @@ public class Tenant {
     }
     
 
-    public Tenant(Integer tenantID, String firstName, String lastName, String email, String phone, String username, String password, Double balance) {
-        this.tenantID = tenantID;
+    public Tenant(String firstName, String lastName, String email, String phone, String username, String password, Double balance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

@@ -1,7 +1,6 @@
 package com.shortstack.griddle.controller;
 
 import com.shortstack.griddle.model.Address;
-import com.shortstack.griddle.model.Tenant;
 import com.shortstack.griddle.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -19,9 +19,7 @@ public class Landlord {
     public Landlord() {
     }
 
-    public Landlord(Integer landlordID, String firstName, String lastName, String email, String phone, String username,
-            String password, Boolean isLandlord) {
-        this.landlordID = landlordID;
+    public Landlord(String firstName, String lastName, String email, String phone, String username, String password, Boolean isLandlord) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

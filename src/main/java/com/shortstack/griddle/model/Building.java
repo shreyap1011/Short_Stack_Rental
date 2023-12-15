@@ -14,8 +14,7 @@ public class Building {
     public Building() {
     }
 
-    public Building(Integer buildingID, Integer addressID, Integer landlordID, String buildingName) {
-        this.buildingID = buildingID;
+    public Building(Integer addressID, Integer landlordID, String buildingName) {
         this.addressID = addressID;
         this.landlordID = landlordID;
         this.buildingName = buildingName;
