@@ -1,6 +1,6 @@
 package com.shortstack.griddle.controller;
 
-import com.shortstack.griddle.model.User;
+import com.shortstack.griddle.model.Tenant;
 import com.shortstack.griddle.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,26 +15,25 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/users")
-    public Iterable<User> getAllUsers() {
+    public Iterable<Tenant> getAllUsers() {
         return userService.getAllUsers();
     }
 
-
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/users/{id}")
-    public User findUser(@PathVariable int id) {
+    public Tenant findUser(@PathVariable int id) {
         return userService.findUser(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/addUser")
-    public String addUser(@RequestBody User user) {
+    public String addUser(@RequestBody Tenant user) {
         return userService.createUser(user);
     }
 
     @ResponseStatus(HttpStatus.RESET_CONTENT)
     @PutMapping("/updateUser")
-    public User updateUser(@RequestBody User user) {
+    public Tenant updateUser(@RequestBody Tenant user) {
         return userService.updateUser(user);
     }
 

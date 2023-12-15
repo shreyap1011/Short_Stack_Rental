@@ -10,9 +10,12 @@ public class Lease {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer leaseID;
-    private Integer userID;
+    private Integer tenantID;
     private Integer apartmentID;
     private Double rent;
+    private Double utilityFee;
+    private Double amenityFee;
+    private Double technologyFee;
 
     @Temporal(TemporalType.DATE)
     private Date startDate;
@@ -23,11 +26,16 @@ public class Lease {
     public Lease() {
     }
 
-    public Lease(Integer leaseID, Integer userID, Integer apartmentID, Double rent, Date startDate, Date endDate) {
+    
+
+    public Lease(Integer leaseID, Integer tenantID, Integer apartmentID, Double rent, Double utilityFee,  Double amenityFee, Double technologyFee, Date startDate, Date endDate) {
         this.leaseID = leaseID;
-        this.userID = userID;
+        this.tenantID = tenantID;
         this.apartmentID = apartmentID;
         this.rent = rent;
+        this.utilityFee = utilityFee;
+        this.amenityFee = amenityFee;
+        this.technologyFee = technologyFee;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -40,12 +48,12 @@ public class Lease {
         this.leaseID = leaseID;
     }
 
-    public Integer getUserID() {
-        return userID;
+    public Integer getTenantID() {
+        return tenantID;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+    public void setTenantID(Integer tenantID) {
+        this.tenantID = tenantID;
     }
 
     public Integer getApartmentID() {
@@ -62,6 +70,30 @@ public class Lease {
 
     public void setRent(Double rent) {
         this.rent = rent;
+    }
+
+    public Double getUtilityFee() {
+        return utilityFee;
+    }
+
+    public void setUtilityFee(Double utilityFee) {
+        this.utilityFee = utilityFee;
+    }
+
+    public Double getAmenityFee() {
+        return amenityFee;
+    }
+
+    public void setAmenityFee(Double amenityFee) {
+        this.amenityFee = amenityFee;
+    }
+
+    public Double getTechnologyFee() {
+        return technologyFee;
+    }
+
+    public void setTechnologyFee(Double technologyFee) {
+        this.technologyFee = technologyFee;
     }
 
     public Date getStartDate() {
@@ -84,9 +116,12 @@ public class Lease {
     public String toString() {
         return "Lease{" + 
         "leaseID=" + leaseID + 
-        ", userID=" + userID + 
+        ", tenantID=" + tenantID + 
         ", apartmentID=" + apartmentID + 
         ", rent=" + rent + 
+        ", utilityFee=" + utilityFee + 
+        ", amenityFee=" + amenityFee + 
+        ", technologyFee=" + technologyFee + 
         ", startDate=" + startDate + 
         ", endDate=" + endDate + 
         "}";

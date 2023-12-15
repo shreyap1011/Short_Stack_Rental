@@ -3,49 +3,42 @@ package com.shortstack.griddle.model;
 import jakarta.persistence.*;
 
 @Entity
-public class User {
+public class Tenant {
     // @id means id will auto generate
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userID;
+    private Integer tenantID;
     private String firstName;
     private String lastName;
     private String email;
     private String phone;
     private String username;
     private String password;
+    private Double balance;
 
-     // possibility: 
-        // public enum Role {
-        //     Tenant, Landlord
-        // }
-
-        // @Enumerated(EnumType.STRING)
-        // private Role role;
-
-    private Boolean isLandlord;
-
-    public User() {
+    public Tenant() {
     }
+    
 
-    public User(Integer userID, String firstName, String lastName, String email, String phone, String username, String password, Boolean isLandlord) {
-        this.userID = userID;
+    public Tenant(Integer tenantID, String firstName, String lastName, String email, String phone, String username, String password, Double balance) {
+        this.tenantID = tenantID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.username = username;
         this.password = password;
-        this.isLandlord = isLandlord;
+        this.balance = balance;
     }
 
-    public Integer getUserID() {
-        return userID;
+
+    public Integer getTenantID() {
+        return tenantID;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+      public void setTenantID(Integer tenantID) {
+        this.tenantID = tenantID;
     }
 
     public String getFirstName() {
@@ -96,27 +89,27 @@ public class User {
         this.password = password;
     }
 
-    public Boolean getIsLandlord() {
-        return isLandlord;
+
+    public Double getBalance() {
+        return balance;
     }
 
-    public void setIsLandlord(Boolean isLandlord) {
-        this.isLandlord = isLandlord;
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-        "userID=" + userID + 
-        ", firstName=" + firstName + 
-        ", lastName=" + lastName + 
-        ", email=" + email + 
-        ", phone=" + phone + 
-        ", username=" + username + 
-        ", password=" + password + 
-        ", isLandlord=" + isLandlord + 
-        "}";
-}
-
-    
+        return "Tenant{" +
+                "tenantID=" + tenantID +
+                ", firstName=" + firstName +
+                ", lastName=" + lastName +
+                ", email=" + email +
+                ", phone=" + phone +
+                ", username=" + username +
+                ", password=" + password +
+                ", balance=" + balance +
+                "}";
+    }
 }

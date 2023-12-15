@@ -8,16 +8,16 @@ public class Building {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer buildingID;
     private Integer addressID;
-    private Integer userID;
+    private Integer landlordID;
     private String buildingName;
     
     public Building() {
     }
 
-    public Building(Integer buildingID, Integer addressID, Integer userID, String buildingName) {
+    public Building(Integer buildingID, Integer addressID, Integer landlordID, String buildingName) {
         this.buildingID = buildingID;
         this.addressID = addressID;
-        this.userID = userID;
+        this.landlordID = landlordID;
         this.buildingName = buildingName;
     }
 
@@ -37,12 +37,12 @@ public class Building {
         this.addressID = addressID;
     }
 
-    public Integer getUserID() {
-        return userID;
+    public Integer landlordID() {
+        return landlordID;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+    public void setlandlordID(Integer landlordID) {
+        this.landlordID = landlordID;
     }
 
     public String getbuildingName() {
@@ -58,7 +58,7 @@ public class Building {
         return "Building{" + 
         "buildingID=" + buildingID + 
         ", addressID=" + addressID + 
-        ", userID=" + userID + 
+        ", landlordID=" + landlordID + 
         ", buildingName=" + buildingName +
          "}";
     }
