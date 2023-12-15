@@ -29,10 +29,20 @@ public class AddressService {
         Optional<Address> optionalAddress = addressRepository.findById(address.getAddressID());
         Address oldAddress = null;
         if(optionalAddress.isPresent()) {
-
+            oldAddress = optionalAddress.get();
+            oldAddress.setAddressID(address.getAddressID());
+            oldAddress.setStreet(address.getStreet());
+            oldAddress.setCity(address.getCity());
+            oldAddress.setState(address.getState());
+            oldAddress.setZip(address.getZip());
         } else {
             return new Address();
         }
         return oldAddress;
+    }
+
+    public String deleteAddress(int id) {
+        addressRepository.deleteById(id);
+        return "Address deleted";
     }
 }
