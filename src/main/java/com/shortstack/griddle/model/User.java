@@ -15,6 +15,15 @@ public class User {
     private String phone;
     private String username;
     private String password;
+
+     // possibility: 
+        // public enum Role {
+        //     Tennant, Landlord
+        // }
+
+        // @Enumerated(EnumType.STRING)
+        // private Role role
+        
     private Boolean isLandlord;
 
     public User() {
