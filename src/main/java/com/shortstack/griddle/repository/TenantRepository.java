@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 public interface TenantRepository extends CrudRepository<Tenant, Integer> {
     List<Tenant> findAll();
 
+    Tenant findByUsername(String username);
+
     @Query(value = "INSERT INTO TENANT(FIRSTNAME, LASTNAME, EMAIL, PHONE, USERNAME, PASSWORD, BALANCE) VALUES (:firstname, :lastname, :email, :phone, :username, :password, :balance)", nativeQuery = true)
     void createTenant(@Param("firstname") String firstname, @Param("lastname") String lastname, @Param("email") String email, @Param("phone") String phone, @Param("username") String username, @Param("password") String password, @Param("balance") double balance);
 

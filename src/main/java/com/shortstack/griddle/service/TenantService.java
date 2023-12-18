@@ -23,27 +23,27 @@ public class TenantService {
     }
 
 
-//    public Tenant findTenant(int id) {
-//        return tenantRepository.findById(id);
-//    }
+    public Tenant findTenant(String username) {
+        return tenantRepository.findByUsername(username);
+    }
 
-//    public Tenant updateTenant(Tenant tenant) {
-//        Optional<Tenant> optionalLandlord = tenantRepository.findById(tenant.getTenantId());
-//        Tenant oldTenant = null;
-//        if (optionalLandlord.isPresent()) {
-//            oldTenant = optionalLandlord.get();
-//            oldTenant.setTenantId(tenant.getTenantId());
-//            oldTenant.setEmail(tenant.getEmail());
-//            oldTenant.setFirstName(tenant.getFirstName());
-//            oldTenant.setLastName(tenant.getLastName());
-//            oldTenant.setUsername(tenant.getUsername());
-//            oldTenant.setPassword(tenant.getPassword());
-//            oldTenant.setBalance(tenant.getBalance());
-//        } else {
-//            return new Tenant();
-//        }
-//        return oldTenant;
-//    }
+    public Tenant updateTenant(Tenant tenant) {
+        Optional<Tenant> optionalLandlord = tenantRepository.findById(tenant.getId());
+        Tenant oldTenant = null;
+        if (optionalLandlord.isPresent()) {
+            oldTenant = optionalLandlord.get();
+            oldTenant.setId(tenant.getId());
+            oldTenant.setEmail(tenant.getEmail());
+            oldTenant.setFirstName(tenant.getFirstName());
+            oldTenant.setLastName(tenant.getLastName());
+            oldTenant.setUsername(tenant.getUsername());
+            oldTenant.setPassword(tenant.getPassword());
+            oldTenant.setBalance(tenant.getBalance());
+        } else {
+            return new Tenant();
+        }
+        return oldTenant;
+    }
 
     public String deleteTenant(int id) {
         tenantRepository.deleteById(id);

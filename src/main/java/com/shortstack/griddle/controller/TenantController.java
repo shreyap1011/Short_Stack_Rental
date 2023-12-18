@@ -19,22 +19,24 @@ public class TenantController {
         return tenantService.getAllTenants();
     }
 
-//    @ResponseStatus(HttpStatus.OK)
-//    @GetMapping("/tenants/{id}")
-//    public Tenant findTenant(@PathVariable int id) {
-//        return tenantService.findTenant(id);
-//    }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/tenant")
+    public Tenant findTenant(@RequestParam(required = false) String username) {
+        return tenantService.findTenant(username);
+    }
+
     @PostMapping("/addTenant")
     @ResponseStatus(HttpStatus.CREATED)
     public void addTenant(@RequestBody Tenant tenant) {
         tenantService.save(tenant);
     }
 
-//    @ResponseStatus(HttpStatus.RESET_CONTENT)
-//    @PutMapping("/updateTenant")
-//    public Tenant updateTenant(@RequestBody Tenant tenant) {
-//        return tenantService.updateTenant(tenant);
-//    }
+    //update method needs to be recalibrated
+    @ResponseStatus(HttpStatus.RESET_CONTENT)
+    @PutMapping("/updateTenant")
+    public Tenant updateTenant(@RequestBody Tenant tenant) {
+        return tenantService.updateTenant(tenant);
+    }
 
 
     @DeleteMapping("deleteTenant/{id}")
