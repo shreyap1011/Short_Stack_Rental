@@ -29,7 +29,7 @@ public class TenantController {
     @PostMapping("/addTenant")
     @ResponseStatus(HttpStatus.CREATED)
     public void addTenant(@RequestBody Tenant tenant) {
-        tenantService.save(tenant);
+        tenantService.createTenant(tenant);
     }
 
     //update method needs to be recalibrated

@@ -16,7 +16,7 @@ public class TenantService {
         return tenantRepository.findAll();
     }
 
-    public void save(Tenant tenant) {
+    public void createTenant(Tenant tenant) {
         tenantRepository.createTenant(tenant.getFirstName(), tenant.getLastName(),
                 tenant.getEmail(), tenant.getPhone(), tenant.getUsername(), tenant.getPassword(),
                 tenant.getBalance());

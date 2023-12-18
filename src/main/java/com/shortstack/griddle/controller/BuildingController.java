@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
@@ -20,14 +22,15 @@ public class BuildingController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/building/{landlordid}")
+    public List<Building> findBuildingsByLandlordid(@PathVariable Integer landlordid) {
+        return buildingService.findBuildingsByLandlordid(landlordid);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/building")
-    public Building findBuilding(@RequestParam(required = false) Integer landlordid, String buildingname) {
-        if (landlordid != null)
-            return buildingService.findBuildingByLandlordid(landlordid);
-        else if (buildingname != null)
+    public Building findBuilding(@RequestParam(required = false) String buildingname) {
             return buildingService.findBuildingByBuildingname(buildingname);
-        else
-            return new Building();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
