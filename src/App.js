@@ -12,6 +12,7 @@ import ViewPaymentHistory from './components/tenant/ViewPaymentHistory';
 import TenantPayment from './components/tenant/TenantPayment';
 import AddCard from './components/tenant/AddCard';
 import logoImage from './img/logo.png';
+import AddTenant from './components/landlord/AddTenant';
 
 
 const Header = () =>{
@@ -41,6 +42,7 @@ function App() {
           <Route path={"/landlordlogin"} element={<LandlordLoginPage/>} exact={true}/>
           <Route path={"/landlordregistration"} element={<LandlordRegistrationPage/>}/>
           <Route path={"/landlord"} element={<ViewAllLandlordInfo />} exact={true}/>
+          <Route path={"/landlord/addTenant"} element={<AddTenant/>} exact={true}/>
           <Route path={"/tenant/dashboard"} element={<ViewAllTenantInfo />} exact={true}/>
           <Route path={"/tenant/paymentHistory"} element={<ViewPaymentHistory/>} exact={true}></Route>
           <Route path={"/tenant/newPayment"} element={<TenantPayment/>} exact={true}></Route>

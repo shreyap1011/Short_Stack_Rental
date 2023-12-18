@@ -1,22 +1,26 @@
+import { useEffect, useState } from "react"
+import TenantService from "../../service/TenantService";
+import { useNavigate } from "react-router-dom";
+
 export default function ViewAllLandlordInfo() {
-    let tenants = [];
-    for(let i = 0; i< 20; i++) {
-        let building_num = Math.floor(Math.random()*3) + 1;
-        let status_num = Math.floor(Math.random()*2);
-        let tenant = {
-            building: building_num,
-            unit: i + 1,
-            name: "Tenant " + i,
-            balance: "$$$",
-            status: status_num == 0 ? "paid" : "unpaid"
-        }
-        tenants.push(tenant);
-    }
-    tenants.sort((a,b) => {
-        if(a.building > b.building) return 1;
-        if(a.building < b.building) return -1;
-        return 0; 
+
+    let[state, setState] = useState({
+        tenants: []
     });
+
+    useEffect (() => {
+        TenantService.getAllTenants().then((response)=>{
+            setState(()=>({
+                tenants: response.data
+            }));
+        }, ()=>{});
+    }, []);
+
+    let navigate = useNavigate();
+    let addTenant = (e) => {
+        e.preventDefault();
+        navigate("/landlord/addTenant");
+    }
 
     return(
         <>
@@ -24,29 +28,36 @@ export default function ViewAllLandlordInfo() {
         <table>
             <thead>
                 <tr>
-                    <th>Building</th>
-                    <th>Unit</th>
-                    <th>Tenant</th>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Username</th>
+                    <th>Password</th>
                     <th>Balance</th>
-                    <th>Status</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                 </tr>
             </thead>
             <tbody>
                 {
-                    tenants.map((tenant) => {
+                    state.tenants.map((tenant) => {
                         return (
                             <tr>
-                                <td>{tenant.building}</td>
-                                <td>{tenant.unit}</td>
-                                <td>{tenant.name}</td>
+                                <td>{tenant.id}</td>
+                                <td>{tenant.email}</td>
+                                <td>{tenant.phone}</td>
+                                <td>{tenant.username}</td>
+                                <td>{tenant.password}</td>
                                 <td>{tenant.balance}</td>
-                                <td>{tenant.status}</td>
+                                <td>{tenant.firstName}</td>
+                                <td>{tenant.lastName}</td>
                             </tr>
                         )
                     })
                 }
             </tbody>
         </table>
+        <button onClick={addTenant}>Add Tenant</button>
         </>
     )
 }
