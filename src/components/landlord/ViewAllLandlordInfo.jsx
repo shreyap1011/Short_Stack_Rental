@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import TenantService from "../../service/TenantService";
 import { useNavigate, useLocation } from "react-router-dom";
 import BuildingService from "../../service/BuildingService";
+import '../../App.css';
+import logoImage from '../../img/transparent-griddle-logo.png';
 
 export default function ViewAllLandlordInfo() {
     let location = useLocation();
@@ -42,8 +44,16 @@ export default function ViewAllLandlordInfo() {
 
     return(
         <>
-        <h2>Welcome {landlord.firstName}!</h2>
-        <h2>All Tenants</h2>
+      <nav className="navbar">
+        <ul className="nav-list">
+          <li><a href="#welcome">Welcome {landlord.firstName}!</a></li>
+          <li><a href="#allTenants"></a></li>
+        </ul>
+        <div className="navbar-brand">
+          <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
+        </div>
+      </nav>
+        <h2>All Buildings</h2>
 
         <table>
             <thead>
@@ -55,6 +65,7 @@ export default function ViewAllLandlordInfo() {
                     <th>City</th>
                     <th>State</th>
                     <th>Zip</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -69,6 +80,9 @@ export default function ViewAllLandlordInfo() {
                                 <td>{building.city}</td>
                                 <td>{building.state}</td>
                                 <td>{building.zip}</td>
+                                <td>
+                                    <button>View Tenants</button>
+                                </td>
                             </tr>
                         )
                     })

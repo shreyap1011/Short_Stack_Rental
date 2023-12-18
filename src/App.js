@@ -19,7 +19,7 @@ const Header = () =>{
   const navigate = useNavigate();
   const currentPath = window.location.pathname;
 
-  const shouldRenderHeader = !["/","/login", "/registration", "/landlordlogin", "/landlordregistration"].includes(currentPath);
+  const shouldRenderHeader = !["/","/login", "/registration", "/landlordlogin", "/landlordregistration", "/landlord"].includes(currentPath);
 
   return shouldRenderHeader ? (
     <header>
