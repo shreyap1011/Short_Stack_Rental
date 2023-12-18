@@ -11,7 +11,7 @@ import java.util.List;
 public interface BuildingRepository extends CrudRepository<Building, Integer> {
     List<Building> findAll();
 
-    Building findByLandlordid(int landlordid);
+    List<Building> findAllByLandlordid(int landlordid);
 
     Building findByBuildingname(String buildingname);
 

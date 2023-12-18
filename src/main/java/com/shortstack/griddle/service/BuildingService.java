@@ -22,8 +22,8 @@ public class BuildingService {
                 building.getCity(), building.getState(), building.getZip());
     }
 
-    public Building findBuildingByLandlordid(int landlordid) {
-        return buildingRepository.findByLandlordid(landlordid);
+    public List<Building> findBuildingsByLandlordid(int landlordid) {
+        return buildingRepository.findAllByLandlordid(landlordid);
     }
 
     public Building findBuildingByBuildingname(String buildingname) {
