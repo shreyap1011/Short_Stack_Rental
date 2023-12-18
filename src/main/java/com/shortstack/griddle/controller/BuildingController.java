@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class BuildingController {
@@ -20,22 +20,27 @@ public class BuildingController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/buildings/{id}")
-    public Building findBuilding(@PathVariable int id) {
-        return buildingService.findBuilding(id);
+    @GetMapping("/building")
+    public Building findBuilding(@RequestParam(required = false) Integer landlordid, String buildingname) {
+        if (landlordid != null)
+            return buildingService.findBuildingByLandlordid(landlordid);
+        else if (buildingname != null)
+            return buildingService.findBuildingByBuildingname(buildingname);
+        else
+            return new Building();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/addBuilding")
-    public String addBuilding(@RequestBody Building building) {
-        return buildingService.createBuilding(building);
+    public void addBuilding(@RequestBody Building building) {
+        buildingService.createBuilding(building);
     }
 
-    @ResponseStatus(HttpStatus.RESET_CONTENT)
-    @PutMapping("/updateBuilding")
-    public Building updateBuilding(@RequestBody Building building) {
-        return buildingService.updateBuilding(building);
-    }
+//    @ResponseStatus(HttpStatus.RESET_CONTENT)
+//    @PutMapping("/updateBuilding")
+//    public Building updateBuilding(@RequestBody Building building) {
+//        return buildingService.updateBuilding(building);
+//    }
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("deleteBuilding/{id}")
