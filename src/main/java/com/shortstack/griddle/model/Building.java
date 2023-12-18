@@ -10,7 +10,7 @@ public class Building {
     private Integer addressID;
     private Integer landlordID;
     private String buildingName;
-    
+
     public Building() {
     }
 
@@ -54,10 +54,10 @@ public class Building {
 
     @Override
     public String toString() {
-        return "Building{" + 
-        "buildingID=" + buildingID + 
-        ", addressID=" + addressID + 
-        ", landlordID=" + landlordID + 
+        return "Building{" +
+        "buildingID=" + buildingID +
+        ", addressID=" + addressID +
+        ", landlordID=" + landlordID +
         ", buildingName=" + buildingName +
          "}";
     }

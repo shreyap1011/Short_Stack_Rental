@@ -66,14 +66,14 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" + 
-        "addressID=" + addressID + 
-        ", street=" + street + 
-        ", city=" + city + 
-        ", state=" + state + 
-        ", zip=" + zip + 
+        return "Address{" +
+        "addressID=" + addressID +
+        ", street=" + street +
+        ", city=" + city +
+        ", state=" + state +
+        ", zip=" + zip +
         "}";
     }
-    
+
 
 }

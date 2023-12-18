@@ -3,25 +3,38 @@ package com.shortstack.griddle.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "LANDLORD")
 public class Landlord {
-    // @id means id will auto generate
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer landlordID;
-    private String firstName;
-    private String lastName;
+    @Column(name = "ID")
+    private Integer id;
+
+    @Column(name = "FIRSTNAME")
+    private String firstname;
+
+    @Column(name = "LASTNAME")
+    private String lastname;
+
+    @Column(name = "EMAIL")
     private String email;
+
+    @Column(name = "PHONE")
     private String phone;
+
+    @Column(name = "USERNAME")
     private String username;
+
+    @Column(name = "PASSWORD")
     private String password;
 
     public Landlord() {
     }
 
-    public Landlord(String firstName, String lastName, String email, String phone, String username, String password, Boolean isLandlord) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Landlord(String firstname, String lastname, String email, String phone, String username,
+            String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.phone = phone;
         this.username = username;
@@ -29,27 +42,27 @@ public class Landlord {
     }
 
     public Integer getLandlordID() {
-        return landlordID;
+        return this.id;
     }
 
     public void setLandlordID(Integer landlordID) {
-        this.landlordID = landlordID;
+        this.id = landlordID;
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getLastName() {
-        return lastName;
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -87,9 +100,9 @@ public class Landlord {
     @Override
     public String toString() {
         return "Landlord{" +
-                "landlordID=" + landlordID +
-                ", firstName=" + firstName +
-                ", lastName=" + lastName +
+                "landlordID=" + id +
+                ", firstname=" + firstname +
+                ", lastname=" + lastname +
                 ", email=" + email +
                 ", phone=" + phone +
                 ", username=" + username +

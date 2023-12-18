@@ -9,7 +9,7 @@ public class Apartment {
     private Integer apartmentID;
     private Integer buildingID;
     private String apartmentNumber;
-    
+
     public Apartment() {
     }
 
@@ -44,12 +44,12 @@ public class Apartment {
 
     @Override
     public String toString() {
-        return "Apartment{" + 
-        "apartmentID=" + apartmentID + 
-        ", buildingID=" + buildingID + 
-        ", apartmentNumber=" + apartmentNumber + 
+        return "Apartment{" +
+        "apartmentID=" + apartmentID +
+        ", buildingID=" + buildingID +
+        ", apartmentNumber=" + apartmentNumber +
         "}";
     }
-    
-    
+
+
 }

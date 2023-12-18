@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class LandlordController {
@@ -14,23 +14,18 @@ public class LandlordController {
     LandlordService landlordService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/landlords")
-    public Iterable<Landlord> getAllLandlords() {
-        return landlordService.getAllLandlords();
-    }
-
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/landlords/{id}")
-    public Landlord findLandlord(@PathVariable int id) {
-        return landlordService.findLandlord(id);
+    @GetMapping("/landlord")
+    public Landlord findLandlord(@RequestParam(required=false) String username) {
+        return landlordService.findLandlord(username);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/addLandlord")
-    public String addLandlord(@RequestBody Landlord landlord) {
-        return landlordService.createLandlord(landlord);
+    public void createLandlord(@RequestBody Landlord landlord) {
+        landlordService.createLandlord(landlord);
     }
 
+    //Potentially need to rework udpate
     @ResponseStatus(HttpStatus.RESET_CONTENT)
     @PutMapping("/updateLandlord")
     public Landlord updateLandlord(@RequestBody Landlord landlord) {

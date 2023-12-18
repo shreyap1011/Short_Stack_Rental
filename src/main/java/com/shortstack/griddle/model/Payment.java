@@ -86,14 +86,14 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment{" + 
-        "paymentID=" + paymentID + 
-        ", leaseID=" + leaseID + 
-        ", paymentMethod=" + paymentMethod + 
-        ", amount=" + amount + 
-        ", paymentDate=" + paymentDate + 
-        ", status=" + status + 
+        return "Payment{" +
+        "paymentID=" + paymentID +
+        ", leaseID=" + leaseID +
+        ", paymentMethod=" + paymentMethod +
+        ", amount=" + amount +
+        ", paymentDate=" + paymentDate +
+        ", status=" + status +
         "}";
     }
-    
+
 }

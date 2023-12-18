@@ -26,7 +26,7 @@ public class Lease {
     public Lease() {
     }
 
-    
+
 
     public Lease(Integer tenantID, Integer apartmentID, Double rent, Double utilityFee,  Double amenityFee, Double technologyFee, Date startDate, Date endDate) {
         this.tenantID = tenantID;
@@ -113,19 +113,19 @@ public class Lease {
 
     @Override
     public String toString() {
-        return "Lease{" + 
-        "leaseID=" + leaseID + 
-        ", tenantID=" + tenantID + 
-        ", apartmentID=" + apartmentID + 
-        ", rent=" + rent + 
-        ", utilityFee=" + utilityFee + 
-        ", amenityFee=" + amenityFee + 
-        ", technologyFee=" + technologyFee + 
-        ", startDate=" + startDate + 
-        ", endDate=" + endDate + 
+        return "Lease{" +
+        "leaseID=" + leaseID +
+        ", tenantID=" + tenantID +
+        ", apartmentID=" + apartmentID +
+        ", rent=" + rent +
+        ", utilityFee=" + utilityFee +
+        ", amenityFee=" + amenityFee +
+        ", technologyFee=" + technologyFee +
+        ", startDate=" + startDate +
+        ", endDate=" + endDate +
         "}";
     }
-    
+
 
 
 }
