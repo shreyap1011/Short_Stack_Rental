@@ -9,8 +9,13 @@ export default function LandlordLoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [landlord, setLandlord] = useState({
+    landlordID: '',
+    email:'',
     username: '',
-    password: ''
+    password: '',
+    phone: '',
+    firstName: '',
+    lastName: ''
   })
 
   const navigate = useNavigate();

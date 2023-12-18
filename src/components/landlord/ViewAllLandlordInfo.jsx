@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import TenantService from "../../service/TenantService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import BuildingService from "../../service/BuildingService";
 
 export default function ViewAllLandlordInfo() {
+    let location = useLocation();
+    const landlord = location.state.landlord;
 
     let[state, setState] = useState({
         tenants: []
@@ -28,6 +30,11 @@ export default function ViewAllLandlordInfo() {
     }, []);
 
     let navigate = useNavigate();
+    let addBuilding = (e) => {
+        e.preventDefault();
+        console.log(landlord.landlordID);
+        navigate("/landlord/addBuilding", {state: {landlord}});
+    }
     let addTenant = (e) => {
         e.preventDefault();
         navigate("/landlord/addTenant");
@@ -35,6 +42,7 @@ export default function ViewAllLandlordInfo() {
 
     return(
         <>
+        <h2>Welcome {landlord.firstName}!</h2>
         <h2>All Tenants</h2>
 
         <table>
@@ -67,6 +75,7 @@ export default function ViewAllLandlordInfo() {
                 }
             </tbody>
         </table>
+        <button onClick={addBuilding}>Add Building</button>
         <table>
             <thead>
                 <tr>

@@ -13,7 +13,7 @@ import TenantPayment from './components/tenant/TenantPayment';
 import AddCard from './components/tenant/AddCard';
 import logoImage from './img/logo.png';
 import AddTenant from './components/landlord/AddTenant';
-
+import AddBuilding from './components/landlord/AddBuilding';
 
 const Header = () =>{
   const navigate = useNavigate();
@@ -43,6 +43,7 @@ function App() {
           <Route path={"/landlordregistration"} element={<LandlordRegistrationPage/>}/>
           <Route path={"/landlord"} element={<ViewAllLandlordInfo />} exact={true}/>
           <Route path={"/landlord/addTenant"} element={<AddTenant/>} exact={true}/>
+          <Route path={"/landlord/addBuilding"} element={<AddBuilding/>} exact={true}/>
           <Route path={"/tenant/dashboard"} element={<ViewAllTenantInfo />} exact={true}/>
           <Route path={"/tenant/paymentHistory"} element={<ViewPaymentHistory/>} exact={true}></Route>
           <Route path={"/tenant/newPayment"} element={<TenantPayment/>} exact={true}></Route>
