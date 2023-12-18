@@ -8,13 +8,21 @@ import LandlordService from '../../service/LandlordService';
 export default function LandlordLoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const [landlord, setLandlord] = useState({
+    username: '',
+    password: ''
+  })
 
   const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
-    LandlordService.findLandlordByUser(username).then(()=>{
-      
+    LandlordService.findLandlordByUser(username).then((response)=>{
+      setLandlord(response.data);
+      if(landlord.password == password) {
+        navigate("/landlord", {state: {landlord}});
+      } else {
+        alert("Invalid password");
+      }
     }, ()=>{
       alert("Invalid username")
     })
