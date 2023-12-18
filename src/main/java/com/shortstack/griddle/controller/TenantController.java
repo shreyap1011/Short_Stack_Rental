@@ -11,34 +11,34 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class TenantController {
     @Autowired
-    TenantService tenantService;
+    private TenantService tenantService;
 
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/tenants")
+    @ResponseStatus(HttpStatus.OK)
     public Iterable<Tenant> getAllTenants() {
         return tenantService.getAllTenants();
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/tenants/{id}")
-    public Tenant findTenant(@PathVariable int id) {
-        return tenantService.findTenant(id);
-    }
-
-    @ResponseStatus(HttpStatus.CREATED)
+//    @ResponseStatus(HttpStatus.OK)
+//    @GetMapping("/tenants/{id}")
+//    public Tenant findTenant(@PathVariable int id) {
+//        return tenantService.findTenant(id);
+//    }
     @PostMapping("/addTenant")
-    public String addTenant(@RequestBody Tenant tenant) {
-        return tenantService.createTenant(tenant);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addTenant(@RequestBody Tenant tenant) {
+        tenantService.save(tenant);
     }
 
-    @ResponseStatus(HttpStatus.RESET_CONTENT)
-    @PutMapping("/updateTenant")
-    public Tenant updateTenant(@RequestBody Tenant tenant) {
-        return tenantService.updateTenant(tenant);
-    }
+//    @ResponseStatus(HttpStatus.RESET_CONTENT)
+//    @PutMapping("/updateTenant")
+//    public Tenant updateTenant(@RequestBody Tenant tenant) {
+//        return tenantService.updateTenant(tenant);
+//    }
 
-    @ResponseStatus(HttpStatus.OK)
+
     @DeleteMapping("deleteTenant/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public String deleteTenant(@PathVariable int id) {
         return tenantService.deleteTenant(id);
     }

@@ -1,4 +1,4 @@
-package com.snow.test.dialect;
+package com.shortstack.griddle.dialect;
 
 import org.hibernate.dialect.Dialect;
 
