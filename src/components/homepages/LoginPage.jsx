@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import TenantService from '../../service/TenantService';
 import { Link, useNavigate } from 'react-router-dom';
 import buildingImage from '../../img/building.jpg';
 import logoImage from '../../img/logo.png';
@@ -7,63 +8,37 @@ import '../../App.css';
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  let[state, setState] = useState({
+    tenants: []
+  });
+  useEffect (() => {
+      TenantService.getAllTenants().then((response)=>{
+          setState(()=>({
+              tenants: response.data
+          }));
+      }, ()=>{});
+  }, []);
+
   const navigate = useNavigate();
-
-  const handleLogin = () => {
-    // Get the username and password
-    const enteredUsername = username.trim();
-    const enteredPassword = password.trim();
-  
-    // Debugging: Log the fetch URL
-    const fetchUrl = "/passwords.txt";
-    console.log('Fetching:', fetchUrl);
-  
-    // Fetch the passwords from the file
-    fetch(fetchUrl)
-      .then((res) => res.text())
-      .then((text) => {
-        // Debugging: Log the content of the passwords file
-        console.log('Passwords File Content:', text);
-  
-        const creds = text.split("\n");
-        let notFound = true;
-  
-        creds.forEach((line) => {
-          const cred = line.split(",");
-          const storedUsername = cred[0].trim();
-          const storedPassword = cred[1].trim();
-          const storedRole = cred[2].trim();
-  
-          if (enteredUsername === storedUsername && enteredPassword === storedPassword) {
-            // If credentials match, store username and redirect
-            localStorage.setItem("username", enteredUsername);
-
-            if (storedRole === 'tenant') {
-                navigate('/tenant/dashboard');
-              } else if (storedRole === 'landlord') {
-                navigate('/landlord');
-              } else {
-                alert('Invalid user role.');
-              }
-    
-              notFound = false;
-          }
-        });
-  
-        if (notFound) {
-          alert('Incorrect Login Credentials.');
-          setUsername('');
-          setPassword('');
+  const handleLogin = (e) => {
+    e.preventDefault();
+    let found = false;
+    for(let i = 0; i < state.tenants.length; i++) {
+      const tenant = state.tenants[i];
+      if(tenant.username == username) {
+        if(tenant.password == password) {
+          found = true;
+          navigate("/tenant/dashboard", {state: {tenant}});
+        } else {
+          found = true;
+          alert("Password incorrect");
+          break;
         }
-      })
-      .catch((error) => {
-        // Debugging: Log fetch error
-        console.error('Fetch Error:', error);
-        alert('Error during login.');
-      });
-
-     /* const handleRegistration = () => {
-      }*/
+      } 
+    }
+    if(!found) {
+      alert("Invalid username");
+    }
   };
   
 
@@ -97,18 +72,14 @@ export default function LoginPage() {
             <div>
               <label>
                 Password:
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
               </label>
             </div>
             <button onClick={handleLogin}>Login</button>
-            {/* Registration link */}
-            <p>
+            {/* Registration link  */}
+            {/* <p>
               Don't have an account? <Link to="/registration">Register</Link>
-            </p>
+            </p>  */}
           </div>
         </div>
       </div>

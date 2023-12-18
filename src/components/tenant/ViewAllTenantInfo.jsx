@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ViewPaymentHistory from "./ViewPaymentHistory";
 import TenantPayment from "./TenantPayment";
 
@@ -36,6 +36,9 @@ export default function ViewAllTenantInfo() {
         }
     }
 
+    let location = useLocation();
+    let tenant = location.state.tenant;
+
     let curr_charges = [];
     let fut_charges = [];
     for(let i = 0; i < 3; i++) {
@@ -70,14 +73,14 @@ export default function ViewAllTenantInfo() {
     
     return(
         <>
-        <h2>Welcome, Tenant!</h2>
+        <h2>Welcome, {tenant.firstName}!</h2>
         <p>Address Line 1, Unit #</p>
         <p>Address Line 2</p>
 
         <button onClick={goToHistory}>View Payment History</button>
 
         <div id="contents">
-            <h3>CURRENT BALANCE: $0.00</h3>
+            <h3>CURRENT BALANCE: ${tenant.balance}</h3>
             <p>as of: {today_string}</p>
             <button onClick={newPayment}>Pay Now</button>
             <div>

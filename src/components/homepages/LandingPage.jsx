@@ -21,7 +21,7 @@ export default function LandingPage() {
   return (
     <div className="landing-page">
       <div className="background-image"></div>
-      <h1>Welcome to</h1>
+      <h1>Welcome To</h1>
       <img src={logoImage} alt="Griddle Logo" className="logo-image" />
       <p>Manage your rental properties and tenants with ease.</p>
       <button onClick={goToTenant}>I'm a tenant.</button>

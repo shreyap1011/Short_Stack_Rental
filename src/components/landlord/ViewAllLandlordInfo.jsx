@@ -1,17 +1,28 @@
 import { useEffect, useState } from "react"
 import TenantService from "../../service/TenantService";
 import { useNavigate } from "react-router-dom";
+import BuildingService from "../../service/BuildingService";
 
 export default function ViewAllLandlordInfo() {
 
     let[state, setState] = useState({
         tenants: []
     });
-
     useEffect (() => {
         TenantService.getAllTenants().then((response)=>{
             setState(()=>({
                 tenants: response.data
+            }));
+        }, ()=>{});
+    }, []);
+
+    let[buildings, setBuildings] = useState({
+        buildings:[]
+    });
+    useEffect (()=>{
+        BuildingService.getAllBuildings().then((response)=>{
+            setBuildings(()=>({
+                buildings: response.data
             }));
         }, ()=>{});
     }, []);
@@ -25,6 +36,37 @@ export default function ViewAllLandlordInfo() {
     return(
         <>
         <h2>All Tenants</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Landlord ID</th>
+                    <th>Building Name</th>
+                    <th>Street Name</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    buildings.buildings.map((building) => {
+                        return(
+                            <tr>
+                                <td>{building.id}</td>
+                                <td>{building.landlordid}</td>
+                                <td>{building.buildingname}</td>
+                                <td>{building.streetname}</td>
+                                <td>{building.city}</td>
+                                <td>{building.state}</td>
+                                <td>{building.zip}</td>
+                            </tr>
+                        )
+                    })
+                }
+            </tbody>
+        </table>
         <table>
             <thead>
                 <tr>

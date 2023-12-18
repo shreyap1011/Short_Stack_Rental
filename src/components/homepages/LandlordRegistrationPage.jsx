@@ -3,36 +3,34 @@ import { Link, useNavigate } from 'react-router-dom';
 import buildingImage from '../../img/building.jpg';
 import logoImage from '../../img/logo.png';
 import '../../App.css';
+import LandlordService from '../../service/LandlordService';
 
 const RegistrationContainer = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [registrationOption, setRegistrationOption] = useState('tenant'); // Default to 'tenant'
+
   const navigate = useNavigate();
-
-  const handleRegistration = () => {
-    // Perform registration logic based on the selected option
-    // For simplicity, this example just logs the registration details
-    console.log(`Registering as ${registrationOption}:`);
-    console.log(`Username: ${username}`);
-    console.log(`Password: ${password}`);
-    // Add your registration logic here
-
-    // After registration, navigate to the corresponding dashboard
-    if (registrationOption === 'tenant') {
-      navigate('/tenant/dashboard');
-    } else if (registrationOption === 'landlord') {
-      navigate('/landlord');
-    } else {
-      alert('Invalid registration option.');
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    let landlord = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+      username: username,
+      password: password
     }
-  };
-
-  const switchRegistrationOption = () => {
-    // Toggle between 'tenant' and 'landlord' options
-    setRegistrationOption((prevOption) => (prevOption === 'tenant' ? 'landlord' : 'tenant'));
-  };
-
+    LandlordService.addLandlord(landlord).then(()=> {
+      alert("Registration successful!");
+      navigate("/landlord");
+    }, ()=>{
+      alert("Registration failed");
+    })
+  }
   return (
     <div className="container">
         <div className="building-container">
@@ -44,33 +42,34 @@ const RegistrationContainer = () => {
 
         <div className="registration-box">
             <h2>Landlord Registration</h2>
-            <div>
+            <form onSubmit={handleSubmit}>
             <label>
                 Create Username:
                 <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
             </label>
-            </div>
-            <div>
             <label>
                 Create Password:
-                <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
             </label>
-            </div>
 
-        {/* Switch between registration options */}
-        <p className="user-type-buttons">
-            <button className="user-type-button">
-                Landlord
-            </button>
-            <button className="user-type-button">
-                Tenant
-            </button>
-        </p>
-        <button className="register-button" onClick={handleRegistration}> Register</button>
+            <label>
+                First Name: 
+                <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+            </label>
+            <label>
+                Last Name:
+                <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+            </label>
+            <label>
+                Email:
+                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </label>
+            <label>
+                Phone:
+                <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)}/>
+            </label>
+            <input type='submit' value="Register"/>
+            </form>
 
             {/* Back to login link */}
             <p>
