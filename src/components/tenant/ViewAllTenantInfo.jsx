@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import ViewPaymentHistory from "./ViewPaymentHistory";
 import TenantPayment from "./TenantPayment";
+import './tenant.css';
 
 export default function ViewAllTenantInfo() {
     let today = new Date();
@@ -43,14 +44,19 @@ export default function ViewAllTenantInfo() {
     let fut_charges = [];
     for(let i = 0; i < 3; i++) {
         let charge = {
+            date: '12/' + i + '/2023',
+            balance : tenant.balance + 10,
             description : "Description1",
-            amount : (1.0 + i)
+            amount : (1.0 + i),
+            status: 'UNPAID'
         }
         curr_charges.push(charge);
 
         let charge2 = {
+            date: '12/' + (i+20) + '/2023',
+            balance : tenant.balance + 10,
             description : "Description2",
-            amount : (2.0 + i)
+            amount : (1.0 + i)
         }
         fut_charges.push(charge2);
     }
@@ -58,60 +64,112 @@ export default function ViewAllTenantInfo() {
     let navigate = useNavigate();
     let goToHistory = (e) => {
         e.preventDefault();
-        // let el = document.getElementById("contents");
-        // el.innerHTML = <ViewPaymentHistory/>
-        navigate("/tenant/paymentHistory");
+        navigate("/tenant/paymentHistory", {state : {tenant}});
     }
     let newPayment = (e) => {
         e.preventDefault();
-        // let el = document.getElementById("contents");
-        // el.innerHTML = <TenantPayment/>
-        navigate("/tenant/newPayment");
+        navigate("/tenant/newPayment", {state : {tenant}});
     }
     let curr_total = 0;
     let fut_total = 0;
     
     return(
         <>
-        <h2>Welcome, {tenant.firstName}!</h2>
-        <p>Address Line 1, Unit #</p>
-        <p>Address Line 2</p>
-
-        <button onClick={goToHistory}>View Payment History</button>
-
-        <div id="contents">
-            <h3>CURRENT BALANCE: ${tenant.balance}</h3>
-            <p>as of: {today_string}</p>
-            <button onClick={newPayment}>Pay Now</button>
-            <div>
-                <h3>{getMonth(today.getMonth())} Monthly Charges</h3>
-                {
-                    curr_charges.map((charge) => {
-                        curr_total += charge.amount;
-                        return(
-                            <>
-                            <p>{charge.description}: ${charge.amount}</p>
-                            </>
-                        )
-                    })
-                }
-                <p><b>TOTAL: ${curr_total}</b></p>
+        <div id="dashboard">
+        <div id="info">
+            <div id="contact-card">
+                <h3>Personal Information</h3>
+                <p>Address Line 1, Unit #</p>
+                <p>Address Line 2</p>
+                <br/>
+                <p>EMAIL: {tenant.email}</p>
+                <p>PHONE: {tenant.phone}</p>
             </div>
-
-            <div>
-                <h3>{getMonth(today.getMonth() + 1)} Monthly Charges</h3>
-                {
-                    fut_charges.map((charge) => {
-                        fut_total += charge.amount;
-                        return(
-                            <>
-                            <p>{charge.description}: ${charge.amount}</p>
-                            </>
-                        )
-                    })
-                }
-                <p><b>TOTAL: ${fut_total}</b></p>
+            <div id="balance-summary">
+                <h3>{getMonth(today.getMonth())} Balance Summary</h3>
+                <table>
+                    {
+                        curr_charges.map((charge) => {
+                            return (
+                                <tr>
+                                    <td id="left-data">{charge.description}</td>
+                                    <td id="right-data">${charge.amount}</td>
+                                </tr>
+                            )
+                        })
+                    }
+                </table>
+                <button onClick={newPayment}>Pay Remaining Balance</button>
             </div>
+        </div>
+
+        <div id="payment">
+            <div id="top-right-head">
+            <h2>Welcome, {tenant.firstName}!</h2>
+            <div id="balance">
+                <h3>CURRENT BALANCE: ${tenant.balance}</h3>
+                <p>&nbsp;(as of: {today_string})</p>
+            </div>
+            </div>
+            <br/>
+            <div id="table-head">
+                <h3>Current Charges</h3>
+                <button onClick={newPayment}>Pay Now</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        curr_charges.map((charge) => {
+                            return (
+                                <tr>
+                                    <td>{charge.date}</td>
+                                    <td>{charge.amount}</td>
+                                    <td>{charge.description}</td>
+                                    <td>{charge.balance}</td>
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
+
+            <div id="table-head">
+                <h3>Payment History</h3>
+                <button onClick={goToHistory}>View All</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        fut_charges.map((charge) => {
+                            return (
+                                <tr>
+                                    <td>{charge.date}</td>
+                                    <td>{charge.amount}</td>
+                                    <td>{charge.description}</td>
+                                    <td>{charge.balance}</td>
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
+        </div>
         </div>
         </>
     )
