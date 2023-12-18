@@ -1,0 +1,87 @@
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(246, 243, 240);
+    padding: 0px 10% 10% 5%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#dashboard {
+    display: flex;
+}
+
+button {
+    background-color: bisque;
+    color: black;
+}
+
+button:hover {
+    background-color: rgb(125, 101, 70);    
+    color: white;
+}
+
+
+#info {
+    margin-right: 5%;
+}
+
+#contact-card {
+    background-color: rgb(69, 12, 12);
+    border-radius: 10px;
+    padding: 10px 20px 20px 20px;
+    margin-bottom: 20px;
+    color: bisque;
+}
+
+#contact-card p {
+    margin: 0%;
+}
+
+#balance-summary {
+    align-items: center;
+    background-color: rgb(69, 12, 12);
+    color: bisque;
+    border-radius: 10px;
+    padding: 10px 20px 20px 20px;
+}
+
+#balance-summary table{
+    border-style: hidden;
+    background-color: rgb(69, 12, 12);
+    color: bisque;
+}
+
+#balance-summary td {
+    border-style: hidden;
+}
+
+#balance {
+    display: inline-flex;
+    align-items: center;
+}
+
+#top-right-head {
+    margin: 0px;
+    padding: 5px 5px 5px 5px;
+}
+
+#top-right-head > h2 {
+    margin: 0px;
+}
+
+#table-head {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(69, 12, 12);
+    color: bisque;
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+table {
+    margin: 0px auto 20px;
+    background-color: white;
+}
