@@ -13,8 +13,7 @@ public class Apartment {
     public Apartment() {
     }
 
-    public Apartment(Integer apartmentID, Integer buildingID, String apartmentNumber) {
-        this.apartmentID = apartmentID;
+    public Apartment(Integer buildingID, String apartmentNumber) {
         this.buildingID = buildingID;
         this.apartmentNumber = apartmentNumber;
     }

@@ -27,9 +27,8 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(Integer paymentID, Integer leaseID, String paymentMethod, Double amount, Date paymentDate,
+    public Payment(Integer leaseID, String paymentMethod, Double amount, Date paymentDate,
             Status status) {
-        this.paymentID = paymentID;
         this.leaseID = leaseID;
         this.paymentMethod = paymentMethod;
         this.amount = amount;

@@ -32,7 +32,7 @@ public class Landlord {
     }
 
     public Landlord(String firstname, String lastname, String email, String phone, String username,
-            String password, Boolean isLandlord) {
+            String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;

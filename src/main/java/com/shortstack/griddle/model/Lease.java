@@ -28,8 +28,7 @@ public class Lease {
 
 
 
-    public Lease(Integer leaseID, Integer tenantID, Integer apartmentID, Double rent, Double utilityFee,  Double amenityFee, Double technologyFee, Date startDate, Date endDate) {
-        this.leaseID = leaseID;
+    public Lease(Integer tenantID, Integer apartmentID, Double rent, Double utilityFee,  Double amenityFee, Double technologyFee, Date startDate, Date endDate) {
         this.tenantID = tenantID;
         this.apartmentID = apartmentID;
         this.rent = rent;

@@ -14,8 +14,7 @@ public class Building {
     public Building() {
     }
 
-    public Building(Integer buildingID, Integer addressID, Integer landlordID, String buildingName) {
-        this.buildingID = buildingID;
+    public Building(Integer addressID, Integer landlordID, String buildingName) {
         this.addressID = addressID;
         this.landlordID = landlordID;
         this.buildingName = buildingName;
@@ -37,11 +36,11 @@ public class Building {
         this.addressID = addressID;
     }
 
-    public Integer landlordID() {
+    public Integer getLandlordID() {
         return landlordID;
     }
 
-    public void setlandlordID(Integer landlordID) {
+    public void setLandlordID(Integer landlordID) {
         this.landlordID = landlordID;
     }
 
