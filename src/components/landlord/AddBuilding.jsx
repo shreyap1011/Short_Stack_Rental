@@ -1,6 +1,8 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import BuildingService from "../../service/BuildingService";
+import '../../App.css';
+import logoImage from '../../img/griddle-white.png';
 
 export default function AddBuilding() {
     let location = useLocation();
@@ -37,29 +39,81 @@ export default function AddBuilding() {
         }, ()=>{
             alert("Building could not be added");
         })
-       
+
+
     }
     return(
         <>
+        <nav className="navbar">
+        <div className="navbar-brand">
+            <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
+        </div>
+        <ul className="nav-list">
+            <li><a href="#allTenants">All Tenants</a></li>
+            <li><a href="/" >Logout</a></li>
+        </ul>
+        </nav>
+        <div className="form-container">
         <h2>New Building</h2>
-        <form onSubmit={handleSubmit}>
-            <label>
-                Building Name: <input onChange={handleBuildingName} type="text" value={buildingname}/>
-            </label>
-            <label>
-                Street: <input onChange={handleStreetName} type="text" value={streetname}/>
-            </label>
-            <label>
-                City: <input onChange={handleCity} type="text" value={city}/>
-            </label>
-            <label>
-                State: <input onChange={handleState} type="text" value={state}/>
-            </label>
-            <label>
-                ZIP Code: <input onChange={handleZip} type="number" max="99999" min="0" value={zip}/>
-            </label>
-            <input type="submit" value="Add New Building"/>
+        <form className="building-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="buildingName">Building Name:</label>
+            <input
+              type="text"
+              id="buildingName"
+              onChange={handleBuildingName}
+              value={buildingname}
+              required
+            />
+          </div>
+  
+          <div className="form-group">
+            <label htmlFor="street">Street:</label>
+            <input
+              type="text"
+              id="street"
+              onChange={handleStreetName}
+              value={streetname}
+              required
+            />
+          </div>
+  
+          <div className="form-group">
+            <label htmlFor="city">City:</label>
+            <input
+              type="text"
+              id="city"
+              onChange={handleCity}
+              value={city}
+              required
+            />
+          </div>
+  
+          <div className="form-group">
+            <label htmlFor="state">State:</label>
+            <input
+              type="text"
+              id="state"
+              onChange={handleState}
+              value={state}
+              required
+            />
+          </div>
+  
+          <div className="form-group">
+            <label htmlFor="zip">ZIP Code:</label>
+            <input
+              type="number"
+              id="zip"
+              onChange={handleZip}
+              value={zip}
+              required
+            />
+          </div>
+  
+          <button type="submit">Add New Building</button>
         </form>
-        </>
+      </div>
+      </>
     )
 }

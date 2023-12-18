@@ -2,6 +2,7 @@ import { useState } from "react"
 import TenantService from "../../service/TenantService";
 import { useNavigate } from "react-router-dom";
 
+
 export default function AddTenant() {
     let [firstName, setFirstName] = useState('');
     let [lastName, setLastName] = useState('');

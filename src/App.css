@@ -195,7 +195,7 @@ button:hover {
 }
 
 /*nav bar*/
-/* YourComponent.css */
+
 
 .navbar {
   background-color: #1c1c1c;
@@ -226,19 +226,33 @@ button:hover {
 }
 
 .nav-list a:hover {
-  color: #6e2a05;
+  color: #1f788e;
 }
-
-/* YourComponent.css */
 
 .logo-image-navbar {
-  max-width: 129px; /* Adjust the size as needed */
-  margin-right: 10px; /* Add some spacing between the logo and text */
+  max-width: 150px;
+  margin-right: 10px;
 }
 
-/*table container*/
+/* */
+.nav-list li:last-child {
+  margin-right: 0;
+}
 
-/* YourComponent.css */
+/* */
+.nav-list li:last-child a {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.nav-list li:last-child a:hover {
+  color: #1f788e;
+}
+
+
+
+
+/*table container*/
 
 .table-container {
   margin-bottom: 20px;
@@ -262,4 +276,50 @@ th {
 
 button {
   margin-top: 10px;
+}
+
+/*form container*/
+
+.form-container {
+  width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.building-form {
+  display: grid;
+  gap: 10px;
+}
+
+.form-group {
+  display: grid;
+  gap: 5px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
