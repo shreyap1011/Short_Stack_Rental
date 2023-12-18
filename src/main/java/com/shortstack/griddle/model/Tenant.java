@@ -8,8 +8,9 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "TENANT")
 public class Tenant {
-    // @id means id will auto generate
-
+    //ID column is auto incrementing using Snowflake Sequence, therefore not in the constructor.
+    //Decided to let backend + Snowflake generate table ID due to register should not know
+    // tenant item at creation. Therefore not passed by the front end.
     @Id
     @Column(name = "ID")
     private Integer id;
@@ -118,7 +119,7 @@ public class Tenant {
     @Override
     public String toString() {
         return "Tenant{" +
-                "id=" + id +
+                "tenantId=" + id +
                 ", firstname=" + firstname +
                 ", lastname=" + lastname +
                 ", email=" + email +

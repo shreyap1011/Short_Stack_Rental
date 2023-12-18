@@ -22,11 +22,11 @@ public class TenantService {
                 tenant.getBalance());
     }
 
-
     public Tenant findTenant(String username) {
         return tenantRepository.findByUsername(username);
     }
 
+    //Potentially needs to be reworked.
     public Tenant updateTenant(Tenant tenant) {
         Optional<Tenant> optionalLandlord = tenantRepository.findById(tenant.getId());
         Tenant oldTenant = null;
