@@ -3,64 +3,109 @@ package com.shortstack.griddle.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "BUILDING")
 public class Building {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer buildingID;
-    private Integer addressID;
-    private Integer landlordID;
-    private String buildingName;
+    @Column(name = "ID")
+    private Integer id;
+
+    @Column(name = "LANDLORDID")
+    private Integer landlordid;
+
+    @Column(name = "BUILDINGNAME")
+    private String buildingname;
+
+    @Column(name = "STREETNAME")
+    private String streetname;
+
+    @Column(name = "CITY")
+    private String city;
+
+    @Column(name = "STATE")
+    private String state;
+
+    @Column(name = "ZIP")
+    private String zip;
 
     public Building() {
     }
 
-    public Building(Integer addressID, Integer landlordID, String buildingName) {
-        this.addressID = addressID;
-        this.landlordID = landlordID;
-        this.buildingName = buildingName;
+    public Building(Integer landlordid, String buildingname, String streetname, String city, String state, String zip) {
+        this.landlordid = landlordid;
+        this.buildingname = buildingname;
+        this.streetname = streetname;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
     }
 
-    public Integer getBuildingID() {
-        return buildingID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setBuildingID(Integer buildingID) {
-        this.buildingID = buildingID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getAddressID() {
-        return addressID;
+    public int getLandlordid() {
+        return landlordid;
     }
 
-    public void setAddressID(Integer addressID) {
-        this.addressID = addressID;
+    public void setLandlordid(int landlordid) {
+        this.landlordid = landlordid;
     }
 
-    public Integer getLandlordID() {
-        return landlordID;
+    public String getBuildingname() {
+        return buildingname;
     }
 
-    public void setLandlordID(Integer landlordID) {
-        this.landlordID = landlordID;
+    public void setBuildingname(String buildingname) {
+        this.buildingname = buildingname;
     }
 
-    public String getbuildingName() {
-        return buildingName;
+    public String getStreetname() {
+        return streetname;
     }
 
-    public void setbuildingName(String buildingName) {
-        this.buildingName = buildingName;
+    public void setStreetname(String streetname) {
+        this.streetname = streetname;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
     @Override
     public String toString() {
         return "Building{" +
-        "buildingID=" + buildingID +
-        ", addressID=" + addressID +
-        ", landlordID=" + landlordID +
-        ", buildingName=" + buildingName +
-         "}";
+                "buildingId=" + id +
+                ", landlordId=" + landlordid +
+                ", buildingname='" + buildingname + '\'' +
+                ", streetname='" + streetname + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip='" + zip + '\'' +
+                '}';
     }
-
 }
 
