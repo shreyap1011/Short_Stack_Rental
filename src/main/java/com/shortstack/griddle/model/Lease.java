@@ -2,6 +2,7 @@ package com.shortstack.griddle.model;
 
 import jakarta.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "LEASE")
@@ -46,6 +47,7 @@ public class Lease {
         this.amenityfee = amenityfee;
         this.technologyfee = technologyfee;
     }
+
 
     public int getId() {
         return id;
