@@ -12,10 +12,13 @@ import java.util.List;
 @Repository
 public interface LeaseRepository extends JpaRepository<Lease, Integer> {
 
-    @Query(value = "SELECT LEASE.TENANTID, LEASE.APARTMENTID, LEASE.STARTDATE, LEASE.ENDDATE, LEASE.RENT, LEASE.UTILITYFEE, LEASE.AMENITYFEE, LEASE.TECHNOLOGYFEE FROM LEASE INNER JOIN APARTMENT ON APARTMENT.ID = LEASE.APARTMENTID INNER JOIN BUILDING ON BUILDING.ID = APARTMENT.BUILDINGID INNER JOIN LANDLORD ON LANDLORD.ID = BUILDING.LANDLORDID WHERE LANDLORD.ID = :landlordid", nativeQuery = true)
-    List<Lease> findLeaseByLandlordid(@Param("landlordid") int landlordid);
+    @Query(value = "SELECT LEASE.ID, LEASE.TENANTID, LEASE.APARTMENTID, LEASE.STARTDATE, LEASE.ENDDATE, LEASE.RENT, LEASE.UTILITYFEE, LEASE.AMENITYFEE, LEASE.TECHNOLOGYFEE FROM LEASE INNER JOIN APARTMENT ON APARTMENT.ID = LEASE.APARTMENTID INNER JOIN BUILDING ON BUILDING.ID = APARTMENT.BUILDINGID INNER JOIN LANDLORD ON LANDLORD.ID = BUILDING.LANDLORDID WHERE LANDLORD.ID = :landlordid", nativeQuery = true)
+    <T>
+    List<T> findLeaseByLandlordid(@Param("landlordid") int landlordid);
 
     Lease findByTenantid(int tenantid);
+
+    Lease findByApartmentid(int apartmentid);
 
     @Query(value = "INSERT INTO LEASE(TENANTID, APARTMENTID, STARTDATE, ENDDATE, RENT, UTILITYFEE, AMENITYFEE, TECHNOLOGYFEE) " +
             "VALUES (:tenantid, :apartmentid, :startdate, :enddate, :rent, :utilityfee, :amenityfee, :technologyfee)", nativeQuery = true)
