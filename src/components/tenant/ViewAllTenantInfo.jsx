@@ -75,9 +75,9 @@ export default function ViewAllTenantInfo() {
     
     return(
         <>
-        <div id="dashboard">
-        <div id="info">
-            <div id="contact-card">
+        <div id="dashboard-tenant">
+        <div id="info-tenant">
+            <div id="contact-card-tenant">
                 <h3>Personal Information</h3>
                 <p>Address Line 1, Unit #</p>
                 <p>Address Line 2</p>
@@ -85,15 +85,15 @@ export default function ViewAllTenantInfo() {
                 <p>EMAIL: {tenant.email}</p>
                 <p>PHONE: {tenant.phone}</p>
             </div>
-            <div id="balance-summary">
+            <div id="balance-summary-tenant">
                 <h3>{getMonth(today.getMonth())} Balance Summary</h3>
                 <table>
                     {
                         curr_charges.map((charge) => {
                             return (
                                 <tr>
-                                    <td id="left-data">{charge.description}</td>
-                                    <td id="right-data">${charge.amount}</td>
+                                    <td id="left-data-tenant">{charge.description}</td>
+                                    <td id="right-data-tenant">${charge.amount}</td>
                                 </tr>
                             )
                         })
@@ -103,16 +103,16 @@ export default function ViewAllTenantInfo() {
             </div>
         </div>
 
-        <div id="payment">
-            <div id="top-right-head">
+        <div id="payment-tenant">
+            <div id="top-right-head-tenant">
             <h2>Welcome, {tenant.firstName}!</h2>
-            <div id="balance">
+            <div id="balance-tenant">
                 <h3>CURRENT BALANCE: ${tenant.balance}</h3>
                 <p>&nbsp;(as of: {today_string})</p>
             </div>
             </div>
             <br/>
-            <div id="table-head">
+            <div id="table-head-tenant">
                 <h3>Current Charges</h3>
                 <button onClick={newPayment}>Pay Now</button>
             </div>
@@ -141,7 +141,7 @@ export default function ViewAllTenantInfo() {
                 </tbody>
             </table>
 
-            <div id="table-head">
+            <div id="table-head-tenant">
                 <h3>Payment History</h3>
                 <button onClick={goToHistory}>View All</button>
             </div>
