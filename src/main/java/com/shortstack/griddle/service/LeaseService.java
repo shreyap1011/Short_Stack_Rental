@@ -1,30 +1,32 @@
-//package com.shortstack.griddle.service;
-//
-//import com.shortstack.griddle.model.Lease;
-//import com.shortstack.griddle.repository.LeaseRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//
-//import java.util.List;
-//import java.util.Optional;
-//
-//public class LeaseService {
-//
-//    @Autowired
-//    private LeaseRepository leaseRepository;
-//
-//    public List<Lease> getAllLeases() {
-//        return (List<Lease>) leaseRepository.findAll();
-//    }
-//
-//    public Lease findLease(int id) {
-//        return leaseRepository.findById(id).orElse(null);
-//    }
-//
-//    public String createLease(Lease lease) {
-//        leaseRepository.save(lease);
-//        return "Lease added";
-//    }
-//
+package com.shortstack.griddle.service;
+
+import com.shortstack.griddle.model.Lease;
+import com.shortstack.griddle.repository.LeaseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class LeaseService {
+
+    @Autowired
+    LeaseRepository leaseRepository;
+
+    public List<Lease> getAllLeasesByLandlord(int landlordid) {
+        return leaseRepository.findLeaseByLandlordid(landlordid);
+    }
+
+    public Lease findLease(int tenantid) {
+        return leaseRepository.findByTenantid(tenantid);
+    }
+
+    public void createLease(Lease lease) {
+        leaseRepository.createLease(lease.getTenantid(), lease.getApartmentid(), lease.getStartdate(), lease.getEnddate(),
+                lease.getRent(), lease.getUtilityfee(), lease.getAmenityfee(), lease.getTechnologyfee());
+    }
+
 //    public Lease updateLease(Lease lease) {
 //        Optional<Lease> optionalLease = leaseRepository.findById(lease.getLeaseID());
 //        Lease oldLease = null;
@@ -44,9 +46,9 @@
 //        }
 //        return oldLease;
 //    }
-//
-//    public String deleteLease(int id) {
-//        leaseRepository.deleteById(id);
-//        return "Lease deleted";
-//    }
-//}
+
+    public String deleteLease(int id) {
+        leaseRepository.deleteById(id);
+        return "Lease deleted";
+    }
+}
