@@ -22,6 +22,10 @@ public class TenantService {
                 tenant.getBalance());
     }
 
+    public Integer lastTenantid() {
+        return tenantRepository.lastTenantid();
+    }
+
     public Tenant findTenant(String username) {
         return tenantRepository.findByUsername(username);
     }

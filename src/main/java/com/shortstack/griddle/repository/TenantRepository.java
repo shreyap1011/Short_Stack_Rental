@@ -13,8 +13,11 @@ public interface TenantRepository extends CrudRepository<Tenant, Integer> {
 
     Tenant findByUsername(String username);
 
+    @Query(value = "SELECT TENANT_ID.NEXTVAL -1", nativeQuery = true)
+    Integer lastTenantid();
+
     //Native Snowflake query, ID auto generate.
-    @Query(value = "INSERT INTO TENANT(FIRSTNAME, LASTNAME, EMAIL, PHONE, USERNAME, PASSWORD, BALANCE) VALUES (:firstname, :lastname, :email, :phone, :username, :password, :balance)", nativeQuery = true)
+    @Query(value = "INSERT INTO TENANT(FIRSTNAME, LASTNAME, EMAIL, PHONE, USERNAME, PASSWORD, BALANCE) VALUES (:firstname, :lastname, :email, :phone, :username, :password, :balance);", nativeQuery = true)
     void createTenant(@Param("firstname") String firstname, @Param("lastname") String lastname, @Param("email") String email, @Param("phone") String phone, @Param("username") String username, @Param("password") String password, @Param("balance") double balance);
 
     @Query(value = "DELETE FROM TENANT WHERE ID = :id", nativeQuery = true)
