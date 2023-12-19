@@ -323,3 +323,12 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+/*nav bar home page hover*/
+.nav-item {
+  cursor: pointer;
+  transition: color 0.3s ease; /* Add transition for smooth color change */
+}
+
+.nav-item:hover {
+  color: #007bff; /* Change color to your desired hover color */
+}

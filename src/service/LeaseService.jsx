@@ -2,15 +2,19 @@ import React from "react";
 import axios from "axios";
 
 const getLeasesByLandlordUrl = "http://localhost:8080/api/leases/";
-const findLeaseByTenantUrl = "http://localhost:8080/api/lease/";
+const findLeaseByUrl = "http://localhost:8080/api/lease";
 const addLeaseUrl = "http://localhost:8080/api/addLease";
 const updateLeaseUrl = "http://localhost:8080/api/updateLease";
 const deleteLeaseUrl = "http://localhost:8080/api/deleteLease/";
 
 class LeaseService {
 
-    findLease(id) {
-        return axios.get(findLeaseByTenantUrl + id);
+    findLeaseByApartment(id) {
+        return axios.get(findLeaseByUrl, {params : {apartmentid : id}});
+    }
+
+    findLeaseByTenant(id) {
+        return axios.get(findLeaseByUrl, {params : {tenantid : id}});
     }
 
     getAllLeasesByLandlord(id) {

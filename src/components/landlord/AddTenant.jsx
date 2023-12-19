@@ -43,6 +43,7 @@ export default function AddTenant() {
     
     return(
         <>
+        
         <form onSubmit={handleSubmit}>
             <label>
                 First Name: <input onChange={handleFirstName} type="text" value={firstName}></input>

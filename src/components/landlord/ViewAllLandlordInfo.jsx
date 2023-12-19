@@ -52,7 +52,7 @@ export default function ViewAllLandlordInfo() {
             <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
         </div>
         <ul className="nav-list">
-            <li><a href="#allTenants">All Tenants</a></li>
+            <li><a href="/landlord">Home Page </a></li>
             <li><a href="/" >Logout</a></li>
         </ul>
         </nav>
