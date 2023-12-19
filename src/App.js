@@ -14,6 +14,9 @@ import AddCard from './components/tenant/AddCard';
 import logoImage from './img/logo.png';
 import AddTenant from './components/landlord/AddTenant';
 import AddBuilding from './components/landlord/AddBuilding';
+import ViewTenantsForBuilding from './components/landlord/building/ViewTenantsForBuilding';
+import AddApartment from './components/landlord/building/AddApartment';
+import AddLease from './components/landlord/building/AddLease';
 
 const Header = () =>{
   const navigate = useNavigate();
@@ -44,6 +47,9 @@ function App() {
           <Route path={"/landlord"} element={<ViewAllLandlordInfo />} exact={true}/>
           <Route path={"/landlord/addTenant"} element={<AddTenant/>} exact={true}/>
           <Route path={"/landlord/addBuilding"} element={<AddBuilding/>} exact={true}/>
+          <Route path={"/landlord/addApartment"} element={<AddApartment/>} exact={true}/>
+          <Route path={"/landlord/addLease"} element={<AddLease/>} exact={true}/>
+          <Route path={"/landlord/viewBuilding"} element={<ViewTenantsForBuilding/>} exact={true}/>
           <Route path={"/tenant/dashboard"} element={<ViewAllTenantInfo />} exact={true}/>
           <Route path={"/tenant/paymentHistory"} element={<ViewPaymentHistory/>} exact={true}></Route>
           <Route path={"/tenant/newPayment"} element={<TenantPayment/>} exact={true}></Route>

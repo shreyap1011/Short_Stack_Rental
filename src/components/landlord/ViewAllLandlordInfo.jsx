@@ -32,14 +32,16 @@ export default function ViewAllLandlordInfo() {
     }, []);
 
     let navigate = useNavigate();
+    let viewBuilding = (building) => {
+        navigate("/landlord/viewBuilding", {state : {landlord: landlord, building: building}})
+    }
     let addBuilding = (e) => {
         e.preventDefault();
-        console.log(landlord.landlordID);
         navigate("/landlord/addBuilding", {state: {landlord}});
     }
     let addTenant = (e) => {
         e.preventDefault();
-        navigate("/landlord/addTenant");
+        navigate("/landlord/addTenant", {state : landlord});
     }
 
   
@@ -84,7 +86,7 @@ export default function ViewAllLandlordInfo() {
                                 <td>{building.state}</td>
                                 <td>{building.zip}</td>
                                 <td>
-                                    <button>View Tenants</button>
+                                    <button onClick={()=>{viewBuilding(building)}}>View Tenants</button>
                                 </td>
                             </tr>
                         )
