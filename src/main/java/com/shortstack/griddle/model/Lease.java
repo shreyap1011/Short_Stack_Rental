@@ -8,13 +8,13 @@ import java.sql.Date;
 public class Lease {
     @Id
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @Column(name = "TENANTID")
-    private int tenantid;
+    private Integer tenantid;
 
     @Column(name = "APARTMENTID")
-    private int apartmentid;
+    private Integer apartmentid;
 
     @Column(name = "STARTDATE")
     private Date startdate;

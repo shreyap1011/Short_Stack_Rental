@@ -23,9 +23,14 @@ public class LeaseController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/lease/{tenantid}")
-    public Lease findLeaseByTenant(@PathVariable int tenantid) {
-        return leaseService.findLease(tenantid);
+    @GetMapping("/lease")
+    public Lease findLeaseByTenant(@RequestParam(required = false)Integer tenantid, Integer apartmentid) {
+        if (tenantid != null)
+            return leaseService.findByTenantid(tenantid);
+        else if (apartmentid != null)
+            return leaseService.findByApartmentid(apartmentid);
+        else
+            return new Lease();
     }
 
     @ResponseStatus(HttpStatus.CREATED)

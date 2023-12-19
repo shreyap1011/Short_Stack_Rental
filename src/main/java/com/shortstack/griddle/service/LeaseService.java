@@ -18,8 +18,12 @@ public class LeaseService {
         return leaseRepository.findLeaseByLandlordid(landlordid);
     }
 
-    public Lease findLease(int tenantid) {
+    public Lease findByTenantid(int tenantid) {
         return leaseRepository.findByTenantid(tenantid);
+    }
+
+    public Lease findByApartmentid(int apartmentid) {
+        return leaseRepository.findByApartmentid(apartmentid);
     }
 
     public void createLease(Lease lease) {
