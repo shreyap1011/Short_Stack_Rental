@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -17,10 +19,28 @@ public class LeaseController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/leases/{landlordid}")
-    public List<Lease> getAllLeasesByLandlord(@PathVariable int landlordid) {
-        List<Lease> leases = leaseService.getAllLeasesByLandlord(landlordid);
-        return leases;
+    public List<Map<String, Object>> getAllLeasesByLandlord(@PathVariable int landlordid) {
+        List<Object[]> rows = leaseService.getAllLeasesByLandlord(landlordid);
+
+        List<Map<String, Object>> jsonList = rows.stream()
+                .map(row -> {
+                    Map<String, Object> jsonMap = new HashMap<>();
+                    jsonMap.put("id", ((Number) row[0]).intValue());
+                    jsonMap.put("tenantid", ((Number) row[1]).intValue());
+                    jsonMap.put("apartmentid", ((Number) row[2]).intValue());
+                    jsonMap.put("startdate", ((Date) row[3]).toString());
+                    jsonMap.put("enddate", ((Date) row[4]).toString());
+                    jsonMap.put("rent", ((Number) row[5]).doubleValue());
+                    jsonMap.put("utilityfee", ((Number) row[6]).doubleValue());
+                    jsonMap.put("amenityfee", ((Number) row[7]).doubleValue());
+                    jsonMap.put("technologyfee", ((Number) row[8]).doubleValue());
+                    return jsonMap;
+                })
+                .collect(Collectors.toList());
+
+        return jsonList;
     }
+
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/lease")
