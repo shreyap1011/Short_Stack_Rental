@@ -1,12 +1,12 @@
 package com.shortstack.griddle.service;
 
 import com.shortstack.griddle.model.Landlord;
-import com.shortstack.griddle.model.Tenant;
+// import com.shortstack.griddle.model.Tenant;
 import com.shortstack.griddle.repository.LandlordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+// import java.util.List;
 import java.util.Optional;
 
 @Service

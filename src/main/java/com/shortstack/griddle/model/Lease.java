@@ -2,7 +2,7 @@ package com.shortstack.griddle.model;
 
 import jakarta.persistence.*;
 import java.sql.Date;
-import java.util.List;
+// import java.util.List;
 
 @Entity
 @Table(name = "LEASE")

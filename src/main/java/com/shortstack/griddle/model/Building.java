@@ -100,11 +100,11 @@ public class Building {
         return "Building{" +
                 "buildingId=" + id +
                 ", landlordId=" + landlordid +
-                ", buildingname='" + buildingname + '\'' +
-                ", streetname='" + streetname + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", zip='" + zip + '\'' +
+                ", buildingname='" + buildingname + 
+                ", streetname='" + streetname + 
+                ", city='" + city + 
+                ", state='" + state + 
+                ", zip='" + zip + 
                 '}';
     }
 }
