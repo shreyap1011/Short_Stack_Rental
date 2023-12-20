@@ -1,5 +1,6 @@
 package com.shortstack.griddle.repository;
 
+import com.shortstack.griddle.model.Landlord;
 import com.shortstack.griddle.model.Lease;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,11 +21,9 @@ public interface LeaseRepository extends JpaRepository<Lease, Integer> {
 
     Lease findByApartmentid(int apartmentid);
 
-    @Query(value = "INSERT INTO LEASE(TENANTID, APARTMENTID, STARTDATE, ENDDATE, RENT, UTILITYFEE, AMENITYFEE, TECHNOLOGYFEE) " +
-            "VALUES (:tenantid, :apartmentid, :startdate, :enddate, :rent, :utilityfee, :amenityfee, :technologyfee)", nativeQuery = true)
-    void createLease(@Param("tenantid") int tenantid, @Param("apartmentid") int apartmentid, @Param("startdate") Date startdate,
-                      @Param("enddate") Date enddate, @Param("rent") double rent, @Param("utilityfee") double utilityfee,
-                      @Param("amenityfee") double amenityfee, @Param("technologyfee") double technologyfee);
+    @Query(value = "INSERT INTO LEASE(TENANTID, APARTMENTID, STARTDATE, ENDDATE, RENT) " +
+            "VALUES (:tenantid, :apartmentid, :startdate, :enddate, :rent)", nativeQuery = true)
+    void createLease(@Param("tenantid") int tenantid, @Param("apartmentid") int apartmentid, @Param("startdate") Date startdate, @Param("enddate") Date enddate, @Param("rent") double rent);
 
     @Query(value = "DELETE FROM LEASE WHERE ID = :id", nativeQuery = true)
     void deleteById(int id);

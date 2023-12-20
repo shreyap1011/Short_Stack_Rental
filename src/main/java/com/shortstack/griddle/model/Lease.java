@@ -2,7 +2,7 @@ package com.shortstack.griddle.model;
 
 import jakarta.persistence.*;
 import java.sql.Date;
-import java.util.List;
+// import java.util.List;
 
 @Entity
 @Table(name = "LEASE")
@@ -26,26 +26,14 @@ public class Lease {
     @Column(name = "RENT")
     private double rent;
 
-    @Column(name = "UTILITYFEE")
-    private double utilityfee;
-
-    @Column(name = "AMENITYFEE")
-    private double amenityfee;
-
-    @Column(name = "TECHNOLOGYFEE")
-    private double technologyfee;
-
     public Lease(){}
 
-    public Lease(int tenantid, int apartmentid, Date startdate, Date enddate, double rent, double utilityfee, double amenityfee, double technologyfee) {
+    public Lease(int tenantid, int apartmentid, Date startdate, Date enddate, double rent) {
         this.tenantid = tenantid;
         this.apartmentid = apartmentid;
         this.startdate = startdate;
         this.enddate = enddate;
         this.rent = rent;
-        this.utilityfee = utilityfee;
-        this.amenityfee = amenityfee;
-        this.technologyfee = technologyfee;
     }
 
 
@@ -97,30 +85,6 @@ public class Lease {
         this.rent = rent;
     }
 
-    public double getUtilityfee() {
-        return utilityfee;
-    }
-
-    public void setUtilityfee(double utilityfee) {
-        this.utilityfee = utilityfee;
-    }
-
-    public double getAmenityfee() {
-        return amenityfee;
-    }
-
-    public void setAmenityfee(double amenityfee) {
-        this.amenityfee = amenityfee;
-    }
-
-    public double getTechnologyfee() {
-        return technologyfee;
-    }
-
-    public void setTechnologyfee(double technologyfee) {
-        this.technologyfee = technologyfee;
-    }
-
     @Override
     public String toString() {
         return "Lease{" +
@@ -130,9 +94,6 @@ public class Lease {
                 ", startdate=" + startdate +
                 ", enddate=" + enddate +
                 ", rent=" + rent +
-                ", utilityfee=" + utilityfee +
-                ", amenityfee=" + amenityfee +
-                ", technologyfee=" + technologyfee +
                 '}';
     }
 }
