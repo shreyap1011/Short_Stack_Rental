@@ -31,9 +31,6 @@ public class LeaseController {
                     jsonMap.put("startdate", ((Date) row[3]).toString());
                     jsonMap.put("enddate", ((Date) row[4]).toString());
                     jsonMap.put("rent", ((Number) row[5]).doubleValue());
-                    jsonMap.put("utilityfee", ((Number) row[6]).doubleValue());
-                    jsonMap.put("amenityfee", ((Number) row[7]).doubleValue());
-                    jsonMap.put("technologyfee", ((Number) row[8]).doubleValue());
                     return jsonMap;
                 })
                 .collect(Collectors.toList());
