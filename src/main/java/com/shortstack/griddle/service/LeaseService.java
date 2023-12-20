@@ -28,7 +28,7 @@ public class LeaseService {
 
     public void createLease(Lease lease) {
         leaseRepository.createLease(lease.getTenantid(), lease.getApartmentid(), lease.getStartdate(), lease.getEnddate(),
-                lease.getRent(), lease.getUtilityfee(), lease.getAmenityfee(), lease.getTechnologyfee());
+                lease.getRent());
     }
 
 //    public Lease updateLease(Lease lease) {
