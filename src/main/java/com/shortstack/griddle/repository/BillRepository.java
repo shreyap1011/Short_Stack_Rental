@@ -14,7 +14,7 @@ import java.util.List;
 public interface BillRepository extends CrudRepository<Bill, Integer> {
     List<Bill> findAll();
 
-    Bill findAllByLeaseid(int leaseid);
+    List<Bill> findAllByLeaseid(int leaseid);
 
     @Query(value = "INSERT INTO BILL(LEASEID, DESCRIPTION, AMOUNT) VALUES (:leaseid, :description, :amount)", nativeQuery = true)
     void createBill(@Param("leaseid") Integer leaseid, @Param("description") String description, @Param("amount") Double amount);
