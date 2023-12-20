@@ -26,6 +26,10 @@ public class TenantService {
         return tenantRepository.lastTenantid();
     }
 
+    public Tenant findById(int id) {
+        return tenantRepository.findById(id);
+    }
+
     public Tenant findTenant(String username) {
         return tenantRepository.findByUsername(username);
     }

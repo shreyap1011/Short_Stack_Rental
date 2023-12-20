@@ -20,6 +20,12 @@ public class TenantController {
         return tenantService.getAllTenants();
     }
 
+    @GetMapping("/tenants/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Tenant getTenantById(@PathVariable int id) {
+        return tenantService.findById(id);
+    }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/tenant")
     public Tenant findTenant(@RequestParam(required = false) String username) {
