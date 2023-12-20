@@ -41,7 +41,7 @@ export default function ViewAllLandlordInfo() {
     }
     let addTenant = (e) => {
         e.preventDefault();
-        navigate("/landlord/addTenant", {state : landlord});
+        navigate("/landlord/addTenant", {state : {landlord}});
     }
 
   

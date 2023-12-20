@@ -1,9 +1,12 @@
 import { useState } from "react"
 import TenantService from "../../service/TenantService";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 export default function AddTenant() {
+    let location = useLocation();
+    let landlord = location.state.landlord;
+
     let [firstName, setFirstName] = useState('');
     let [lastName, setLastName] = useState('');
     let [email, setEmail] = useState('');
@@ -35,7 +38,7 @@ export default function AddTenant() {
 
         TenantService.addTenant(tenant).then(()=> {
             alert("Tenant added!");
-            navigate("/landlord");
+            navigate("/landlord", {state : {landlord}});
         }, ()=>{
             alert("Tenant could not be added");
         })

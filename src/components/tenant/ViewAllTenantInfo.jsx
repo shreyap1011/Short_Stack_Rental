@@ -1,7 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import ViewPaymentHistory from "./ViewPaymentHistory";
 import TenantPayment from "./TenantPayment";
-import './tenant.css';
+/*import './tenant.css';*/
+import logoImage from '../../img/griddle-white.png';
 
 export default function ViewAllTenantInfo() {
     let today = new Date();
@@ -72,9 +73,24 @@ export default function ViewAllTenantInfo() {
     }
     let curr_total = 0;
     let fut_total = 0;
+
+    let goToHomePage = (e) => {
+        e.preventDefault();
+        navigate("/tenant/dashboard");
+    }
+    
     
     return(
         <>
+        <nav className="navbar">
+            <div className="navbar-brand">
+                <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
+            </div>
+            <ul className="nav-list">
+                <li onClick={goToHomePage}>Home Page</li>
+                <li><a href="/" >Logout</a></li>
+            </ul>
+        </nav>
         <div id="dashboard-tenant">
         <div id="info-tenant">
             <div id="contact-card-tenant">

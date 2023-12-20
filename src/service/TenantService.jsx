@@ -2,7 +2,8 @@ import React from "react";
 import axios from "axios";
 
 const getAllTenantsUrl = "http://localhost:8080/api/tenants";
-const findTenantUrl = "http://localhost:8080/api/tenant/";
+const findTenantUrl = "http://localhost:8080/api/tenants/";
+const findTenantByUsernameUrl = "http://localhost:8080/api/tenant";
 const addTenantUrl = "http://localhost:8080/api/addTenant";
 const updateTenantUrl = "http://localhost:8080/api/updateTenant";
 const deleteTenantUrl = "http://localhost:8080/api/deleteTenant/";
@@ -14,6 +15,10 @@ class TenantService {
 
     findTenant(id) {
         return axios.get(findTenantUrl + id);
+    }
+
+    findTenantByUsername(username) {
+        return axios.get(findTenantByUsernameUrl, {params : {username : username}})
     }
 
     addTenant(tenant) {

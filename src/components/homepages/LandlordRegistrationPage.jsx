@@ -26,7 +26,7 @@ const RegistrationContainer = () => {
     }
     LandlordService.addLandlord(landlord).then(()=> {
       alert("Registration successful!");
-      navigate("/landlord");
+      navigate("/landlordlogin");
     }, ()=>{
       alert("Registration failed");
     })

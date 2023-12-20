@@ -23,6 +23,8 @@ export default function ViewTenantsForBuilding() {
         }, ()=>{});
     }, []);
 
+    
+
     let tenantid = -1;
     let getTenantByLease = (id) => {
         // LeaseService.findLease(id).then((response) => {
@@ -83,7 +85,7 @@ export default function ViewTenantsForBuilding() {
                     apartmentState.apartments.map((apartment) => {
                         return(
                             <tr>
-                                <ViewTenantRow apartment={apartment.id}/>
+                                <ViewTenantRow apartment={apartment}/>
                                 <td>
                                     <button onClick={()=>{addLease(apartment)}}>Add Lease</button>
                                 </td>

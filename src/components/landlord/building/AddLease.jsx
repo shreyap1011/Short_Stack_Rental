@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logoImage from '../../../img/griddle-white.png';
 import TenantService from "../../../service/TenantService";
 import LeaseService from "../../../service/LeaseService";
@@ -22,9 +22,6 @@ export default function AddLease() {
     let [startdate, setStartDate] = useState('');
     let [enddate, setEndDate] = useState('');
     let [rent, setRent] = useState('');
-    let [utilityfee, setUtilityFee] = useState('');
-    let [amenityfee, setAmenityFee] = useState('');
-    let [technologyfee, setTechnologyFee] = useState('');
     
 /*Handle Tenant Information*/ 
     let handleFirstName = (e) => { setFirstName(e.target.value) }
@@ -38,9 +35,9 @@ export default function AddLease() {
     let handleStartDate = (e) => { setStartDate(e.target.value) }
     let handleEndDate = (e) => { setEndDate(e.target.value) }
     let handleRent = (e) => { setRent(e.target.value) }
-    let handleUtilityFee = (e) => { setUtilityFee(e.target.value) }
-    let handleAmenityFee = (e) => { setAmenityFee(e.target.value) }
-    let handleTechnologyFee = (e) => { setTechnologyFee(e.target.value) }
+
+    let [tenantid, setId] = useState('');
+    
 
     let navigate = useNavigate();
     let handleSubmit = (e) => {
@@ -55,19 +52,30 @@ export default function AddLease() {
             balance: 0
         }
 
-        TenantService.addTenant(tenant).then(()=> {}, ()=>{});
+        TenantService.addTenant(tenant);
+
+        console.log(tenant.username);
+        TenantService.findTenantByUsername(tenant.username).then((response)=> {
+            setId(response.data.id);
+            console.log(JSON.stringify(response));
+            console.log(response.data.id +" service tenantid");
+            console.log(tenantid + " variable tenantid");
+        }, () => {
+            console.log("Tenant not found");
+        });
         
         let lease = {
-            tenantid : 1,
-            apartmentid : apartment.id,
+            tenantid : tenantid,
+            apartmentid : apartment.apartmentID,
             startdate : startdate,
             enddate : enddate,
-            rent : rent,
-            utilityfee : utilityfee,
-            amenityfee : amenityfee,
-            technologyfee : technologyfee
+            rent : rent
         }
 
+        console.log(lease.tenantid + "tenant id");
+        console.log(lease.startdate);
+        console.log(lease.enddate);
+        console.log(lease.rent);
         LeaseService.addLease(lease).then(()=>{}, ()=>{})
 
     }
@@ -124,15 +132,6 @@ export default function AddLease() {
                 </label>
                 <label>
                     Monthly Rent: <input onChange={handleRent} type="number" min="0" value={rent}></input>
-                </label>
-                <label>
-                    Utility Fee: <input onChange={handleUtilityFee} type="number" min="0" value={utilityfee}></input>
-                </label>
-                <label>
-                    Amenity Fee: <input onChange={handleAmenityFee} type="number" min="0" value={amenityfee}></input>
-                </label>
-                <label>
-                    Technology Fee: <input onChange={handleTechnologyFee} type="number" min="0" value={technologyfee}></input>
                 </label>
             </div>
             <input type="submit" value="Create Lease"/>    

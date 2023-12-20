@@ -3,40 +3,43 @@ import TenantService from "../../../service/TenantService";
 import LeaseService from "../../../service/LeaseService";
 
 export default function ViewTenantRow({apartment}) {
-    console.log(apartment);
+    /* view all tenants within each building*/
     let [tenant, setTenant] = useState({
         id : '',
-        firstname : '',
-        lastname : '',
+        firstName : '',
+        lastName : '',
         email : '',
         phone : '',
         username : '',
         password : '',
         balance : ''
     })
-    let tenantid = -1;
+    let [tenantid, setId] = useState('');
 
     useEffect(() => {
-        LeaseService.findLeaseByApartment(apartment).then((response) => {
-            tenantid = response.data.tenantid;
+        LeaseService.findLeaseByApartment(apartment.apartmentID).then((response) => {
+            setId(response.data.tenantid);
+            console.log("LeaseService: " + tenantid);
         }, ()=> { 
-            console.log("Apartment ID:"  + apartment + "-- Lease not found");
+            console.log("Apartment ID:"  + apartment.apartmentID + "-- Lease not found");
         });
-    })
+    }, [apartment.apartmentID]);
         
     useEffect(() => {
         TenantService.findTenant(tenantid).then((response) => {
             setTenant(response.data);
+            console.log("TenantService (yes):" + tenantid);
         }, () => {
-            console.log("Apartment ID:"  + apartment + "-- Tenant not found");
+            console.log("TenantService (no):" + tenantid);
+            console.log("Apartment ID:"  + apartment.apartmentID + "-- Tenant not found");
         });
-    })
+    }, [tenantid]);
         
 
     return (
         <>
         <td>{apartment.apartmentnumber}</td>
-        <td>{tenant.firstname} {tenant.lastname}</td>
+        <td>{tenant.firstName} {tenant.lastName}</td>
         </>
     )
 }
