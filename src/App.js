@@ -17,12 +17,13 @@ import AddBuilding from './components/landlord/AddBuilding';
 import ViewTenantsForBuilding from './components/landlord/building/ViewTenantsForBuilding';
 import AddApartment from './components/landlord/building/AddApartment';
 import AddLease from './components/landlord/building/AddLease';
+import BalanceOverview from './components/landlord/BalanceOverview';
 
 const Header = () =>{
   const navigate = useNavigate();
   const currentPath = window.location.pathname;
 
-  const shouldRenderHeader = !["/","/login", "/registration", "/landlordlogin", "/landlordregistration", "/landlord", "/landlord/addBuilding", "/landlord/viewBuilding", "/landlord/addLease", "/tenant/dashboard" ].includes(currentPath);
+  const shouldRenderHeader = !["/","/login", "/registration", "/landlordlogin", "/landlordregistration", "/landlord", "/landlord/addBuilding", "/landlord/viewBuilding", "/landlord/addLease", "/tenant/dashboard", "/landlord/balanceOverview" ].includes(currentPath);
 
   return shouldRenderHeader ? (
     <header>
@@ -45,6 +46,7 @@ function App() {
           <Route path={"/landlordlogin"} element={<LandlordLoginPage/>} exact={true}/>
           <Route path={"/landlordregistration"} element={<LandlordRegistrationPage/>}/>
           <Route path={"/landlord"} element={<ViewAllLandlordInfo />} exact={true}/>
+          <Route path={"/landlord/balanceOverview"} element={<BalanceOverview />} exact={true}/>
           <Route path={"/landlord/addTenant"} element={<AddTenant/>} exact={true}/>
           <Route path={"/landlord/addBuilding"} element={<AddBuilding/>} exact={true}/>
           <Route path={"/landlord/addApartment"} element={<AddApartment/>} exact={true}/>

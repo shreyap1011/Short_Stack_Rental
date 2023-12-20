@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import TenantService from "../../../service/TenantService";
 import LeaseService from "../../../service/LeaseService";
+import { useNavigate } from "react-router-dom";
 
-export default function ViewTenantRow({apartment}) {
+export default function ViewTenantRow({apartment, building, landlord}) {
     /* view all tenants within each building*/
     let [tenant, setTenant] = useState({
         id : '',
@@ -34,12 +35,27 @@ export default function ViewTenantRow({apartment}) {
             console.log("Apartment ID:"  + apartment.apartmentID + "-- Tenant not found");
         });
     }, [tenantid]);
-        
 
-    return (
-        <>
-        <td>{apartment.apartmentnumber}</td>
-        <td>{tenant.firstName} {tenant.lastName}</td>
-        </>
-    )
+    let navigate = useNavigate();
+    let addLease = (apartment) => {
+        navigate("/landlord/addLease", {state : {landlord: landlord, building: building, apartment: apartment}})
+    }
+        
+    if(tenant.id) {
+        return(
+            <>
+                <td>{apartment.apartmentnumber}</td>
+                <td>{tenant.firstName} {tenant.lastName}</td>
+            </>
+        );
+    } else {
+        return(
+            <>
+                <td>{apartment.apartmentnumber}</td>
+                <td>
+                    <button onClick={()=>{addLease(apartment)}}>Add Lease</button>
+                </td>
+            </>
+        )
+    }
 }

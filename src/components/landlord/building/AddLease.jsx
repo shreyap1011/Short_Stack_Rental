@@ -36,8 +36,7 @@ export default function AddLease() {
     let handleEndDate = (e) => { setEndDate(e.target.value) }
     let handleRent = (e) => { setRent(e.target.value) }
 
-    let [tenantid, setId] = useState('');
-    
+    // let [tenantid, setId] = useState('');
 
     let navigate = useNavigate();
     let handleSubmit = (e) => {
@@ -52,31 +51,35 @@ export default function AddLease() {
             balance: 0
         }
 
-        TenantService.addTenant(tenant);
+        TenantService.addTenant(tenant).then((response)=> {
+            // setId(response.data);
 
-        console.log(tenant.username);
-        TenantService.findTenantByUsername(tenant.username).then((response)=> {
-            setId(response.data.id);
-            console.log(JSON.stringify(response));
-            console.log(response.data.id +" service tenantid");
-            console.log(tenantid + " variable tenantid");
-        }, () => {
-            console.log("Tenant not found");
+            let lease = {
+                tenantid : response.data,
+                apartmentid : apartment.apartmentID,
+                startdate : startdate,
+                enddate : enddate,
+                rent : rent
+            }
+    
+            LeaseService.addLease(lease).then(()=>{
+                console.log(lease.tenantid + "success tenant id");
+                alert("Lease successfully created!");
+                navigate("/landlord/viewBuilding", {state : {landlord : landlord, building : building}});
+            }, ()=>{
+                console.log(lease.tenantid + "no tenant id");
+            })
         });
-        
-        let lease = {
-            tenantid : tenantid,
-            apartmentid : apartment.apartmentID,
-            startdate : startdate,
-            enddate : enddate,
-            rent : rent
-        }
 
-        console.log(lease.tenantid + "tenant id");
-        console.log(lease.startdate);
-        console.log(lease.enddate);
-        console.log(lease.rent);
-        LeaseService.addLease(lease).then(()=>{}, ()=>{})
+        // console.log(tenant.username);
+        // TenantService.findTenantByUsername(tenant.username).then((response)=> {
+        //     setId(response.data.id);
+        //     console.log(JSON.stringify(response));
+        //     console.log(response.data.id +" service tenantid");
+        //     console.log(tenantid + " variable tenantid");
+        // }, () => {
+        //     console.log("Tenant not found");
+        // });
 
     }
 

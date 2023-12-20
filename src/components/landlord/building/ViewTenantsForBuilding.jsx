@@ -52,6 +52,10 @@ export default function ViewTenantsForBuilding() {
         e.preventDefault();
         navigate("/landlord", {state : {landlord}});
     }
+    let goToBalanceOverview = (e) => {
+        e.preventDefault();
+        navigate("/landlord/balanceOverview", {state : {landlord}});
+    }
     
 
     return (
@@ -62,6 +66,7 @@ export default function ViewTenantsForBuilding() {
             </div>
             <ul className="nav-list">
                 <li onClick={goToHomePage}>Home Page</li>
+                <li onClick={goToBalanceOverview}>Balance Overview</li>
                 <li><a href="/" >Logout</a></li>
             </ul>
         </nav>
@@ -77,7 +82,6 @@ export default function ViewTenantsForBuilding() {
                 <tr>
                     <th>Unit #</th>
                     <th>Tenant</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -85,10 +89,10 @@ export default function ViewTenantsForBuilding() {
                     apartmentState.apartments.map((apartment) => {
                         return(
                             <tr>
-                                <ViewTenantRow apartment={apartment}/>
-                                <td>
+                                <ViewTenantRow apartment={apartment} building={building} landlord={landlord}/>
+                                {/* <td>
                                     <button onClick={()=>{addLease(apartment)}}>Add Lease</button>
-                                </td>
+                                </td> */}
                             </tr>
                         )
                     })
