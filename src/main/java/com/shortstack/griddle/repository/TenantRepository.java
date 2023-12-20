@@ -13,6 +13,8 @@ public interface TenantRepository extends CrudRepository<Tenant, Integer> {
 
     Tenant findByUsername(String username);
 
+    Tenant findById(int it);
+
     @Query(value = "SELECT TENANT_ID.NEXTVAL -1", nativeQuery = true)
     Integer lastTenantid();
 
