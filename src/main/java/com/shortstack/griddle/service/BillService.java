@@ -21,7 +21,7 @@ public class BillService {
                 bill.getAmount());
     }
 
-    public Bill findBill(int leaseid) {
+    public List<Bill> findBill(int leaseid) {
         return billRepository.findAllByLeaseid(leaseid);
     }
 

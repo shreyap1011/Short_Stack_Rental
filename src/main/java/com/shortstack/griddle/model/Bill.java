@@ -21,7 +21,7 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Integer id, Integer leaseid, String description, Double amount) {
+    public Bill(Integer leaseid, String description, Double amount) {
         this.id = id;
         this.leaseid = leaseid;
         this.description = description;
@@ -63,7 +63,7 @@ public class Bill {
     @Override
     public String toString() {
         return "Bill{" + 
-        "id=" + id + 
+        "billid=" + id +
         ", leaseid=" + leaseid + 
         ", description=" + description + 
         ", amount=" + amount + 

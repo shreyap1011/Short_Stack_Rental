@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 // Will adjust origins based on where requests are coming from.
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -22,8 +24,8 @@ public class BillController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/bill")
-    public Bill findBill(@RequestParam(required = false) int billid) {
-        return billService.findBill(billid);
+    public List<Bill> findBill(@RequestParam(required = false) int leaseid) {
+        return billService.findBill(leaseid);
     }
 
     @PostMapping("/addBill")
