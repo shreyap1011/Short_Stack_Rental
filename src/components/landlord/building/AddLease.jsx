@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import logoImage from '../../../img/griddle-white.png';
 import TenantService from "../../../service/TenantService";
 import LeaseService from "../../../service/LeaseService";
+import BillService from "../../../service/BillService";
 
 export default function AddLease() {
     let location = useLocation();
@@ -65,7 +66,9 @@ export default function AddLease() {
             }
     
             LeaseService.addLease(lease).then(()=>{
-                console.log(lease.tenantid + "success tenant id");
+                let tableBody = document.getElementById("bills-table");
+                
+
                 alert("Lease successfully created!");
                 navigate("/landlord/viewBuilding", {state : {landlord : landlord, building : building}});
             }, ()=>{
@@ -73,17 +76,13 @@ export default function AddLease() {
             })
         });
 
-        // console.log(tenant.username);
-        // TenantService.findTenantByUsername(tenant.username).then((response)=> {
-        //     setId(response.data.id);
-        //     console.log(JSON.stringify(response));
-        //     console.log(response.data.id +" service tenantid");
-        //     console.log(tenantid + " variable tenantid");
-        // }, () => {
-        //     console.log("Tenant not found");
-        // });
-
     }
+
+    let rowid = 0;
+    let deleteBill = (e) => {
+        e.preventDefault();
+        
+    }   
 
     let addBill = (e) => {
         e.preventDefault();
@@ -91,20 +90,26 @@ export default function AddLease() {
         const amount = document.getElementById("bill-amount");
 
         let row = document.createElement("tr");
+        row.id = "row" + rowid;
+        rowid++;
         let descriptionCell = document.createElement("td");
         descriptionCell.innerHTML = description.value;
         let amountCell = document.createElement("td");
         amountCell.innerHTML = amount.value;
 
-
+        let deleteCell = document.createElement("td");
+        let deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Delete Charge";
+        deleteButton.onclick = deleteBill;
+        deleteCell.appendChild(deleteButton);
 
         row.appendChild(descriptionCell);
         row.appendChild(amountCell);
+        row.appendChild(deleteCell);
         document.getElementById("bills-table").appendChild(row);
-    }
 
-    let createBill = (e) => {
-        e.preventDefault();
+        description.value = "";
+        amount.value = "";
     }
 
     let goToHomePage = (e) => {
@@ -178,7 +183,6 @@ export default function AddLease() {
                     </label>
                     <button onClick={addBill}>Add Bill</button>
                 </div>
-                <button id="new-bill" onClick={createBill}>Add Monthly Charge</button>
             </div>
             <input type="submit" value="Create Lease"/>    
         </form>    
