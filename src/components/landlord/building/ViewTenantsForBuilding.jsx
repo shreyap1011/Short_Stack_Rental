@@ -25,20 +25,7 @@ export default function ViewTenantsForBuilding() {
 
     
 
-    let tenantid = -1;
-    let getTenantByLease = (id) => {
-        // LeaseService.findLease(id).then((response) => {
-        //     tenantid = response.data.tenantid;
-        // }, ()=> { 
-        //     console.log("Apartment ID:"  + id + "-- Lease not found");
-        // });
-        // TenantService.findTenant(tenantid).then((response) => {
-        //     return response.data.firstname + " " + response.data.lastname;
-        // }, () => {
-        //     console.log("Apartment ID:"  + id + "-- Tenant not found");
-        // });
-        // return "Not Found";
-    }
+
 
     const navigate = useNavigate();
     let addUnit = (e) => {

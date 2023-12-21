@@ -36,6 +36,8 @@ export default function AddLease() {
     let handleEndDate = (e) => { setEndDate(e.target.value) }
     let handleRent = (e) => { setRent(e.target.value) }
 
+    let bills = [];
+
     // let [tenantid, setId] = useState('');
 
     let navigate = useNavigate();
@@ -81,6 +83,28 @@ export default function AddLease() {
         //     console.log("Tenant not found");
         // });
 
+    }
+
+    let addBill = (e) => {
+        e.preventDefault();
+        const description = document.getElementById("bill-description");
+        const amount = document.getElementById("bill-amount");
+
+        let row = document.createElement("tr");
+        let descriptionCell = document.createElement("td");
+        descriptionCell.innerHTML = description.value;
+        let amountCell = document.createElement("td");
+        amountCell.innerHTML = amount.value;
+
+
+
+        row.appendChild(descriptionCell);
+        row.appendChild(amountCell);
+        document.getElementById("bills-table").appendChild(row);
+    }
+
+    let createBill = (e) => {
+        e.preventDefault();
     }
 
     let goToHomePage = (e) => {
@@ -136,6 +160,25 @@ export default function AddLease() {
                 <label>
                     Monthly Rent: <input onChange={handleRent} type="number" min="0" value={rent}></input>
                 </label>
+            </div>
+
+            <div id="bill">
+            <h3>Additional Charges</h3>
+                <table>
+                    <tbody id="bills-table">
+                    </tbody>
+                </table>
+                <div id="add-bill">
+                    <h3>New Bill</h3>
+                    <label>
+                        Description: <input id="bill-description" type="text"></input>
+                    </label>
+                    <label>
+                        Amount: <input id="bill-amount" type="number" min="0"></input>
+                    </label>
+                    <button onClick={addBill}>Add Bill</button>
+                </div>
+                <button id="new-bill" onClick={createBill}>Add Monthly Charge</button>
             </div>
             <input type="submit" value="Create Lease"/>    
         </form>    

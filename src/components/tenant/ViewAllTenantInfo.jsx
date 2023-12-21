@@ -3,6 +3,9 @@ import ViewPaymentHistory from "./ViewPaymentHistory";
 import TenantPayment from "./TenantPayment";
 /*import './tenant.css';*/
 import logoImage from '../../img/griddle-white.png';
+import { useEffect, useState } from "react"
+import LeaseService from "../../service/LeaseService";
+import BillService from "../../service/BillService";
 
 export default function ViewAllTenantInfo() {
     let today = new Date();
@@ -40,6 +43,38 @@ export default function ViewAllTenantInfo() {
 
     let location = useLocation();
     let tenant = location.state.tenant;
+    console.log("tenant id "+ tenant.id);
+
+    let[leases, setLeases] = useState({
+        leases:{}
+    });
+
+    let[bills, setBills] = useState({
+        bills:[]
+    });
+
+
+    useEffect (()=>{
+        LeaseService.findLeaseByTenant(tenant.id).then((response)=>{
+            setLeases(()=>({
+                leases: response.data
+            }));
+        }, ()=>{});
+    }, []); 
+    console.log('Single Leases:', leases);
+
+    useEffect (()=>{
+        BillService.getAllBills().then((response)=>{
+            setBills(()=>({
+                bills: response.data
+            }));
+        }, ()=>{});
+    }, []);
+
+  
+ 
+    
+   
 
     let curr_charges = [];
     let fut_charges = [];
@@ -143,16 +178,26 @@ export default function ViewAllTenantInfo() {
                 </thead>
                 <tbody>
                     {
-                        curr_charges.map((charge) => {
+                        bills.bills
+                        .filter((bill) => bill.leaseid === leases.leases.id)
+                        .map((filteredBill) => (
+                            <tr key={filteredBill.id}>
+                                <td>{}</td>
+                                <td>{filteredBill.amount}</td>
+                                <td>{filteredBill.description}</td>
+                                <td>{}</td>
+                            </tr>
+                        ))
+                      /* bills.bills.map((bill) => {
                             return (
                                 <tr>
-                                    <td>{charge.date}</td>
-                                    <td>{charge.amount}</td>
-                                    <td>{charge.description}</td>
-                                    <td>{charge.balance}</td>
+                                    <td></td>
+                                    <td>{bill.amount}</td>
+                                    <td>{bill.description}</td>
+                                    <td></td>
                                 </tr>
                             )
-                        })
+                        })*/
                     }
                 </tbody>
             </table>
@@ -172,7 +217,7 @@ export default function ViewAllTenantInfo() {
                 </thead>
                 <tbody>
                     {
-                        fut_charges.map((charge) => {
+                       /* fut_charges.map((charge) => {
                             return (
                                 <tr>
                                     <td>{charge.date}</td>
@@ -181,7 +226,7 @@ export default function ViewAllTenantInfo() {
                                     <td>{charge.balance}</td>
                                 </tr>
                             )
-                        })
+                        })*/
                     }
                 </tbody>
             </table>

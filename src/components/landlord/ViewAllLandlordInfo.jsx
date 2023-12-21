@@ -9,13 +9,11 @@ export default function ViewAllLandlordInfo() {
     let location = useLocation();
     const landlord = location.state.landlord;
 
-    
-
     let[buildings, setBuildings] = useState({
         buildings:[]
     });
     useEffect (()=>{
-        BuildingService.getAllBuildings().then((response)=>{
+        BuildingService.getAllBuildingsByLandlord(landlord.landlordID).then((response)=>{
             setBuildings(()=>({
                 buildings: response.data
             }));
