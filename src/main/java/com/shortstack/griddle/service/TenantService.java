@@ -34,6 +34,11 @@ public class TenantService {
         return tenantRepository.findByUsername(username);
     }
 
+    public List<Object[]> getAllTenantsByLandlord(int landlordid) {
+        return tenantRepository.findTenantByLandlordid(landlordid);
+    }
+
+
     //Potentially needs to be reworked.
     public Tenant updateTenant(Tenant tenant) {
         Optional<Tenant> optionalLandlord = tenantRepository.findById(tenant.getId());

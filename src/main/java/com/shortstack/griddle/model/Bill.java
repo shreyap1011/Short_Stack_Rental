@@ -22,7 +22,6 @@ public class Bill {
     }
 
     public Bill(Integer leaseid, String description, Double amount) {
-        this.id = id;
         this.leaseid = leaseid;
         this.description = description;
         this.amount = amount;

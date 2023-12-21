@@ -1,6 +1,5 @@
 package com.shortstack.griddle.repository;
 
-import com.shortstack.griddle.model.Landlord;
 import com.shortstack.griddle.model.Lease;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
