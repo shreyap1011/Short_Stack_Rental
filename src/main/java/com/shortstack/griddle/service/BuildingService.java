@@ -30,6 +30,10 @@ public class BuildingService {
         return buildingRepository.findByBuildingname(buildingname);
     }
 
+    public List<Object[]> getTenantBuilding(int landlordid) {
+        return buildingRepository.getTenantBuilding(landlordid);
+    }
+
 //    public Building updateBuilding(Building building) {
 //        Optional<Building> optionalBuilding = buildingRepository.findById(building.getBuildingID());
 //        Building oldBuilding = null;

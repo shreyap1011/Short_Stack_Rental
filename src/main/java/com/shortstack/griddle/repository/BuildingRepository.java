@@ -21,4 +21,8 @@ public interface BuildingRepository extends CrudRepository<Building, Integer> {
     @Query(value = "DELETE FROM BUILDING WHERE ID = :id", nativeQuery = true)
     void deleteById(int id);
 
+    @Query(value = 
+    "SELECT BUILDING.* FROM BUILDING INNER JOIN APARTMENT ON BUILDING.ID = APARTMENT.BUILDINGID  INNER JOIN LEASE ON APARTMENT.ID = LEASE.APARTMENTID  INNER JOIN TENANT ON TENANT.ID = LEASE.TENANTID WHERE TENANT.ID = :tenantid", nativeQuery = true)
+    <T>
+    List<T> getTenantBuilding(@Param("tenantid") int tenantid);
 }
