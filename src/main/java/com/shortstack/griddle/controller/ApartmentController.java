@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -51,5 +52,23 @@ public class ApartmentController {
     @DeleteMapping("deleteApartment/{id}")
     public String deleteApartment(@PathVariable int id) {
         return apartmentService.deleteApartment(id);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/tenant/apartment/{tenantid}")
+    public List<Map<String, Object>> getTenantApartment(@PathVariable int tenantid) {
+        List<Object[]> rows = apartmentService.getTenantApartment(tenantid);
+
+        List<Map<String, Object>> jsonList = rows.stream()
+                .map(row -> {
+                    Map<String, Object> jsonMap = new HashMap<>();
+                    jsonMap.put("id", ((Number) row[0]).intValue());
+                    jsonMap.put("buildingid", ((Number) row[1]).intValue());
+                    jsonMap.put("apartmentnumber", ((String) row[2]).toString());
+                    return jsonMap;
+                })
+                .collect(Collectors.toList());
+
+        return jsonList;
     }
 }

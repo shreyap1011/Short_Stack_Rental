@@ -76,7 +76,7 @@ public class BuildingController {
 
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/tenant/building/{tenantid}}")
+    @GetMapping("/tenant/building/{tenantid}")
     public List<Map<String, Object>> getTenantBuilding(@PathVariable int tenantid) {
         List<Object[]> rows = buildingService.getTenantBuilding(tenantid);
 

@@ -21,4 +21,9 @@ public interface ApartmentRepository extends CrudRepository<Apartment, Integer> 
 
     @Query(value = "DELETE FROM APARTMENT WHERE ID = :id", nativeQuery = true)
     void deleteById(int id);
+
+    @Query(value = 
+    "SELECT APARTMENT.* FROM APARTMENT INNER JOIN LEASE ON APARTMENT.ID = LEASE.APARTMENTID  INNER JOIN TENANT ON TENANT.ID = LEASE.TENANTID WHERE TENANT.ID = :tenantid", nativeQuery = true)
+    <T>
+    List<T> getTenantApartment(@Param("tenantid") int tenantid);
 }

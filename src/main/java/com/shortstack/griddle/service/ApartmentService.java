@@ -48,4 +48,8 @@ public class ApartmentService {
         return "Apartment deleted";
     }
 
+    public List<Object[]> getTenantApartment(int tenantid) {
+        return apartmentRepository.getTenantApartment(tenantid);
+    }
+
 }
