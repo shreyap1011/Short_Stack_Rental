@@ -42,11 +42,14 @@ public class TenantService {
             oldTenant = optionalLandlord.get();
             oldTenant.setId(tenant.getId());
             oldTenant.setEmail(tenant.getEmail());
+            oldTenant.setPhone(tenant.getPhone());
             oldTenant.setFirstName(tenant.getFirstName());
             oldTenant.setLastName(tenant.getLastName());
             oldTenant.setUsername(tenant.getUsername());
             oldTenant.setPassword(tenant.getPassword());
             oldTenant.setBalance(tenant.getBalance());
+            tenantRepository.updateTenant(oldTenant.getFirstName(), oldTenant.getLastName(), oldTenant.getEmail(),
+                    oldTenant.getPhone(), oldTenant.getUsername(), oldTenant.getPassword(), oldTenant.getBalance(), oldTenant.getId());
         } else {
             return new Tenant();
         }

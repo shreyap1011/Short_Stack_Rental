@@ -15,6 +15,10 @@ public interface TenantRepository extends CrudRepository<Tenant, Integer> {
 
     Tenant findById(int it);
 
+    @Query(value = "UPDATE TENANT SET FIRSTNAME=:firstname, LASTNAME=:lastname, EMAIL=:email, PHONE=:phone, USERNAME=:username, PASSWORD=:password, BALANCE=:balance WHERE ID =:id", nativeQuery = true)
+    <T>
+    List<T> updateTenant(@Param("firstname") String firstname, @Param("lastname") String lastname, @Param("email") String email, @Param("phone") String phone, @Param("username") String username, @Param("password") String password, @Param("balance") double balance, @Param("id") int id);
+
     @Query(value = "SELECT TENANT_ID.NEXTVAL -1", nativeQuery = true)
     Integer lastTenantid();
 
