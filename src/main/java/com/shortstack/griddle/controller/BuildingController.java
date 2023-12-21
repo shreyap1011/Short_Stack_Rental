@@ -76,9 +76,9 @@ public class BuildingController {
 
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/tenant/building/{buildingid}")
-    public List<Map<String, Object>> getTenantBuilding(@PathVariable int buildingid) {
-        List<Object[]> rows = buildingService.getTenantBuilding(buildingid);
+    @GetMapping("/tenant/building/{tenantid}}")
+    public List<Map<String, Object>> getTenantBuilding(@PathVariable int tenantid) {
+        List<Object[]> rows = buildingService.getTenantBuilding(tenantid);
 
         List<Map<String, Object>> jsonList = rows.stream()
                 .map(row -> {

@@ -30,8 +30,8 @@ public class BuildingService {
         return buildingRepository.findByBuildingname(buildingname);
     }
 
-    public List<Object[]> getTenantBuilding(int landlordid) {
-        return buildingRepository.getTenantBuilding(landlordid);
+    public List<Object[]> getTenantBuilding(int tenantid) {
+        return buildingRepository.getTenantBuilding(tenantid);
     }
 
 //    public Building updateBuilding(Building building) {
