@@ -14,9 +14,30 @@ public class LeaseService {
     @Autowired
     LeaseRepository leaseRepository;
 
+
+
+
+
+
+
+
+
     public List<Object[]> getAllLeasesByLandlord(int landlordid) {
         return leaseRepository.findLeaseByLandlordid(landlordid);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     public Lease findByTenantid(int tenantid) {
         return leaseRepository.findByTenantid(tenantid);
@@ -24,6 +45,10 @@ public class LeaseService {
 
     public Lease findByApartmentid(int apartmentid) {
         return leaseRepository.findByApartmentid(apartmentid);
+    }
+
+    public Integer lastLeaseid() {
+        return leaseRepository.lastLeaseid();
     }
 
     public void createLease(Lease lease) {

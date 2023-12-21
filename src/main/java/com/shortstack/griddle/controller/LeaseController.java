@@ -41,7 +41,7 @@ public class LeaseController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/lease")
-    public Lease findLeaseByTenant(@RequestParam(required = false)Integer tenantid, Integer apartmentid) {
+    public Lease findLeaseByLease(@RequestParam(required = false)Integer tenantid, Integer apartmentid) {
         if (tenantid != null)
             return leaseService.findByTenantid(tenantid);
         else if (apartmentid != null)
@@ -50,10 +50,17 @@ public class LeaseController {
             return new Lease();
     }
 
+    // @ResponseStatus(HttpStatus.CREATED)
+    // @PostMapping("/addLease")
+    // public void createLease(@RequestBody Lease lease) {
+    //     leaseService.createLease(lease);
+    // }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/addLease")
-    public void createLease(@RequestBody Lease lease) {
+    public int addLease(@RequestBody Lease lease) {
         leaseService.createLease(lease);
+        return leaseService.lastLeaseid();
     }
 
 //    @ResponseStatus(HttpStatus.RESET_CONTENT)
