@@ -45,6 +45,7 @@ export default function ViewTenantRow({apartment, building, landlord}) {
         return(
             <>
                 <td>{apartment.apartmentnumber}</td>
+                <td>${tenant.balance}</td>
                 <td>{tenant.firstName} {tenant.lastName}</td>
             </>
         );
@@ -52,6 +53,7 @@ export default function ViewTenantRow({apartment, building, landlord}) {
         return(
             <>
                 <td>{apartment.apartmentnumber}</td>
+                <td>-</td>
                 <td>
                     <button onClick={()=>{addLease(apartment)}}>Add Lease</button>
                 </td>

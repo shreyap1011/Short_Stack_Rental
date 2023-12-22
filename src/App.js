@@ -54,8 +54,7 @@ function App() {
           <Route path={"/landlord/viewBuilding"} element={<ViewTenantsForBuilding/>} exact={true}/>
           <Route path={"/tenant/dashboard"} element={<ViewAllTenantInfo />} exact={true}/>
           <Route path={"/tenant/paymentHistory"} element={<ViewPaymentHistory/>} exact={true}></Route>
-          <Route path={"/tenant/newPayment"} element={<TenantPayment/>} exact={true}></Route>
-          <Route path={"/tenant/newCard"} element={<AddCard/>} exact={true}></Route>
+          <Route path={"/tenant/newPayment"} element={<AddCard/>} exact={true}></Route>
       </Routes>
       </BrowserRouter>
     </div>

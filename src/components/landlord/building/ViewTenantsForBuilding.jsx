@@ -23,17 +23,10 @@ export default function ViewTenantsForBuilding() {
         }, ()=>{});
     }, []);
 
-    
-
-
-
     const navigate = useNavigate();
     let addUnit = (e) => {
         e.preventDefault();
         navigate("/landlord/addApartment", {state : {landlord: landlord, building: building}})
-    }
-    let addLease = (apartment) => {
-        navigate("/landlord/addLease", {state : {landlord: landlord, building: building, apartment: apartment}})
     }
     let goToHomePage = (e) => {
         e.preventDefault();
@@ -68,6 +61,7 @@ export default function ViewTenantsForBuilding() {
             <thead>
                 <tr>
                     <th>Unit #</th>
+                    <th>Outstanding Balance</th>
                     <th>Tenant</th>
                 </tr>
             </thead>
@@ -77,9 +71,6 @@ export default function ViewTenantsForBuilding() {
                         return(
                             <tr>
                                 <ViewTenantRow apartment={apartment} building={building} landlord={landlord}/>
-                                {/* <td>
-                                    <button onClick={()=>{addLease(apartment)}}>Add Lease</button>
-                                </td> */}
                             </tr>
                         )
                     })

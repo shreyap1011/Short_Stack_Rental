@@ -8,7 +8,7 @@ import logoImage from '../../img/griddle-white.png';
 export default function ViewAllLandlordInfo() {
     let location = useLocation();
     const landlord = location.state.landlord;
-
+    
     let[buildings, setBuildings] = useState({
         buildings:[]
     });

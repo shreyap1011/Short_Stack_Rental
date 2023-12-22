@@ -1,6 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function ViewPaymentHistory() {
+    let location = useLocation();
+    let tenant = location.state.tenant;
     let getDateString = (date) => {
         try {
             return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
@@ -24,7 +26,7 @@ export default function ViewPaymentHistory() {
     let navigate = useNavigate();
     let viewCurrent = (e) => {
         e.preventDefault();
-        navigate("/tenant/dashboard");
+        navigate("/tenant/dashboard", {state : {tenant}});
     } 
 
     return(

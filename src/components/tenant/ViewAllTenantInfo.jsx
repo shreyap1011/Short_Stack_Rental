@@ -6,6 +6,7 @@ import logoImage from '../../img/griddle-white.png';
 import { useEffect, useState } from "react"
 import LeaseService from "../../service/LeaseService";
 import BillService from "../../service/BillService";
+import TenantService from "../../service/TenantService";
 
 export default function ViewAllTenantInfo() {
     let today = new Date();
@@ -53,6 +54,22 @@ export default function ViewAllTenantInfo() {
         bills:[]
     });
 
+    let[building, setBuilding] = useState({
+        zip : '',
+        buildingname : '',
+        streetname : '',
+        city : '',
+        id : '',
+        state : '',
+        landlordid : ''
+    })
+
+    let[apartment, setApartment] = useState({
+        buildingid:'',
+        apartmentnumber:'',
+        apartmentID:''
+    })
+
 
     useEffect (()=>{
         LeaseService.findLeaseByTenant(tenant.id).then((response)=>{
@@ -71,10 +88,33 @@ export default function ViewAllTenantInfo() {
         }, ()=>{});
     }, []);
 
-  
- 
-    
-   
+    useEffect (()=>{
+        TenantService.findBuildingByTenant(tenant.id).then((response)=>{
+            setBuilding(()=>({
+                zip: response.data[0].zip,
+                buildingname: response.data[0].buildingname,
+                streetname: response.data[0].streetname,
+                city: response.data[0].city,
+                id: response.data[0].id,
+                state: response.data[0].state,
+                landlordid: response.data[0].landlordid
+            }));
+        }, (response)=>{
+            console.log("TEST FIND BUILDING " + JSON.stringify(response.data));
+        });
+    }, []);
+
+    useEffect (()=>{
+        TenantService.findApartmentByTenant(tenant.id).then((response)=>{
+            setApartment(()=>({
+                buildingid: response.data[0].buildingid,
+                apartmentnumber:response.data[0].apartmentnumber,
+                apartmentID:response.data[0].apartmentID
+            }));
+        }, (response)=>{
+            console.log("TEST FIND BUILDING " + JSON.stringify(response.data));
+        });
+    }, []);
 
     let curr_charges = [];
     let fut_charges = [];
@@ -111,7 +151,7 @@ export default function ViewAllTenantInfo() {
 
     let goToHomePage = (e) => {
         e.preventDefault();
-        navigate("/tenant/dashboard");
+        navigate("/tenant/dashboard", {state : {tenant}});
     }
     
     
@@ -130,8 +170,8 @@ export default function ViewAllTenantInfo() {
         <div id="info-tenant">
             <div id="contact-card-tenant">
                 <h3>Personal Information</h3>
-                <p>Address Line 1, Unit #</p>
-                <p>Address Line 2</p>
+                <p>{building.streetname}, Unit {apartment.apartmentnumber}</p>
+                <p>{building.city}, {building.state} {building.zip}</p>
                 <br/>
                 <p>EMAIL: {tenant.email}</p>
                 <p>PHONE: {tenant.phone}</p>

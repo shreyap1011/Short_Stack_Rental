@@ -1,14 +1,16 @@
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 export default function TenantPayment() {
+    let location = useLocation();
+    let tenant = location.state.tenant;
     let navigate = useNavigate();
     let backToDash = (e) => {
         e.preventDefault();
-        navigate("/tenant/dashboard");
+        navigate("/tenant/dashboard", {state : {tenant}});
     }
     let addCard = (e) => {
         e.preventDefault();
-        navigate("/tenant/newCard");
+        navigate("/tenant/newCard", {state: {tenant}});
     }
     let handleSubmit = (e) => {
         e.preventDefault();

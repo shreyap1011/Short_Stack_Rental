@@ -65,12 +65,20 @@ export default function AddLease() {
                 rent : rent
             }
     
-            LeaseService.addLease(lease).then(()=>{
-                let tableBody = document.getElementById("bills-table");
-                
-
-                alert("Lease successfully created!");
-                navigate("/landlord/viewBuilding", {state : {landlord : landlord, building : building}});
+            LeaseService.addLease(lease).then((leaseResponse)=>{
+                for(let i = 0; i < bills.length; i++) {
+                    let bill = {
+                        leaseid : leaseResponse.data,
+                        description : bills[i].description,
+                        amount : bills[i].amount
+                    }
+                    BillService.addBill(bill).then(()=>{
+                        alert("Lease successfully created!");
+                        navigate("/landlord/viewBuilding", {state : {landlord : landlord, building : building}});
+                    }, ()=>{
+                        console.log(leaseResponse.data + " no lease id");
+                    })
+                }  
             }, ()=>{
                 console.log(lease.tenantid + "no tenant id");
             })
@@ -96,6 +104,13 @@ export default function AddLease() {
         descriptionCell.innerHTML = description.value;
         let amountCell = document.createElement("td");
         amountCell.innerHTML = amount.value;
+
+        const bill = {
+            description : description.value,
+            amount : amount.value
+        }
+        bills.push(bill);
+        console.log(bill.description + " " + bill.amount);
 
         let deleteCell = document.createElement("td");
         let deleteButton = document.createElement("button");
