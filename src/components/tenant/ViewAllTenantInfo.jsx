@@ -166,112 +166,107 @@ export default function ViewAllTenantInfo() {
                 <li><a href="/" >Logout</a></li>
             </ul>
         </nav>
-        <div id="dashboard-tenant">
-        <div id="info-tenant">
-            <div id="contact-card-tenant">
-                <h3>Personal Information</h3>
-                <p>{building.streetname}, Unit {apartment.apartmentnumber}</p>
-                <p>{building.city}, {building.state} {building.zip}</p>
-                <br/>
-                <p>EMAIL: {tenant.email}</p>
-                <p>PHONE: {tenant.phone}</p>
-            </div>
-            <div id="balance-summary-tenant">
-                <h3>{getMonth(today.getMonth())} Balance Summary</h3>
-                <table>
-                    {
-                        curr_charges.map((charge) => {
-                            return (
-                                <tr>
-                                    <td id="left-data-tenant">{charge.description}</td>
-                                    <td id="right-data-tenant">${charge.amount}</td>
-                                </tr>
-                            )
-                        })
-                    }
-                </table>
-                <button onClick={newPayment}>Pay Remaining Balance</button>
-            </div>
-        </div>
 
-        <div id="payment-tenant">
-            <div id="top-right-head-tenant">
+        <div id="payment-tenant" className="welcome-balance-container">
+        <div id="top-right-head-tenant">
             <h2>Welcome, {tenant.firstName}!</h2>
             <div id="balance-tenant">
                 <h3>CURRENT BALANCE: ${tenant.balance}</h3>
                 <p>&nbsp;(as of: {today_string})</p>
             </div>
-            </div>
-            <br/>
-            <div id="table-head-tenant">
-                <h3>Current Charges</h3>
-                <button onClick={newPayment}>Pay Now</button>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Description</th>
-                        <th>Balance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        bills.bills
-                        .filter((bill) => bill.leaseid === leases.leases.id)
-                        .map((filteredBill) => (
-                            <tr key={filteredBill.id}>
-                                <td>{}</td>
-                                <td>{filteredBill.amount}</td>
-                                <td>{filteredBill.description}</td>
-                                <td>{}</td>
-                            </tr>
-                        ))
-                      /* bills.bills.map((bill) => {
-                            return (
-                                <tr>
-                                    <td></td>
-                                    <td>{bill.amount}</td>
-                                    <td>{bill.description}</td>
-                                    <td></td>
-                                </tr>
-                            )
-                        })*/
-                    }
-                </tbody>
-            </table>
+        </div>
+        </div>
 
-            <div id="table-head-tenant">
-                <h3>Payment History</h3>
-                <button onClick={goToHistory}>View All</button>
+        <div id="dashboard-tenant">
+            <div id="info-tenant" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div id="left-info-container" style={{ flexGrow: 1, marginRight: '150px' }}>
+                    <div id="contact-card-tenant" >
+                        <h3>Personal Information</h3>
+                        <p>{building.streetname}, Unit# {apartment.apartmentnumber}</p>
+                        <p>{building.city}, {building.state} {building.zip}</p>
+                        <br />
+                        <p>EMAIL: {tenant.email}</p>
+                        <p>PHONE: {tenant.phone}</p>
+                    </div>
+                    <div id="balance-summary-tenant" style={{ marginTop: '70px' }}>
+                        <h3>{getMonth(today.getMonth())} Balance Summary</h3>
+                        <table>
+                            {
+                                curr_charges.map((charge) => (
+                                    <tr key={charge.description}>
+                                        <td id="left-data-tenant">{charge.description}</td>
+                                        <td id="right-data-tenant">${charge.amount}</td>
+                                    </tr>
+                                ))
+                            }
+                        </table>
+                        <button onClick={newPayment}>Pay Remaining Balance</button>
+                    </div>
+                </div>
+                <div id="payment-tenant">
+                    <div id="table-head-tenant">
+                        <h3>Current Charges</h3>
+                        <button onClick={newPayment}>Pay Now</button>
+                    </div>
+                    <table className="tenant-custom-table">
+                    <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Description</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                bills.bills
+                                .filter((bill) => bill.leaseid === leases.leases.id)
+                                .map((filteredBill) => (
+                                    <tr key={filteredBill.id}>
+                                        <td>{}</td>
+                                        <td>{filteredBill.amount}</td>
+                                        <td>{filteredBill.description}</td>
+                                        <td>{}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                    <div id="table-head-tenant" style={{ marginTop: '50px' }}>
+                        <h3>Payment History</h3>
+                        <button onClick={goToHistory}>View All</button>
+                    </div>
+                    <table className="tenant-custom-table">
+                    <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Description</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                            /* fut_charges.map((charge) => {
+                                    return (
+                                        <tr>
+                                            <td>{charge.date}</td>
+                                            <td>{charge.amount}</td>
+                                            <td>{charge.description}</td>
+                                            <td>{charge.balance}</td>
+                                        </tr>
+                                    )
+                                })*/
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Description</th>
-                        <th>Balance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                       /* fut_charges.map((charge) => {
-                            return (
-                                <tr>
-                                    <td>{charge.date}</td>
-                                    <td>{charge.amount}</td>
-                                    <td>{charge.description}</td>
-                                    <td>{charge.balance}</td>
-                                </tr>
-                            )
-                        })*/
-                    }
-                </tbody>
-            </table>
         </div>
-        </div>
+
         </>
+
+       
     )
 }
