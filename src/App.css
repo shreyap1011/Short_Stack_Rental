@@ -400,11 +400,12 @@ button:hover-tenant {
 
 #top-right-head-tenant {
   margin: 0px;
-  padding: 5px 5px 5px 5px;
+  padding: 5px ;
+  text-align: center;
 }
 
 #top-right-head-tenant > h2 {
-  margin: 0px;
+  margin: 0px auto;
 }
 
 #table-head-tenant {
@@ -416,6 +417,7 @@ button:hover-tenant {
   width: 90%;
   padding-left: 5%;
   padding-right: 5%;
+  margin-bottom: 0;
 }
 
 table-tenant {
@@ -423,3 +425,45 @@ table-tenant {
   background-color: white;
 }
 
+.tenant-custom-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+}
+
+
+/*tetsing tenant side*/
+
+#dashboard-tenant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-balance-container {
+  margin: 20px 0;
+}
+
+#top-right-head-tenant {
+  text-align: center;
+  margin: 0;
+  padding: 5px;
+}
+
+#balance-tenant {
+  /* Additional styling for balance, if needed */
+}
+
+
+#contact-card-tenant {
+  border: 2px solid rgb(69, 12, 12);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#contact-card-tenant h3 {
+  border-bottom: 2px solid rgb(69, 12, 12);
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
