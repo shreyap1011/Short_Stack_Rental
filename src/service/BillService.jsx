@@ -15,7 +15,7 @@ class BillService {
     }
 
     findBillsByLease(id) {
-        return axios.get(findBillByLeaseUrl + id);
+        return axios.get(findBillByLeaseUrl, {params : {leaseid : id}});
     }
 
     getAllBills() {

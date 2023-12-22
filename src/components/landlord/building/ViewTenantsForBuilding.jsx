@@ -62,6 +62,7 @@ export default function ViewTenantsForBuilding() {
                 <tr>
                     <th>Unit #</th>
                     <th>Outstanding Balance</th>
+                    <th>Charges for Month</th>
                     <th>Tenant</th>
                 </tr>
             </thead>

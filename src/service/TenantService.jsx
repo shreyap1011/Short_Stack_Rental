@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 const getAllTenantsUrl = "http://localhost:8080/api/tenants";
+const getAllTenantsByLandlordUrl = "http://localhost:8080/api/tenants/landlord/";
 const findTenantUrl = "http://localhost:8080/api/tenants/";
 const findTenantByUsernameUrl = "http://localhost:8080/api/tenant";
 const findBuildingByTenantUrl = "http://localhost:8080/api/tenant/building/";
@@ -13,6 +14,10 @@ const deleteTenantUrl = "http://localhost:8080/api/deleteTenant/";
 class TenantService {
     getAllTenants() {
         return axios.get(getAllTenantsUrl);
+    }
+    
+    getAllTenantsByLandlord(id) {
+        return axios.get(getAllTenantsByLandlordUrl + id);
     }
 
     findTenant(id) {

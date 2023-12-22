@@ -18,6 +18,7 @@ import ViewTenantsForBuilding from './components/landlord/building/ViewTenantsFo
 import AddApartment from './components/landlord/building/AddApartment';
 import AddLease from './components/landlord/building/AddLease';
 import BalanceOverview from './components/landlord/BalanceOverview';
+import ViewTenant from './components/landlord/ViewTenant';
 
 const Header = () =>{
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ function App() {
           <Route path={"/landlord/addApartment"} element={<AddApartment/>} exact={true}/>
           <Route path={"/landlord/addLease"} element={<AddLease/>} exact={true}/>
           <Route path={"/landlord/viewBuilding"} element={<ViewTenantsForBuilding/>} exact={true}/>
+          <Route path={"/landlord/viewTenant"} element={<ViewTenant/>} exact={true}/>
           <Route path={"/tenant/dashboard"} element={<ViewAllTenantInfo />} exact={true}/>
           <Route path={"/tenant/paymentHistory"} element={<ViewPaymentHistory/>} exact={true}></Route>
           <Route path={"/tenant/newPayment"} element={<AddCard/>} exact={true}></Route>

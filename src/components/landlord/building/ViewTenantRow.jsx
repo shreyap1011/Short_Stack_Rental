@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import TenantService from "../../../service/TenantService";
 import LeaseService from "../../../service/LeaseService";
 import { useNavigate } from "react-router-dom";
+import BillService from "../../../service/BillService";
 
 export default function ViewTenantRow({apartment, building, landlord}) {
     /* view all tenants within each building*/
@@ -16,11 +17,18 @@ export default function ViewTenantRow({apartment, building, landlord}) {
         balance : ''
     })
     let [tenantid, setId] = useState('');
+    let total_charges = 0;
 
     useEffect(() => {
         LeaseService.findLeaseByApartment(apartment.apartmentID).then((response) => {
             setId(response.data.tenantid);
-            console.log("LeaseService: " + tenantid);
+            total_charges += response.data.rent;
+            BillService.findBillsByLease(response.data.id).then((response) => {
+                for(let i = 0; i < response.data.length; i++) {
+                    total_charges += response.data[i].amount;
+                    console.log(total_charges);
+                }
+            })
         }, ()=> { 
             console.log("Apartment ID:"  + apartment.apartmentID + "-- Lease not found");
         });
@@ -46,6 +54,7 @@ export default function ViewTenantRow({apartment, building, landlord}) {
             <>
                 <td>{apartment.apartmentnumber}</td>
                 <td>${tenant.balance}</td>
+                <td>${total_charges}</td>
                 <td>{tenant.firstName} {tenant.lastName}</td>
             </>
         );
@@ -53,6 +62,7 @@ export default function ViewTenantRow({apartment, building, landlord}) {
         return(
             <>
                 <td>{apartment.apartmentnumber}</td>
+                <td>-</td>
                 <td>-</td>
                 <td>
                     <button onClick={()=>{addLease(apartment)}}>Add Lease</button>

@@ -28,16 +28,12 @@ export default function ViewAllLandlordInfo() {
         e.preventDefault();
         navigate("/landlord/addBuilding", {state: {landlord}});
     }
-    let addTenant = (e) => {
-        e.preventDefault();
-        navigate("/landlord/addTenant", {state : {landlord}});
-    }
     let goToBalanceOverview = (e) => {
         e.preventDefault();
         navigate("/landlord/balanceOverview", {state : {landlord}});
     }
 
-  
+
     return(
         <>
         <nav className="navbar">
