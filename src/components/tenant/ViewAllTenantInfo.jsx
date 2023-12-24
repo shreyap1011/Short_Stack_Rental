@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import LeaseService from "../../service/LeaseService";
 import BillService from "../../service/BillService";
 import TenantService from "../../service/TenantService";
+import PaymentService from "../../service/PaymentService";
 
 export default function ViewAllTenantInfo() {
     let today = new Date();
@@ -54,6 +55,10 @@ export default function ViewAllTenantInfo() {
         bills:[]
     });
 
+    let[payments, setPayments] = useState({
+        payments : []
+    })
+
     let[building, setBuilding] = useState({
         zip : '',
         buildingname : '',
@@ -69,7 +74,6 @@ export default function ViewAllTenantInfo() {
         apartmentnumber:'',
         apartmentID:''
     })
-
 
     useEffect (()=>{
         LeaseService.findLeaseByTenant(tenant.id).then((response)=>{
@@ -116,26 +120,15 @@ export default function ViewAllTenantInfo() {
         });
     }, []);
 
-    let curr_charges = [];
-    let fut_charges = [];
-    for(let i = 0; i < 3; i++) {
-        let charge = {
-            date: '12/' + i + '/2023',
-            balance : tenant.balance + 10,
-            description : "Description1",
-            amount : (1.0 + i),
-            status: 'UNPAID'
-        }
-        curr_charges.push(charge);
-
-        let charge2 = {
-            date: '12/' + (i+20) + '/2023',
-            balance : tenant.balance + 10,
-            description : "Description2",
-            amount : (1.0 + i)
-        }
-        fut_charges.push(charge2);
-    }
+    useEffect(()=>{
+        PaymentService.findAllPaymentsByTenant(tenant.id).then((response)=>{
+            setPayments(()=>({
+                payments : response.data
+            }));
+        }, () => {
+            console.log("payments not found")
+        })
+    })
 
     let navigate = useNavigate();
     let goToHistory = (e) => {
@@ -146,8 +139,6 @@ export default function ViewAllTenantInfo() {
         e.preventDefault();
         navigate("/tenant/newPayment", {state : {tenant}});
     }
-    let curr_total = 0;
-    let fut_total = 0;
 
     let goToHomePage = (e) => {
         e.preventDefault();
@@ -191,14 +182,6 @@ export default function ViewAllTenantInfo() {
                     <div id="balance-summary-tenant" style={{ marginTop: '70px' }}>
                         <h3>{getMonth(today.getMonth())} Balance Summary</h3>
                         <table>
-                            {
-                                curr_charges.map((charge) => (
-                                    <tr key={charge.description}>
-                                        <td id="left-data-tenant">{charge.description}</td>
-                                        <td id="right-data-tenant">${charge.amount}</td>
-                                    </tr>
-                                ))
-                            }
                         </table>
                         <button onClick={newPayment}>Pay Remaining Balance</button>
                     </div>
@@ -246,19 +229,6 @@ export default function ViewAllTenantInfo() {
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                            /* fut_charges.map((charge) => {
-                                    return (
-                                        <tr>
-                                            <td>{charge.date}</td>
-                                            <td>{charge.amount}</td>
-                                            <td>{charge.description}</td>
-                                            <td>{charge.balance}</td>
-                                        </tr>
-                                    )
-                                })*/
-                            }
-
                         </tbody>
                     </table>
                 </div>

@@ -92,8 +92,8 @@ export default function BalanceOverview() {
                                 <td>{tenant.username}</td>
                                 <td>{tenant.password}</td>
                                 <td>{tenant.balance}</td>
-                                <td>{tenant.firstName}</td>
-                                <td>{tenant.lastName}</td>
+                                <td>{tenant.firstname}</td>
+                                <td>{tenant.lastname}</td>
                             </tr>
                         )
                     })

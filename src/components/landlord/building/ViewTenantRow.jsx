@@ -28,7 +28,7 @@ export default function ViewTenantRow({apartment, building, landlord}) {
                     total_charges += response.data[i].amount;
                     console.log(total_charges);
                 }
-            })
+            }, ()=>{});
         }, ()=> { 
             console.log("Apartment ID:"  + apartment.apartmentID + "-- Lease not found");
         });
