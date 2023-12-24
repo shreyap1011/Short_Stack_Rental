@@ -1,17 +1,19 @@
 import React from "react";
 import axios from "axios";
 
-const makePaymentUrl = "http://localhost:8080/api/makePayment/";
+const makePaymentUrl = "http://localhost:8080/api/makePayment";
 const findPaymentsByTenantUrl = "http://localhost:8080/api/payments/";
 
 class PaymentService {
 
     makePayment(tenantid, payment) { 
-        axios.post(makePaymentUrl, {params : {tenantid : tenantid,  incomingRequest : payment}})
+        console.log("tenantid : " + tenantid);
+        console.log("payment: " + payment );
+        return axios.post(makePaymentUrl, payment, {params : {tenantid : tenantid}});
     }
 
     findAllPaymentsByTenant(tenantid) {
-        axios.get(findPaymentsByTenantUrl + tenantid);
+        return axios.get(findPaymentsByTenantUrl + tenantid);
     }
 }
 

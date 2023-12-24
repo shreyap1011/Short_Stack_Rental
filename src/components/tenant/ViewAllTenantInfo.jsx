@@ -55,9 +55,9 @@ export default function ViewAllTenantInfo() {
         bills:[]
     });
 
-    let[payments, setPayments] = useState({
+    let[paymentsState, setPayments] = useState({
         payments : []
-    })
+    });
 
     let[building, setBuilding] = useState({
         zip : '',
@@ -120,15 +120,16 @@ export default function ViewAllTenantInfo() {
         });
     }, []);
 
-    useEffect(()=>{
+    useEffect (()=>{
         PaymentService.findAllPaymentsByTenant(tenant.id).then((response)=>{
             setPayments(()=>({
                 payments : response.data
             }));
-        }, () => {
-            console.log("payments not found")
-        })
-    })
+        }, (response)=>{
+            console.log("TEST FIND BUILDING " + JSON.stringify(response.data));
+        });
+    }, []);
+    //console.log("tenant by payment: " + payments)
 
     let navigate = useNavigate();
     let goToHistory = (e) => {
@@ -229,6 +230,17 @@ export default function ViewAllTenantInfo() {
                             </tr>
                         </thead>
                         <tbody>
+                            {
+                                paymentsState.payments.map((payment) => {
+                                    return (
+                                        <tr>
+                                            <td>{payment.paymentdate}</td>
+                                            <td>{payment.amount}</td>
+                                            <td>{payment.note}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
                         </tbody>
                     </table>
                 </div>
