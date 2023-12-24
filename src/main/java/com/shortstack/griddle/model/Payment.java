@@ -1,99 +1,98 @@
-//package com.shortstack.griddle.model;
-//
-//import jakarta.persistence.*;
-//import java.sql.Date;
-//
-//@Entity
-//public class Payment {
-//    // @id means id will auto generate
-//
-//    public enum Status {
-//        Paid, Unpaid, Overdue;
-//    }
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Integer paymentID;
-//    private Integer leaseID;
-//    private String paymentMethod;
-//    private Double amount;
-//
-//    @Temporal(TemporalType.DATE)
-//    private Date paymentDate;
-//
-//    @Enumerated(EnumType.STRING)
-//    private Status status;
-//
-//    public Payment() {
-//    }
-//
-//    public Payment(Integer leaseID, String paymentMethod, Double amount, Date paymentDate,
-//            Status status) {
-//        this.leaseID = leaseID;
-//        this.paymentMethod = paymentMethod;
-//        this.amount = amount;
-//        this.paymentDate = paymentDate;
-//        this.status = status;
-//    }
-//
-//    public Integer getPaymentID() {
-//        return paymentID;
-//    }
-//
-//    public void setPaymentID(Integer paymentID) {
-//        this.paymentID = paymentID;
-//    }
-//
-//    public Integer getLeaseID() {
-//        return leaseID;
-//    }
-//
-//    public void setLeaseID(Integer leaseID) {
-//        this.leaseID = leaseID;
-//    }
-//
-//    public String getPaymentMethod() {
-//        return paymentMethod;
-//    }
-//
-//    public void setPaymentMethod(String paymentMethod) {
-//        this.paymentMethod = paymentMethod;
-//    }
-//
-//    public Double getAmount() {
-//        return amount;
-//    }
-//
-//    public void setAmount(Double amount) {
-//        this.amount = amount;
-//    }
-//
-//    public Date getPaymentDate() {
-//        return paymentDate;
-//    }
-//
-//    public void setPaymentDate(Date paymentDate) {
-//        this.paymentDate = paymentDate;
-//    }
-//
-//    public Status getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(Status status) {
-//        this.status = status;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "Payment{" +
-//        "paymentID=" + paymentID +
-//        ", leaseID=" + leaseID +
-//        ", paymentMethod=" + paymentMethod +
-//        ", amount=" + amount +
-//        ", paymentDate=" + paymentDate +
-//        ", status=" + status +
-//        "}";
-//    }
-//
-//}
+package com.shortstack.griddle.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "PAYMENT")
+public class Payment {
+
+    @Id
+    @Column(name = "ID")
+    private Integer id;
+
+    @Column(name = "tenantid")
+    private Integer tenantid;
+
+    @Column(name = "amount")
+    private double amount;
+
+    @Column(name = "paymentdate")
+    private String paymentdate;
+
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "note")
+    private String note;
+
+    public Payment() {
+    }
+
+    public Payment(Integer tenantid, double amount, String paymentdate, String type, String note) {
+        this.tenantid = tenantid;
+        this.amount = amount;
+        this.paymentdate = paymentdate;
+        this.type = type;
+        this.note = note;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getTenantid() {
+        return tenantid;
+    }
+
+    public void setTenantid(Integer tenantid) {
+        this.tenantid = tenantid;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getPaymentdate() {
+        return paymentdate;
+    }
+
+    public void setPaymentdate(String paymentdate) {
+        this.paymentdate = paymentdate;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "paymentid=" + id +
+                ", tenantid=" + tenantid +
+                ", amount=" + amount +
+                ", paymentdate=" + paymentdate +
+                ", type='" + type + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
+}
