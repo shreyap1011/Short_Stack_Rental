@@ -7,19 +7,38 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Service
 public class TenantService {
     @Autowired
     TenantRepository tenantRepository;
+
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    public TenantService(BCryptPasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public List<Tenant> getAllTenants() {
         return tenantRepository.findAll();
     }
 
     public void createTenant(Tenant tenant) {
+        String hashedPassword = passwordEncoder.encode(tenant.getPassword());
+        tenant.setPassword(hashedPassword);
         tenantRepository.createTenant(tenant.getFirstName(), tenant.getLastName(),
                 tenant.getEmail(), tenant.getPhone(), tenant.getUsername(), tenant.getPassword(),
                 tenant.getBalance());
+    }
+
+    public boolean validateLogin(Tenant tenant, String enteredPassword) {
+        // Retrieve the hashed password from the database (this is just a placeholder)
+        String storedHashedPassword = tenantRepository.findByUsername(tenant.getUsername()).getPassword();
+
+        // Verify the entered password against the stored hashed password
+        return passwordEncoder.matches(enteredPassword, storedHashedPassword);
     }
 
     public Integer lastTenantid() {
