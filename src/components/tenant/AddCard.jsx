@@ -15,8 +15,7 @@ export default function AddCard() {
     let [amount, setAmount] = useState('');
 
     let handleName = (e) => { setName(e.target.value) }
-    let handleCardNumber = (e) => { setCardNumber(e.target.value);
-    console.log(cardNumber); }
+    let handleCardNumber = (e) => { setCardNumber(e.target.value) }
     let handleExpMonth = (e) => { setExpMonth(e.target.value) }
     let handleExpYear = (e) => { setExpYear(e.target.value) }
     let handleCvc = (e) => { setCvc(e.target.value) }
@@ -69,39 +68,23 @@ export default function AddCard() {
 
         PaymentService.makePayment(tenant.id, new_payment).then(() => {
             alert("Payment successful!");
+            let new_tenant = {
+                id: tenant.id,
+                email: tenant.email,
+                phone: tenant.phone,
+                username: tenant.username,
+                password: tenant.password,
+                balance: tenant.balance - amount,
+                firstName: tenant.firstName,
+                lastName: tenant.lastName
+            }
+            TenantService.updateTenant(new_tenant);
             console.log(new_payment.amount.total + " " + new_payment.source.card.cardData);
-            navigate("/tenant/dashboard", {state: {tenant}});
+            navigate("/tenant/dashboard", {state: {tenant:new_tenant}});
         }, ()=> {
             alert("Payment not successful");
             console.log(new_payment.amount.total + " " + new_payment.source.card.cardData);
         })
-        // let valid = false;
-        // for(let i = 0; i < cards.length; i++) {
-        //     let card = cards[i];
-        //     if(
-        //         card.cardNumber == cardNumber &&
-        //         card.expDate == expDate &&
-        //         card.cvc == cvc
-        //     ) {
-        //         alert("Payment successful!");
-        //         valid = true;
-        //         let newTenant = {
-        //             id : tenant.id,
-        //             firstName : tenant.firstName,
-        //             lastName : tenant.lastName,
-        //             email : tenant.email,
-        //             phone : tenant.phone,
-        //             username : tenant.username,
-        //             password : tenant.password,
-        //             balance : tenant.balance - amount
-        //         }
-        //         TenantService.updateTenant(newTenant);
-        //         navigate("/tenant/dashboard", {state: {tenant}})
-        //     }
-        // }
-        // if(!valid) {
-        //     alert("Payment unsuccessful -- try again");
-        // }
     }
 
     return(
@@ -143,6 +126,7 @@ export default function AddCard() {
                     <option value="2032">32</option>
                     <option value="2033">33</option>
                     <option value="2034">34</option>
+                    <option value="2035">35</option>
                 </select>
 
             </label>
@@ -153,7 +137,7 @@ export default function AddCard() {
             <label>
                 Amount: <input value={amount} onChange={handleAmount} type="number" min="0"></input>
             </label>
-            <input type="submit" value="Add Card"/>
+            <input type="submit" value="Submit Payment"/>
         </form>
         <button onClick={goBack}>Back</button>
         </>

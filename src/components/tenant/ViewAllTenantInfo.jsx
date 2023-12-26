@@ -48,7 +48,7 @@ export default function ViewAllTenantInfo() {
     console.log("tenant id "+ tenant.id);
 
     let[leases, setLeases] = useState({
-        leases:{}
+        leases : {}
     });
 
     let[bills, setBills] = useState({
@@ -146,6 +146,9 @@ export default function ViewAllTenantInfo() {
         navigate("/tenant/dashboard", {state : {tenant}});
     }
     
+    let total_charges = leases.leases.rent;
+    
+    console.log(tenant.balance);
     
     return(
         <>
@@ -189,31 +192,38 @@ export default function ViewAllTenantInfo() {
                 </div>
                 <div id="payment-tenant">
                     <div id="table-head-tenant">
-                        <h3>Current Charges</h3>
+                        <h3>Recurring Charges</h3>
                         <button onClick={newPayment}>Pay Now</button>
                     </div>
                     <table className="tenant-custom-table">
                     <thead>
                             <tr>
-                                <th>Date</th>
                                 <th>Amount</th>
                                 <th>Description</th>
-                                <th>Balance</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <td>${leases.leases.rent}</td>
+                                <td>Rent</td>
+                            </tr>
                             {
                                 bills.bills
                                 .filter((bill) => bill.leaseid === leases.leases.id)
-                                .map((filteredBill) => (
+                                .map((filteredBill) => {
+                                    total_charges += filteredBill.amount;
+                                    return (
                                     <tr key={filteredBill.id}>
-                                        <td>{}</td>
-                                        <td>{filteredBill.amount}</td>
+                                        <td>${filteredBill.amount}</td>
                                         <td>{filteredBill.description}</td>
-                                        <td>{}</td>
                                     </tr>
-                                ))
+                                    )
+                                })
                             }
+                            <tr>
+                                <td>${total_charges}</td>
+                                <td>TOTAL</td>
+                            </tr>
                         </tbody>
                     </table>
                     <div id="table-head-tenant" style={{ marginTop: '50px' }}>

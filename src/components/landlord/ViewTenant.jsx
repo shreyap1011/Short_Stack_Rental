@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ApartmentService from "../../service/ApartmentService";
 import TenantService from "../../service/TenantService";
+import PaymentService from "../../service/PaymentService";
 
 export default function ViewTenant() {
     const location = useLocation();
@@ -23,6 +24,10 @@ export default function ViewTenant() {
         apartmentnumber:'',
         apartmentID:''
     });
+
+    let [payments, setPayments] = useState({
+        payments : []
+    })
 
     useEffect (()=>{
         TenantService.findBuildingByTenant(tenant.id).then((response)=>{
@@ -50,6 +55,16 @@ export default function ViewTenant() {
         }, ()=>{});
     }, []);
 
+    useEffect (()=>{
+        PaymentService.findAllPaymentsByTenant(tenant.id).then((response)=>{
+            setPayments(()=>({
+                payments : response.data
+            }));
+        }, ()=>{
+            console.log("payments not found");
+        });
+    }, []);
+
 
     return (
         <>
@@ -71,11 +86,23 @@ export default function ViewTenant() {
                 <tr>
                     <th>Date</th>
                     <th>Charge</th>
+                    <th>Type</th>
                     <th>Description</th>
                 </tr>
             </thead>
             <tbody>
-                
+                {
+                    payments.payments.map((payment) => {
+                        return (
+                            <tr>
+                                <td>{payment.paymentdate}</td>
+                                <td>{payment.amount}</td>
+                                <td>{payment.type}</td>
+                                <td>{payment.note}</td>
+                            </tr>
+                        )
+                    })
+                }
             </tbody>
         </table>
         </>

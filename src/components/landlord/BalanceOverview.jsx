@@ -32,23 +32,34 @@ export default function BalanceOverview() {
         navigate("/landlord/balanceOverview", {state : {landlord}});
     }
     let total_balances = 0;
-    let total_charges = 0;
-    state.tenants.map((tenant) => {
-        total_balances += tenant.balance;
-        LeaseService.findLeaseByTenant(tenant.id).then((response)=> {
-            total_charges += response.data.rent;
-            BillService.findBillsByLease(response.data.id).then((billsresponse) => {
-                for(let i = 0; i < billsresponse.data.length; i++) {
-                    total_charges += billsresponse.data[i].amount;
-                }
-            }, () => {
-                console.log("bills for leaseid " + response.data.id + " not found");
-            })
-        }, () => {
-            console.log("lease not found for " + tenant.firstName);
-        })
-    })
+    let [total_charges, setTotalCharges] = useState(0);
+    // useEffect(() =>{
+    //     state.tenants.map((tenant) => {
+    //         total_balances += tenant.balance;
+    //         LeaseService.findLeaseByTenant(tenant.id).then((response)=> {
+    //             console.log(tenant.id + " " + response.data.rent);
+    //             total_charges += response.data.rent;
+    //             BillService.findBillsByLease(response.data.id).then((billsresponse) => {
+    //                 for(let i = 0; i < billsresponse.data.length; i++) {
+    //                     let prev_charge2 = total_charges;
+    //                     setTotalCharges(() => ({
+    //                         total_charges : prev_charge2 + billsresponse.data[i].amount
+    //                     }));
+    //                     console.log(total_charges);
+    //                 }
+    //             }, () => {
+    //                 console.log("bills for leaseid " + response.data.id + " not found");
+    //             })
+    //         }, () => {
+    //             console.log("lease not found for " + tenant.firstName);
+    //         })
+    //     })
+    // }, []);
 
+    useEffect(() => {
+        console.log("after function total charge:" + total_charges);
+    }, [total_charges]);
+    
     let viewTenant = (tenant) => {
         navigate("/landlord/viewTenant", {state : {landlord : landlord, tenant: tenant}});
     }
@@ -72,14 +83,12 @@ export default function BalanceOverview() {
         
         <table>
             <thead>
-                <tr>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Balance</th>
+                <tr> 
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Balance</th>
                 </tr>
             </thead>
             <tbody>
@@ -87,13 +96,11 @@ export default function BalanceOverview() {
                     state.tenants.map((tenant) => {
                         return (
                             <tr onClick={()=>{viewTenant(tenant)}}>
-                                <td>{tenant.email}</td>
-                                <td>{tenant.phone}</td>
-                                <td>{tenant.username}</td>
-                                <td>{tenant.password}</td>
-                                <td>{tenant.balance}</td>
                                 <td>{tenant.firstname}</td>
                                 <td>{tenant.lastname}</td>
+                                <td>{tenant.email}</td>
+                                <td>{tenant.phone}</td>
+                                <td>{tenant.balance}</td>
                             </tr>
                         )
                     })
