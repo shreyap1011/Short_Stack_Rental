@@ -1,12 +1,12 @@
 package com.shortstack.griddle.service;
 
+import com.shortstack.griddle.model.Bill;
 import com.shortstack.griddle.model.Lease;
+import com.shortstack.griddle.repository.BillRepository;
 import com.shortstack.griddle.repository.LeaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-// import java.util.Optional;
 
 @Service
 public class LeaseService {
@@ -15,29 +15,9 @@ public class LeaseService {
     LeaseRepository leaseRepository;
 
 
-
-
-
-
-
-
-
     public List<Object[]> getAllLeasesByLandlord(int landlordid) {
         return leaseRepository.findLeaseByLandlordid(landlordid);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    
 
     public Lease findByTenantid(int tenantid) {
         return leaseRepository.findByTenantid(tenantid);

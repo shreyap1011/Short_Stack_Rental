@@ -1,9 +1,15 @@
 package com.shortstack.griddle.service;
 
+import com.shortstack.griddle.model.Bill;
+import com.shortstack.griddle.model.Lease;
 import com.shortstack.griddle.model.Tenant;
+import com.shortstack.griddle.repository.BillRepository;
+import com.shortstack.griddle.repository.LeaseRepository;
 import com.shortstack.griddle.repository.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -13,6 +19,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class TenantService {
     @Autowired
     TenantRepository tenantRepository;
+
+    @Autowired
+    LeaseRepository leaseRepository;
+
+    @Autowired
+    BillRepository billRepository;
 
     private final BCryptPasswordEncoder passwordEncoder;
 
@@ -57,8 +69,6 @@ public class TenantService {
         return tenantRepository.findTenantByLandlordid(landlordid);
     }
 
-
-    //Potentially needs to be reworked.
     public Tenant updateTenant(Tenant tenant) {
         Optional<Tenant> optionalLandlord = tenantRepository.findById(tenant.getId());
         Tenant oldTenant = null;
@@ -83,6 +93,26 @@ public class TenantService {
     public String deleteTenant(int id) {
         tenantRepository.deleteById(id);
         return "Tenant deleted";
+    }
+
+    @Scheduled (cron = "0 0 20 * ?")
+    private void chargeTenant() {
+        List<Tenant> allTenants = tenantRepository.findAll();
+        for (Tenant tenant : allTenants) {
+            double amount = updateBalance(tenant);
+            tenantRepository.updateTenantBalance(amount, tenant.getId());
+        }
+    }
+
+    private double updateBalance(Tenant tenant) {
+        Lease tenantLease = leaseRepository.findByTenantid(tenant.getId());
+        return totalAmountDue(tenantLease);
+    }
+
+    private double totalAmountDue(Lease lease) {
+        List<Bill> bills = billRepository.findAllByLeaseid(lease.getId());
+        double billsTotal = bills.stream().reduce(0.00, (subtotal, bill) -> subtotal + bill.getAmount(), Double::sum);
+        return billsTotal + lease.getRent();
     }
 
 }
