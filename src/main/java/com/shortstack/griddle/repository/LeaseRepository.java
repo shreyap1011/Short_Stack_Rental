@@ -27,6 +27,7 @@ public interface LeaseRepository extends JpaRepository<Lease, Integer> {
 
     @Query(value = "DELETE FROM LEASE WHERE ID = :id", nativeQuery = true)
     void deleteById(int id);
+
     @Query(value = "SELECT LEASE_ID.NEXTVAL -1", nativeQuery = true)
     Integer lastLeaseid();
 }
