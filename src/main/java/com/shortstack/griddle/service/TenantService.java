@@ -95,13 +95,14 @@ public class TenantService {
         return "Tenant deleted";
     }
 
-    @Scheduled (cron = "0 0 20 * ?")
+    @Scheduled (cron = "1 * * * * *")
     private void chargeTenant() {
         List<Tenant> allTenants = tenantRepository.findAll();
         for (Tenant tenant : allTenants) {
             double amount = updateBalance(tenant);
-            tenantRepository.updateTenantBalance(amount, tenant.getId());
+            int[] num = tenantRepository.updateTenantBalance(amount, tenant.getId());
         }
+        // send email
     }
 
     private double updateBalance(Tenant tenant) {
@@ -110,9 +111,18 @@ public class TenantService {
     }
 
     private double totalAmountDue(Lease lease) {
+        if (lease == null) {
+            throw new IllegalArgumentException("Lease cannot be null");
+        }
         List<Bill> bills = billRepository.findAllByLeaseid(lease.getId());
-        double billsTotal = bills.stream().reduce(0.00, (subtotal, bill) -> subtotal + bill.getAmount(), Double::sum);
+        if (bills == null) {
+            // Handle the case where bills is null, depending on your use case
+            // You might return lease.getRent() or throw an exception, for example
+            return lease.getRent();
+        }
+        double billsTotal = bills.stream().mapToDouble(Bill::getAmount).sum();
         return billsTotal + lease.getRent();
     }
+
 
 }

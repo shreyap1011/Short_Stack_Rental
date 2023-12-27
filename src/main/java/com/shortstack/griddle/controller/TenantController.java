@@ -87,4 +87,5 @@ public class TenantController {
     public String deleteTenant(@PathVariable int id) {
         return tenantService.deleteTenant(id);
     }
+
 }

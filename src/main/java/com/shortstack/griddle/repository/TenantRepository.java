@@ -31,8 +31,8 @@ public interface TenantRepository extends CrudRepository<Tenant, Integer> {
     List<T> updateTenant(@Param("firstname") String firstname, @Param("lastname") String lastname, @Param("email") String email, @Param("phone") String phone, @Param("username") String username, @Param("password") String password, @Param("balance") double balance, @Param("id") int id);
 
     //check if working
-    @Query(value = "UPDATE TENANT SET BALANCE= (BALANCE+:balance) where ID=:id", nativeQuery = true)
-    void updateTenantBalance(@Param("balance") double balance, @Param("id") int id);
+    @Query(value = "UPDATE TENANT SET BALANCE = (BALANCE+:balance) where ID=:id", nativeQuery = true)
+    int[] updateTenantBalance(@Param("balance") double balance, @Param("id") int id);
 
     @Query(value = "DELETE FROM TENANT WHERE ID = :id", nativeQuery = true)
     void deleteById(int id);
