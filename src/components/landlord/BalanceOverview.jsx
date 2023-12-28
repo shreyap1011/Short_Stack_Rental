@@ -100,7 +100,7 @@ export default function BalanceOverview() {
                                 <td>{tenant.lastname}</td>
                                 <td>{tenant.email}</td>
                                 <td>{tenant.phone}</td>
-                                <td>{tenant.balance}</td>
+                                <td>${tenant.balance}</td>
                             </tr>
                         )
                     })

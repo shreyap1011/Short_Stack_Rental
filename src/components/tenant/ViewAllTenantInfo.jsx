@@ -131,6 +131,30 @@ export default function ViewAllTenantInfo() {
     }, []);
     //console.log("tenant by payment: " + payments)
 
+    paymentsState.payments.sort(function(a,b) {
+        let adate = a.paymentdate.split("-");
+        let bdate = b.paymentdate.split("-");
+        if(adate[0] > bdate[0]) {
+            return 1;
+        } else if(adate[0] < bdate[0]) {
+            return -1;
+        } else {
+            if(adate[1] > bdate[1]) {
+                return -1;
+            } else if(adate[1] < bdate[1]) {
+                return 1;
+            } else {
+                if(adate[2] > bdate[2]) {
+                    return -1;
+                } else if(adate[2] < bdate[2]) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        }
+    })
+
     let navigate = useNavigate();
     let goToHistory = (e) => {
         e.preventDefault();
@@ -177,23 +201,16 @@ export default function ViewAllTenantInfo() {
                 <div id="left-info-container" style={{ flexGrow: 1, marginRight: '150px' }}>
                     <div id="contact-card-tenant" >
                         <h3>Personal Information</h3>
-                        <p>{building.streetname}, Unit# {apartment.apartmentnumber}</p>
+                        <p>{building.streetname}, Unit #{apartment.apartmentnumber}</p>
                         <p>{building.city}, {building.state} {building.zip}</p>
                         <br />
                         <p>EMAIL: {tenant.email}</p>
                         <p>PHONE: {tenant.phone}</p>
                     </div>
-                    <div id="balance-summary-tenant" style={{ marginTop: '70px' }}>
-                        <h3>{getMonth(today.getMonth())} Balance Summary</h3>
-                        <table>
-                        </table>
-                        <button onClick={newPayment}>Pay Remaining Balance</button>
-                    </div>
                 </div>
                 <div id="payment-tenant">
                     <div id="table-head-tenant">
-                        <h3>Recurring Charges</h3>
-                        <button onClick={newPayment}>Pay Now</button>
+                        <h4>Recurring Charges (next due: {getMonth()} 2)</h4>
                     </div>
                     <table className="tenant-custom-table">
                     <thead>
@@ -224,6 +241,9 @@ export default function ViewAllTenantInfo() {
                                 <td>${total_charges}</td>
                                 <td>TOTAL</td>
                             </tr>
+                            <tr>
+                                <td colSpan={2}><button onClick={newPayment}>Pay Now</button></td>
+                            </tr>
                         </tbody>
                     </table>
                     <div id="table-head-tenant" style={{ marginTop: '50px' }}>
@@ -236,7 +256,6 @@ export default function ViewAllTenantInfo() {
                                 <th>Date</th>
                                 <th>Amount</th>
                                 <th>Description</th>
-                                <th>Balance</th>
                             </tr>
                         </thead>
                         <tbody>
