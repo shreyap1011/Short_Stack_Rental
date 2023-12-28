@@ -108,7 +108,7 @@ export default function AddLease() {
         let descriptionCell = document.createElement("td");
         descriptionCell.innerHTML = description.value;
         let amountCell = document.createElement("td");
-        amountCell.innerHTML = amount.value;
+        amountCell.innerHTML = "$" + amount.value;
 
         const bill = {
             description : description.value,
@@ -211,7 +211,7 @@ export default function AddLease() {
                     Description: <input id="bill-description" type="text"></input>
                 </label>
                 <label>
-                    Amount: <input id="bill-amount" type="number" min="0"></input>
+                    Amount: $<input id="bill-amount" type="number" min="0"></input>
                 </label>
                 <button onClick={addBill}>Add Bill</button>
                 </div>

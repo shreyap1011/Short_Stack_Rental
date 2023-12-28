@@ -35,7 +35,9 @@ export default function ViewAllTenantInfo() {
     const { auth } = useAuth();
     console.log("auth " + auth.accessToken);
 
+   // console.log("tenant balance payment: " + tenant.balance);
     useEffect (()=>{
+
         TenantService.findTenantByUsername(username, auth.accessToken).then((response)=>{
             setTenant(()=>({
                 id: response.data.id,
@@ -48,15 +50,26 @@ export default function ViewAllTenantInfo() {
                 firstName: response.data.firstName
             }));
             console.log("1", tenant)
+            console.log("tenant balance payment: " + tenant.balance);
             console.log(JSON.stringify(response.data));
-        }, ()=>{});
-    }, {});
+        }, ()=>{
+            console.log("we done goofed");
+        });
+    }, []);
 
     let goToHomePage = (e) => {
         e.preventDefault();
         navigate("/tenant/dashboard", {state : {username}});
     }
     
+    let formatBalance = (balance) => {
+        if(balance < 0) {
+            return "(" + balance + ")";
+        } else {
+            return balance;
+        }
+    }
+
     console.log(tenant.balance);
     
     return(
@@ -75,7 +88,7 @@ export default function ViewAllTenantInfo() {
         <div id="top-right-head-tenant">
             <h2>Welcome, {tenant.firstName}!</h2>
             <div id="balance-tenant">
-                <h3>CURRENT BALANCE: ${tenant.balance}</h3>
+                <h3>CURRENT BALANCE: ${formatBalance(tenant.balance)}</h3>
                 <p>&nbsp;(as of: {today_string})</p>
             </div>
         </div>

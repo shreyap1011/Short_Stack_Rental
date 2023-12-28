@@ -23,11 +23,8 @@ class LandlordService {
             }, });
     }
 
-    addLandlord(landlord, accessToken) {
-        return axios.post(addLandlordUrl, landlord, {
-            headers: {
-                Authorization : `Bearer ${accessToken}`
-            }, });
+    addLandlord(landlord) {
+        return axios.post(addLandlordUrl, landlord);
     }
 
     updateLandlord(landlord, accessToken) {

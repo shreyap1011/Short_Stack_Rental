@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ApartmentService from "../../service/ApartmentService";
 import TenantService from "../../service/TenantService";
 import PaymentService from "../../service/PaymentService";
+import LeaseService from "../../service/LeaseService";
+import BillService from "../../service/BillService";
 import useAuth from "../../hooks/useAuth";
+import logoImage from '../../img/griddle-white.png';
 
 
 export default function ViewTenant() {
@@ -11,6 +14,12 @@ export default function ViewTenant() {
     const { auth } = useAuth();
     const landlord = location.state.landlord;
     const tenant = location.state.tenant;
+
+    let navigate = useNavigate();
+    
+    let [landlordState, setLandlord] = useState({
+        landlord : {}
+    })
 
     let[building, setBuilding] = useState({
         zip : '',
@@ -30,7 +39,15 @@ export default function ViewTenant() {
 
     let [payments, setPayments] = useState({
         payments : []
-    })
+    });
+
+    let[leases, setLeases] = useState({
+        leases : {}
+    });
+
+    let[bills, setBills] = useState({
+        bills:[]
+    });
 
     useEffect (()=>{
         TenantService.findBuildingByTenant(tenant.id, auth.accessToken).then((response)=>{
@@ -59,6 +76,24 @@ export default function ViewTenant() {
     }, []);
 
     useEffect (()=>{
+        LeaseService.findLeaseByTenant(tenant.id, auth.accessToken).then((response)=>{
+            setLeases(()=>({
+                leases: response.data
+            }));
+            let id = response.data.id;
+            console.log("lease id : " + id);
+            BillService.findBillsByLease(id, auth.accessToken).then((response)=>{
+                setBills(()=>({
+                    bills: response.data
+                }));
+                console.log(bills.bills.length);
+            }, ()=>{
+                console.log("bill fetch failed");
+            });
+        }, ()=>{});
+    }, [tenant.id]); 
+
+    useEffect (()=>{
         PaymentService.findAllPaymentsByTenant(tenant.id, auth.accessToken).then((response)=>{
             setPayments(()=>({
                 payments : response.data
@@ -68,9 +103,31 @@ export default function ViewTenant() {
         });
     }, []);
 
+    let formatBalance = (balance) => {
+        if(balance < 0) {
+            return "(" + balance + ")";
+        } else {
+            return balance;
+        }
+    }
 
+    let goToBalanceOverview = (e) => {
+        e.preventDefault();
+        let landlord = landlordState.landlord;
+        navigate("/landlord/balanceOverview", {state : {landlord}});
+    }
     return (
         <>
+        <nav className="navbar">
+            <div className="navbar-brand">
+                <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
+            </div>
+            <ul className="nav-list">
+                <li><a href="/landlord">Home Page </a></li>
+                <li onClick={goToBalanceOverview}>Balance Overview</li>
+                <li><a href="/" >Logout</a></li>
+            </ul>
+        </nav>
         <div id="personal-info">
             <h3>{tenant.firstName} {tenant.lastName}</h3>
             <h4>ADDRESS:</h4>
@@ -82,8 +139,28 @@ export default function ViewTenant() {
             <p>EMAIL: {tenant.email}</p>
             <p>PHONE: {tenant.phone}</p>
 
-            <h4>BALANCE: ${tenant.balance}</h4>
+            <h4>BALANCE: ${formatBalance(tenant.balance)}</h4>
         </div>
+        <div>
+            <h3>Recurring Charges</h3>
+            <table>
+                <tr>
+                    <td>${leases.leases.rent}</td>
+                    <td>Rent</td>
+                </tr>
+                {
+                    bills.bills.map((bill) => {
+                        return (
+                            <tr>
+                                <td>${bill.amount}</td>
+                                <td>{bill.description}</td>
+                            </tr>
+                        )
+                    })
+                }
+            </table>
+        </div>
+        <h3>Payments Made</h3>
         <table>
             <thead>
                 <tr>
@@ -99,7 +176,7 @@ export default function ViewTenant() {
                         return (
                             <tr>
                                 <td>{payment.paymentdate}</td>
-                                <td>{payment.amount}</td>
+                                <td>${payment.amount}</td>
                                 <td>{payment.type}</td>
                                 <td>{payment.note}</td>
                             </tr>

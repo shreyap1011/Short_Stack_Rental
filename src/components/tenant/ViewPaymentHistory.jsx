@@ -58,11 +58,19 @@ export default function ViewPaymentHistory() {
         navigate("/tenant/dashboard", {state : {username}});
     } 
 
+    let formatBalance = (balance) => {
+        if(balance < 0) {
+            return "(" + balance + ")";
+        } else {
+            return balance;
+        }
+    }
+
     return(
         <>
         <h2>Payment History</h2>
         <button onClick={viewCurrent}>View Current Charges</button>
-        <h3>CURRENT BALANCE: $0.00</h3>
+        <h3>CURRENT BALANCE: ${formatBalance(tenant.balance)}</h3>
         <table>
             <thead>
                 <tr>
@@ -78,7 +86,7 @@ export default function ViewPaymentHistory() {
                             <tr>
                                 <td>{charge.paymentdate}</td>
                                 <td>{charge.note}</td>
-                                <td>{charge.amount}</td>
+                                <td>${charge.amount}</td>
                             </tr>
                         )
                     })

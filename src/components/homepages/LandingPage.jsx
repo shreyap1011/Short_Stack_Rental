@@ -23,7 +23,7 @@ export default function LandingPage() {
       <div className="background-image"></div>
       <h1>Welcome To</h1>
       <img src={logoImage} alt="Griddle Logo" className="logo-image" />
-      <p>Manage your rental properties and tenants with ease.</p>
+      <p>Be at ease when you see your lease.</p>
       <button onClick={goToTenant}>I'm a tenant.</button>
       <br />
       <button onClick={goToLandlord}>I'm a landlord.</button>

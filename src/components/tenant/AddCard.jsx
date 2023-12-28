@@ -3,6 +3,7 @@ import React,  { useState, useEffect } from "react";
 import TenantService from "../../service/TenantService";
 import PaymentService from "../../service/PaymentService";
 import useAuth from "../../hooks/useAuth";
+import logoImage from '../../img/griddle-white.png';
 
 export default function AddCard() {
     let location = useLocation();
@@ -79,10 +80,36 @@ export default function AddCard() {
         })
     }
 
+    let formatBalance = (balance) => {
+        if(balance < 0) {
+            return "(" + balance + ")";
+        } else {
+            return balance;
+        }
+    }
+
+    let goToHomePage = (e) => {
+        e.preventDefault();
+        navigate("/tenant/dashboard", {state : {username}});
+    }
+    
+
     return(
         <>
-        <h2>Card Details</h2>
-        <form onSubmit={handleSubmit}>
+
+        <nav className="navbar">
+            <div className="navbar-brand">
+                <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
+            </div>
+            <ul className="nav-list">
+                <li onClick={goToHomePage}>Home Page</li>
+                <li><a href="/" >Logout</a></li>
+            </ul>
+        </nav>
+
+
+        <h2>Make Payment</h2>
+        <form class="payment-form" onSubmit={handleSubmit}>
             <label>
                 Name: <input value={name} onChange={handleName} type="text" placeholder="John Doe"/>
             </label>
@@ -125,7 +152,7 @@ export default function AddCard() {
             <label>
                 CVC: <input value={cvc} type="number" onChange={handleCvc} placeholder="CVC" min="0" max="999"/>
             </label>
-            <h3>PAYING BALANCE: ${tenant.balance}</h3>
+            <h3>CURRENT BALANCE: ${formatBalance(tenant.balance)}</h3>
             <label>
                 Amount: <input value={amount} onChange={handleAmount} type="number" min="0"></input>
             </label>

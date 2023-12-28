@@ -21,7 +21,8 @@ export default function AddBuilding() {
     let handleCity = (e) => { setCity(e.target.value) }
     let handleState = (e) => { setState(e.target.value) }
     let handleZip = (e) => { setZip(e.target.value) }
-   
+
+
 
     const navigate = useNavigate();
     let handleSubmit = (e) => {
@@ -44,18 +45,27 @@ export default function AddBuilding() {
         })
 
 
+      let goToHomePage = (e) => {
+          e.preventDefault();
+          const username = landlord.username;
+          navigate("/landlord", {state : {username}});
+      }
+
+  
     }
     return(
         <>
         <nav className="navbar">
-        <div className="navbar-brand">
-            <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
-        </div>
-        <ul className="nav-list">
-            <li><a href="#allTenants">All Tenants</a></li>
-            <li><a href="/" >Logout</a></li>
-        </ul>
+            <div className="navbar-brand">
+                <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
+            </div>
+            <ul className="nav-list">
+               
+                <li><a href="/" >Logout</a></li>
+            </ul>
         </nav>
+
+
         <div className="form-container">
         <h2>New Building</h2>
         <form className="building-form" onSubmit={handleSubmit}>

@@ -159,6 +159,14 @@ export default function TenantDash({tenant}) {
         e.preventDefault();
         navigate("/tenant/newPayment", {state : {tenant}});
     }
+
+    let formatBalance = (balance) => {
+        if(balance < 0) {
+            return "(" + balance + ")";
+        } else {
+            return balance;
+        }
+    }
     
     let total_charges = leases.leases.rent;
 
@@ -231,7 +239,7 @@ export default function TenantDash({tenant}) {
                                     return (
                                         <tr>
                                             <td>{payment.paymentdate}</td>
-                                            <td>{payment.amount}</td>
+                                            <td>${payment.amount}</td>
                                             <td>{payment.note}</td>
                                         </tr>
                                     )

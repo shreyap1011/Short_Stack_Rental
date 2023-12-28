@@ -432,7 +432,7 @@ table-tenant {
 }
 
 
-/*tetsing tenant side*/
+/*testing tenant side*/
 
 #dashboard-tenant {
   display: flex;
@@ -466,4 +466,64 @@ table-tenant {
   border-bottom: 2px solid rgb(69, 12, 12);
   padding-bottom: 5px;
   margin-bottom: 10px;
+}
+
+/*card detail form for tenant*/
+.payment-form {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px;
+  max-width: 100%;
+  margin: auto;
+}
+
+/* Apply styles only to elements within the form with the class "payment-form" */
+.payment-form h2 {
+  color: #333;
+  text-align: center;
+}
+
+.payment-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.payment-form input,
+.payment-form select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.payment-form select {
+  appearance: none;
+}
+
+.payment-form input[type="submit"] {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  display: block;
+  margin-top: 15px;
+}
+
+.payment-form input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.payment-form h3 {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #333;
 }

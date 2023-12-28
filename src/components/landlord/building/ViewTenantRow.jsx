@@ -50,12 +50,20 @@ export default function ViewTenantRow({apartment, building, landlord}) {
     let addLease = (apartment) => {
         navigate("/landlord/addLease", {state : {landlord: landlord, building: building, apartment: apartment}})
     }
+
+    let formatBalance = (balance) => {
+        if(balance < 0) {
+            return "(" + balance + ")";
+        } else {
+            return balance;
+        }
+    }
         
     if(tenant.id) {
         return(
             <>
                 <td>{apartment.apartmentnumber}</td>
-                <td>${tenant.balance}</td>
+                <td>${formatBalance(tenant.balance)}</td>
                 <td>{tenant.firstName} {tenant.lastName}</td>
             </>
         );

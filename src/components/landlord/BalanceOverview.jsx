@@ -22,7 +22,15 @@ export default function BalanceOverview() {
             }));
         }, ()=>{});
     }, []);
-    state.tenants.sort((a,b) => a.balance > b.balance);
+    state.tenants.sort(function(a,b) {
+        if(a.balance > b.balance) {
+            return -1;
+        } else if(a.balance < b.balance) {
+            return 1;
+        } else {
+            return 0;
+        }
+    })
 
     const navigate = useNavigate();
     let goToHomePage = (e) => {
@@ -67,6 +75,23 @@ export default function BalanceOverview() {
         navigate("/landlord/viewTenant", {state : {landlord : landlord, tenant: tenant}});
     }
 
+    let formatBalance = (balance) => {
+        if(balance < 0) {
+            return "(" + balance + ")";
+        } else {
+            return balance;
+        }
+    }
+
+    let findStatus = (balance) => {
+        const date = new Date();
+        if((balance > 0) && (date.getDate() > 2)) {
+            return "LATE";
+        } else {
+            return "ON TIME";
+        }
+    }
+
     return (
         <>
         <nav className="navbar">
@@ -80,13 +105,12 @@ export default function BalanceOverview() {
         </ul>
         </nav>
 
-        <h2>All Tenants</h2>
-        <h3>Total Charges for This Month: ${total_charges}</h3>
-        <h3>Total Outstanding Balances: ${total_balances}</h3>
+        <h2>All Tenants Balances</h2>
         
         <table>
             <thead>
                 <tr> 
+                    <th>STATUS</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
@@ -97,17 +121,23 @@ export default function BalanceOverview() {
             <tbody>
                 {
                     state.tenants.map((tenant) => {
+                        total_balances += tenant.balance;
                         return (
                             <tr onClick={()=>{viewTenant(tenant)}}>
+                                <td>{findStatus(tenant.balance)}</td>
                                 <td>{tenant.firstname}</td>
                                 <td>{tenant.lastname}</td>
                                 <td>{tenant.email}</td>
                                 <td>{tenant.phone}</td>
-                                <td>${tenant.balance}</td>
+                                <td>${formatBalance(tenant.balance)}</td>
                             </tr>
                         )
                     })
                 }
+                <tr>
+                    <td colSpan={5}>TOTAL BALANCES</td>
+                    <td>${formatBalance(total_balances)}</td>
+                </tr>
             </tbody>
         </table>
         </>
