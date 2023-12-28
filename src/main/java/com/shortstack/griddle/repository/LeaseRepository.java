@@ -20,12 +20,14 @@ public interface LeaseRepository extends JpaRepository<Lease, Integer> {
 
     Lease findByApartmentid(int apartmentid);
 
+
     @Query(value = "INSERT INTO LEASE(TENANTID, APARTMENTID, STARTDATE, ENDDATE, RENT) " +
             "VALUES (:tenantid, :apartmentid, :startdate, :enddate, :rent)", nativeQuery = true)
     void createLease(@Param("tenantid") int tenantid, @Param("apartmentid") int apartmentid, @Param("startdate") Date startdate, @Param("enddate") Date enddate, @Param("rent") double rent);
 
     @Query(value = "DELETE FROM LEASE WHERE ID = :id", nativeQuery = true)
     void deleteById(int id);
+
     @Query(value = "SELECT LEASE_ID.NEXTVAL -1", nativeQuery = true)
     Integer lastLeaseid();
 }

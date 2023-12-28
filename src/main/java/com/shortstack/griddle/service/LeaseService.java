@@ -1,18 +1,23 @@
 package com.shortstack.griddle.service;
 
+import com.shortstack.griddle.model.Bill;
 import com.shortstack.griddle.model.Lease;
+import com.shortstack.griddle.repository.BillRepository;
 import com.shortstack.griddle.repository.LeaseRepository;
+import com.shortstack.griddle.repository.TenantRepository;
+import net.snowflake.client.jdbc.internal.org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-// import java.util.Optional;
 
 @Service
 public class LeaseService {
 
     @Autowired
     LeaseRepository leaseRepository;
+
+    @Autowired
+    TenantRepository tenantRepository;
 
     public List<Object[]> getAllLeasesByLandlord(int landlordid) {
         return leaseRepository.findLeaseByLandlordid(landlordid);
@@ -33,6 +38,7 @@ public class LeaseService {
     public void createLease(Lease lease) {
         leaseRepository.createLease(lease.getTenantid(), lease.getApartmentid(), lease.getStartdate(), lease.getEnddate(),
                 lease.getRent());
+        tenantRepository.updateTenantBalance(lease.getRent(), lease.getTenantid());
     }
 
 //    public Lease updateLease(Lease lease) {

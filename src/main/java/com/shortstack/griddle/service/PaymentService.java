@@ -4,7 +4,6 @@ import com.shortstack.griddle.model.Payment;
 import com.shortstack.griddle.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
