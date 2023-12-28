@@ -4,12 +4,17 @@ import logoImage from '../../../img/griddle-white.png';
 import TenantService from "../../../service/TenantService";
 import LeaseService from "../../../service/LeaseService";
 import BillService from "../../../service/BillService";
+import useAuth from "../../../hooks/useAuth";
 
 export default function AddLease() {
     let location = useLocation();
+    const { auth } = useAuth();
     let landlord = location.state.landlord;
     let building = location.state.building;
     let apartment = location.state.apartment;
+    // console.log("ADDLEASE landlordid: " + landlord.landlordID);
+    // console.log("ADDLEASE buildingid: " + building.id);
+    // console.log("ADDLEASE apartmentid: " + apartment.apartmentID);
 
 /*Tenant Information*/ 
     let [firstName, setFirstName] = useState('');
@@ -54,7 +59,7 @@ export default function AddLease() {
             balance: 0
         }
 
-        TenantService.addTenant(tenant).then((response)=> {
+        TenantService.addTenant(tenant, auth.accessToken).then((response)=> {
             // setId(response.data);
 
             let lease = {
@@ -65,14 +70,14 @@ export default function AddLease() {
                 rent : rent
             }
     
-            LeaseService.addLease(lease).then((leaseResponse)=>{
+            LeaseService.addLease(lease, auth.accessToken).then((leaseResponse)=>{
                 for(let i = 0; i < bills.length; i++) {
                     let bill = {
                         leaseid : leaseResponse.data,
                         description : bills[i].description,
                         amount : bills[i].amount
                     }
-                    BillService.addBill(bill).then(()=>{
+                    BillService.addBill(bill, auth.accessToken).then(()=>{
                         alert("Lease successfully created!");
                         navigate("/landlord/viewBuilding", {state : {landlord : landlord, building : building}});
                     }, ()=>{
@@ -126,10 +131,17 @@ export default function AddLease() {
         description.value = "";
         amount.value = "";
     }
+    // "Add Monthly Charge" button
+    let createBill = (e) => {
+        e.preventDefault();
+        const testsDiv = document.getElementById("TestsDiv");
+        testsDiv.style.display = "block";
+    }
 
     let goToHomePage = (e) => {
         e.preventDefault();
-        navigate("/landlord", {state : {landlord}});
+        const username = landlord.username;
+        navigate("/landlord", {state : {username}});
     }
 
     return (
@@ -183,22 +195,31 @@ export default function AddLease() {
             </div>
 
             <div id="bill">
+
             <h3>Additional Charges</h3>
+
                 <table>
                     <tbody id="bills-table">
                     </tbody>
                 </table>
                 <div id="add-bill">
-                    <h3>New Bill</h3>
-                    <label>
-                        Description: <input id="bill-description" type="text"></input>
-                    </label>
-                    <label>
-                        Amount: <input id="bill-amount" type="number" min="0"></input>
-                    </label>
-                    <button onClick={addBill}>Add Bill</button>
+                </div>
+
+                <div id="TestsDiv">
+                <h3>New Bill</h3>
+                <label>
+                    Description: <input id="bill-description" type="text"></input>
+                </label>
+                <label>
+                    Amount: <input id="bill-amount" type="number" min="0"></input>
+                </label>
+                <button onClick={addBill}>Add Bill</button>
                 </div>
             </div>
+
+
+
+
             <input type="submit" value="Create Lease"/>    
         </form>    
         </>

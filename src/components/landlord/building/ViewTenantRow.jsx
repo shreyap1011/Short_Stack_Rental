@@ -3,8 +3,10 @@ import TenantService from "../../../service/TenantService";
 import LeaseService from "../../../service/LeaseService";
 import { useNavigate } from "react-router-dom";
 import BillService from "../../../service/BillService";
+import useAuth from "../../../hooks/useAuth";
 
 export default function ViewTenantRow({apartment, building, landlord}) {
+    const { auth } = useAuth();
     /* view all tenants within each building*/
     let [tenant, setTenant] = useState({
         id : '',
@@ -20,7 +22,7 @@ export default function ViewTenantRow({apartment, building, landlord}) {
     let total_charges = 0;
 
     useEffect(() => {
-        LeaseService.findLeaseByApartment(apartment.apartmentID).then((response) => {
+        LeaseService.findLeaseByApartment(apartment.apartmentID, auth.accessToken).then((response) => {
             setId(response.data.tenantid);
             total_charges += response.data.rent;
             BillService.findBillsByLease(response.data.id).then((response) => {
@@ -35,7 +37,7 @@ export default function ViewTenantRow({apartment, building, landlord}) {
     }, [apartment.apartmentID]);
         
     useEffect(() => {
-        TenantService.findTenant(tenantid).then((response) => {
+        TenantService.findTenant(tenantid, auth.accessToken).then((response) => {
             setTenant(response.data);
             console.log("TenantService (yes):" + tenantid);
         }, () => {

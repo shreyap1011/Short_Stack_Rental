@@ -3,10 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom"
 export default function TenantPayment() {
     let location = useLocation();
     let tenant = location.state.tenant;
+    let username = tenant.username;
     let navigate = useNavigate();
     let backToDash = (e) => {
         e.preventDefault();
-        navigate("/tenant/dashboard", {state : {tenant}});
+        navigate("/tenant/dashboard", {state : {username}});
     }
     let addCard = (e) => {
         e.preventDefault();

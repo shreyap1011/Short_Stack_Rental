@@ -9,24 +9,39 @@ const deleteLandlordUrl = "http://localhost:8080/api/deleteLandlord/";
 
 class LandlordService {
 
-    findLandlord(id) {
-        return axios.get(findLandlordUrl + id);
+    findLandlord(id, accessToken) {
+        return axios.get(findLandlordUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    findLandlordByUser(username) {
-        return axios.get(findLandlordByUserUrl + username);
+    findLandlordByUser(username, accessToken) {
+        return axios.get(findLandlordByUserUrl + username, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    addLandlord(landlord) {
-        return axios.post(addLandlordUrl, landlord);
+    addLandlord(landlord, accessToken) {
+        return axios.post(addLandlordUrl, landlord, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    updateLandlord(landlord) {
-        return axios.put(updateLandlordUrl, landlord);
+    updateLandlord(landlord, accessToken) {
+        return axios.put(updateLandlordUrl, landlord, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    deleteLandlord(id) {
-        return axios.delete(deleteLandlordUrl + id);
+    deleteLandlord(id, accessToken) {
+        return axios.delete(deleteLandlordUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 }
 

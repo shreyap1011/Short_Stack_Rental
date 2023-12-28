@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import PaymentService from "../../service/PaymentService";
+import useAuth from "../../hooks/useAuth";
 
 export default function ViewPaymentHistory() {
     let location = useLocation();
     let tenant = location.state.tenant;
+    const {auth} = useAuth();
     let getDateString = (date) => {
         try {
             return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
@@ -18,7 +20,7 @@ export default function ViewPaymentHistory() {
     })
 
     useEffect (() => {
-        PaymentService.findAllPaymentsByTenant(tenant.id).then((response)=>{
+        PaymentService.findAllPaymentsByTenant(tenant.id, auth.accessToken).then((response)=>{
             setCharges(()=>({
                 charges: response.data
             }));
@@ -52,7 +54,8 @@ export default function ViewPaymentHistory() {
     let navigate = useNavigate();
     let viewCurrent = (e) => {
         e.preventDefault();
-        navigate("/tenant/dashboard", {state : {tenant}});
+        let username = tenant.username;
+        navigate("/tenant/dashboard", {state : {username}});
     } 
 
     return(

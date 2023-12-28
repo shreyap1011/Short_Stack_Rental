@@ -3,9 +3,11 @@ import { useState } from 'react';
 import BuildingService from "../../service/BuildingService";
 import '../../App.css';
 import logoImage from '../../img/griddle-white.png';
+import useAuth from "../../hooks/useAuth";
 
 export default function AddBuilding() {
     let location = useLocation();
+    const { auth } = useAuth();
     let landlord = location.state.landlord;
 
     let [buildingname, setBuildingName] = useState('');
@@ -33,9 +35,10 @@ export default function AddBuilding() {
             zip : zip
         }
         
-        BuildingService.addBuilding(building).then(()=> {
+        BuildingService.addBuilding(building, auth.accessToken).then(()=> {
             alert("Building added!");
-            navigate("/landlord", {state : {landlord}});
+            const username = landlord.username;
+            navigate("/landlord", {state : {username}});
         }, ()=>{
             alert("Building could not be added");
         })

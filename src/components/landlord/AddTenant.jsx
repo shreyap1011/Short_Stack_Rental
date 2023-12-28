@@ -1,11 +1,12 @@
 import { useState } from "react"
 import TenantService from "../../service/TenantService";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import useAuth from "../../hooks/useAuth";
 
 export default function AddTenant() {
     let location = useLocation();
     let landlord = location.state.landlord;
+    const { auth } = useAuth();
 
     let [firstName, setFirstName] = useState('');
     let [lastName, setLastName] = useState('');
@@ -36,9 +37,10 @@ export default function AddTenant() {
             balance: balance
         }
 
-        TenantService.addTenant(tenant).then(()=> {
+        TenantService.addTenant(tenant, auth.accessToken).then(()=> {
             alert("Tenant added!");
-            navigate("/landlord", {state : {landlord}});
+            const username = landlord.username;
+            navigate("/landlord", {state : {username}});
         }, ()=>{
             alert("Tenant could not be added");
         })
