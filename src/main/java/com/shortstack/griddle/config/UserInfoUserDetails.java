@@ -1,5 +1,6 @@
 package com.shortstack.griddle.config;
 
+import com.shortstack.griddle.model.Landlord;
 import com.shortstack.griddle.model.Tenant;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,11 @@ public class UserInfoUserDetails implements UserDetails {
     public UserInfoUserDetails(Tenant tenant) {
         this.name = tenant.getUsername();
         this.password = tenant.getPassword();
+    }
+
+    public UserInfoUserDetails(Landlord landlord) {
+        this.name = landlord.getUsername();
+        this.password = landlord.getPassword();
     }
 
     @Override

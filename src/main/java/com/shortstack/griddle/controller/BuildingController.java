@@ -7,6 +7,8 @@ import com.shortstack.griddle.service.LeaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,24 @@ public class BuildingController {
         return buildingService.findBuildingsByLandlordid(landlordid);
     }
 
-
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/building/tenant/{tenantid}")
+    public List<Map<String, Object>> findBuildingByTenantid(@PathVariable int tenantid) {
+        List<Object[]> rows = buildingService.getTenantBuilding(tenantid);
+        return rows.stream().map(
+                        row -> {
+                            Map<String, Object> jsonMap = new HashMap<>();
+                            jsonMap.put("id", ((Number) row[0]));
+                            jsonMap.put("landlordid", ((Number) row[1]));
+                            jsonMap.put("buildingname", row[2]);
+                            jsonMap.put("streetname", row[3]);
+                            jsonMap.put("city", row[4]);
+                            jsonMap.put("state", row[5]);
+                            jsonMap.put("zip", row[6]);
+                            return jsonMap;
+                        })
+                .collect(Collectors.toList());
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/building")
