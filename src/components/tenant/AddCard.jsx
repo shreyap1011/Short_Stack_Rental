@@ -2,10 +2,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import React,  { useState, useEffect } from "react";
 import TenantService from "../../service/TenantService";
 import PaymentService from "../../service/PaymentService";
+import useAuth from "../../hooks/useAuth";
 
 export default function AddCard() {
     let location = useLocation();
     let tenant = location.state.tenant;
+    let username = tenant.username;
+    const { auth } = useAuth();
 
     let [name, setName] = useState('');
     let [cardNumber, setCardNumber] = useState('');
@@ -24,7 +27,7 @@ export default function AddCard() {
     let navigate = useNavigate();
     let goBack = (e) => {
         e.preventDefault();
-        navigate("/tenant/dashboard", {state: {tenant}})
+        navigate("/tenant/dashboard", {state: {username}})
     }
 
     let getDate = () => {
@@ -32,17 +35,6 @@ export default function AddCard() {
         let year = today.getFullYear().toString().substring(2);
         return (today.getMonth() + 1) + "/" + year;
     }
-
-    // let cards = [];
-    // for(let i = 1; i < 9; i++) {
-    //     let card = {
-    //         cardNumber : i * 1111111111111111,
-    //         expDate : i + '/24',
-    //         cvc : i * 111
-    //     }
-    //     cards.push(card);
-    //     // console.log(card.cardNumber + " " + card.expDate + " " + card.cvc);
-    // }
 
     let handleSubmit = (e) => {
         e.preventDefault();
@@ -66,7 +58,7 @@ export default function AddCard() {
                                 terminalId: "10000001"}
         }
 
-        PaymentService.makePayment(tenant.id, new_payment).then(() => {
+        PaymentService.makePayment(tenant.id, new_payment, auth.accessToken).then(() => {
             alert("Payment successful!");
             let new_tenant = {
                 id: tenant.id,
@@ -78,9 +70,9 @@ export default function AddCard() {
                 firstName: tenant.firstName,
                 lastName: tenant.lastName
             }
-            TenantService.updateTenant(new_tenant);
+            TenantService.updateTenant(new_tenant, auth.accessToken);
             console.log(new_payment.amount.total + " " + new_payment.source.card.cardData);
-            navigate("/tenant/dashboard", {state: {tenant:new_tenant}});
+            navigate("/tenant/dashboard", {state: {username}});
         }, ()=> {
             alert("Payment not successful");
             console.log(new_payment.amount.total + " " + new_payment.source.card.cardData);

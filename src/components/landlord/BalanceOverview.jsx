@@ -4,17 +4,19 @@ import TenantService from "../../service/TenantService";
 import logoImage from '../../img/griddle-white.png';
 import LeaseService from "../../service/LeaseService";
 import BillService from "../../service/BillService";
+import useAuth from "../../hooks/useAuth";
 
 export default function BalanceOverview() {
     const location = useLocation();
     const landlord = location.state.landlord;
+    const { auth } = useAuth();
 
     let[state, setState] = useState({
         tenants: []
     });
 
     useEffect (() => {
-        TenantService.getAllTenantsByLandlord(landlord.landlordID).then((response)=>{
+        TenantService.getAllTenantsByLandlord(landlord.landlordID, auth.accessToken).then((response)=>{
             setState(()=>({
                 tenants: response.data
             }));
@@ -25,7 +27,8 @@ export default function BalanceOverview() {
     const navigate = useNavigate();
     let goToHomePage = (e) => {
         e.preventDefault();
-        navigate("/landlord", {state : {landlord}});
+        let username = landlord.username;
+        navigate("/landlord", {state : {username}});
     }
     let goToBalanceOverview = (e) => {
         e.preventDefault();

@@ -10,28 +10,46 @@ const deleteBillUrl = "http://localhost:8080/api/deleteBill/";
 
 class BillService {
 
-    findBill(id) {
-        return axios.get(findBillUrl + id);
+    findBill(id, accessToken) {
+        return axios.get(findBillUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    findBillsByLease(id) {
-        return axios.get(findBillByLeaseUrl, {params : {leaseid : id}});
+    findBillsByLease(id, accessToken) {
+        return axios.get(findBillByLeaseUrl, {params : {leaseid : id}}, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    getAllBills() {
-        return axios.get(getAllBillsUrl);
+    getAllBills(accessToken) {
+        return axios.get(getAllBillsUrl, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    addBill(bill) {
-        return axios.post(addBillUrl, bill);
+    addBill(bill, accessToken) {
+        return axios.post(addBillUrl, bill, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    updateBill(bill) {
-        return axios.put(updateBillUrl, bill);
+    updateBill(bill, accessToken) {
+        return axios.put(updateBillUrl, bill, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    deleteBill(id) {
-        return axios.delete(deleteBillUrl + id);
+    deleteBill(id, accessToken) {
+        return axios.delete(deleteBillUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 }
 

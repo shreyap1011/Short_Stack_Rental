@@ -52,6 +52,7 @@ export default function LandlordLoginPage() {
   // };
   
   const { setAuth } = useAuth();
+  
   const navigate = useNavigate();
   const location = useLocation();
  // const from = location.state?.from?.pathname || "";
@@ -71,7 +72,14 @@ export default function LandlordLoginPage() {
     setErrMsg('');
   }, [username, password])
 
-  
+  // //trying
+  // useEffect(() => {
+  //   if (errRef.current) {
+  //     errRef.current.focus();
+  //   }
+  // }, [errMsg]);
+
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -86,7 +94,7 @@ export default function LandlordLoginPage() {
       setAuth({username, password, accessToken});
       setUsername('');
       setPassword('');
-      navigate('/landlord', { replace: true, state: { username } });
+      navigate('/landlord', { state: { username } });
     } catch(err) {
       if(!err?.response) {
         setErrMsg('No Server Response');
@@ -97,8 +105,10 @@ export default function LandlordLoginPage() {
       } else {
         setErrMsg("Login Failed");
       }
-      errRef.current.focus();
+     errRef.current.focus();
     }
+
+  }
 
   return (
     <div>
@@ -149,5 +159,5 @@ export default function LandlordLoginPage() {
       </div>
     </div>
   )
-}
+
 }

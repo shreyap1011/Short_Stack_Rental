@@ -15,19 +15,31 @@ const deleteTenantUrl = "http://localhost:8080/api/deleteTenant/";
 
 class TenantService {
     getAllTenants(accessToken) {
-        return axios.get(getAllTenantsUrl);
+        return axios.get(getAllTenantsUrl, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
     
     getAllTenantsByLandlord(id, accessToken) {
-        return axios.get(getAllTenantsByLandlordUrl + id);
+        return axios.get(getAllTenantsByLandlordUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
     findTenant(id, accessToken) {
-        return axios.get(findTenantUrl + id);
+        return axios.get(findTenantUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
     findBuildingByTenant(id, accessToken) {
-        return axios.get(findBuildingByTenantUrl + id);
+        return axios.get(findBuildingByTenantUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
     findApartmentByTenant(id, accessToken) {
@@ -46,20 +58,29 @@ class TenantService {
                 Authorization : `Bearer ${accessToken}`
             }, 
             params : {username : username}
-        },
+        }
     );
     }
 
     addTenant(tenant, accessToken) {
-        return axios.post(addTenantUrl, tenant);
+        return axios.post(addTenantUrl, tenant , {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
     updateTenant(tenant, accessToken) {
-        return axios.put(updateTenantUrl, tenant);
+        return axios.put(updateTenantUrl, tenant , {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
     deleteTenant(id, accessToken) {
-        return axios.delete(deleteTenantUrl + id);
+        return axios.delete(deleteTenantUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 }
 

@@ -1,8 +1,12 @@
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import PaymentService from "../../service/PaymentService";
+import useAuth from "../../hooks/useAuth";
 
 export default function ViewPaymentHistory() {
     let location = useLocation();
     let tenant = location.state.tenant;
+    const {auth} = useAuth();
     let getDateString = (date) => {
         try {
             return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
@@ -11,22 +15,47 @@ export default function ViewPaymentHistory() {
         }
     }
 
-    let charges = [];
-    for(let i = 0; i < 10; i++) {
-        let charge = {
-            date: getDateString(new Date()),
-            description: "Description " + i,
-            charge: 1000.0 + (i*10),
-            payment: 2000.0 - (i*10),
-            balance: i*1000.0
+    let [charges, setCharges] = useState({
+        charges : []
+    })
+
+    useEffect (() => {
+        PaymentService.findAllPaymentsByTenant(tenant.id, auth.accessToken).then((response)=>{
+            setCharges(()=>({
+                charges: response.data
+            }));
+        }, ()=>{});
+    }, []);
+
+    charges.charges.sort(function(a,b) {
+        let adate = a.paymentdate.split("-");
+        let bdate = b.paymentdate.split("-");
+        if(adate[0] > bdate[0]) {
+            return 1;
+        } else if(adate[0] < bdate[0]) {
+            return -1;
+        } else {
+            if(adate[1] > bdate[1]) {
+                return -1;
+            } else if(adate[1] < bdate[1]) {
+                return 1;
+            } else {
+                if(adate[2] > bdate[2]) {
+                    return -1;
+                } else if(adate[2] < bdate[2]) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
         }
-        charges.push(charge);
-    }
+    })
 
     let navigate = useNavigate();
     let viewCurrent = (e) => {
         e.preventDefault();
-        navigate("/tenant/dashboard", {state : {tenant}});
+        let username = tenant.username;
+        navigate("/tenant/dashboard", {state : {username}});
     } 
 
     return(
@@ -40,20 +69,16 @@ export default function ViewPaymentHistory() {
                     <th>Date</th>
                     <th>Description</th>
                     <th>Charge</th>
-                    <th>Payment</th>
-                    <th>Balance</th>
                 </tr>
             </thead>
             <tbody>
                 {
-                    charges.map((charge) => {
+                    charges.charges.map((charge) => {
                         return(
                             <tr>
-                                <td>{charge.date}</td>
-                                <td>{charge.description}</td>
-                                <td>{charge.charge}</td>
-                                <td>{charge.payment}</td>
-                                <td>{charge.balance}</td>
+                                <td>{charge.paymentdate}</td>
+                                <td>{charge.note}</td>
+                                <td>{charge.amount}</td>
                             </tr>
                         )
                     })

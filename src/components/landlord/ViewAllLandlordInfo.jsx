@@ -1,38 +1,36 @@
 import { useEffect, useState } from "react"
 import TenantService from "../../service/TenantService";
 import { useNavigate, useLocation } from "react-router-dom";
-import BuildingService from "../../service/BuildingService";
+import LandlordService from "../../service/LandlordService";
 import '../../App.css';
 import logoImage from '../../img/griddle-white.png';
+import useAuth from "../../hooks/useAuth";
+import ViewAllBuildings from "./ViewAllBuildings";
 
 export default function ViewAllLandlordInfo() {
-    let location = useLocation();
-    const landlord = location.state.landlord;
-    
-    let[buildings, setBuildings] = useState({
-        buildings:[]
-    });
+    const location = useLocation();
+    const username = location.state.username;
+    const {auth} = useAuth();
+
+    let [landlordState, setLandlord] = useState({
+        landlord : {}
+    })
+
     useEffect (()=>{
-        BuildingService.getAllBuildingsByLandlord(landlord.landlordID).then((response)=>{
-            setBuildings(()=>({
-                buildings: response.data
+        LandlordService.findLandlordByUser(username, auth.accessToken).then((response)=>{
+            setLandlord(()=>({
+                landlord : response.data
             }));
         }, ()=>{});
-    }, []);
+    }, [username]);
 
     let navigate = useNavigate();
-    let viewBuilding = (building) => {
-        navigate("/landlord/viewBuilding", {state : {landlord: landlord, building: building}})
-    }
-    let addBuilding = (e) => {
-        e.preventDefault();
-        navigate("/landlord/addBuilding", {state: {landlord}});
-    }
+    
     let goToBalanceOverview = (e) => {
         e.preventDefault();
+        let landlord = landlordState.landlord;
         navigate("/landlord/balanceOverview", {state : {landlord}});
     }
-
 
     return(
         <>
@@ -47,44 +45,10 @@ export default function ViewAllLandlordInfo() {
         </ul>
         </nav>
 
-        <h2>Welcome {landlord.firstName}!</h2>
+        <h2>Welcome {landlordState.landlord.firstName}!</h2>
         <h2>All Buildings</h2>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Landlord ID</th>
-                    <th>Building Name</th>
-                    <th>Street Name</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Zip</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    buildings.buildings.map((building) => {
-                        return(
-                            <tr>
-                                <td>{building.id}</td>
-                                <td>{building.landlordid}</td>
-                                <td>{building.buildingname}</td>
-                                <td>{building.streetname}</td>
-                                <td>{building.city}</td>
-                                <td>{building.state}</td>
-                                <td>{building.zip}</td>
-                                <td>
-                                    <button onClick={()=>{viewBuilding(building)}}>View Tenants</button>
-                                </td>
-                            </tr>
-                        )
-                    })
-                }
-            </tbody>
-        </table>
-        <button onClick={addBuilding}>Add Building</button>
+        <ViewAllBuildings landlord={landlordState.landlord}/>
         </>
     )
 }

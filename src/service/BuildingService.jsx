@@ -10,28 +10,46 @@ const deleteBuildingUrl = "http://localhost:8080/api/deleteBuilding/";
 
 class BuildingService {
 
-    findBuilding(id) {
-        return axios.get(findBuildingUrl + id);
+    findBuilding(id, accessToken) {
+        return axios.get(findBuildingUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    getAllBuildings() {
-        return axios.get(getAllBuildingsUrl);
+    getAllBuildings(accessToken) {
+        return axios.get(getAllBuildingsUrl, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
     
-    getAllBuildingsByLandlord(id) {
-        return axios.get(getAllBuildingsByLandlordUrl + id);
+    getAllBuildingsByLandlord(id, accessToken) {
+        return axios.get(getAllBuildingsByLandlordUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    addBuilding(building) {
-        return axios.post(addBuildingUrl, building);
+    addBuilding(building, accessToken) {
+        return axios.post(addBuildingUrl, building, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    updateBuilding(building) {
-        return axios.put(updateBuildingUrl, building);
+    updateBuilding(building, accessToken) {
+        return axios.put(updateBuildingUrl, building, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    deleteBuilding(id) {
-        return axios.delete(deleteBuildingUrl + id);
+    deleteBuilding(id, accessToken) {
+        return axios.delete(deleteBuildingUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 }
 
