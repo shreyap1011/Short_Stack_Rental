@@ -1,9 +1,10 @@
 package com.shortstack.griddle.service;
 
 import com.shortstack.griddle.model.Landlord;
-// import com.shortstack.griddle.model.Tenant;
+import com.shortstack.griddle.model.Tenant;
 import com.shortstack.griddle.repository.LandlordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 // import java.util.List;
@@ -14,9 +15,26 @@ public class LandlordService {
     @Autowired
     private LandlordRepository landlordRepository;
 
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    public LandlordService(BCryptPasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
     public void createLandlord(Landlord landlord) {
+        String hashedPassword = passwordEncoder.encode(landlord.getPassword());
+        landlord.setPassword(hashedPassword);
         landlordRepository.createLandlord(landlord.getFirstName(), landlord.getLastName(),
                 landlord.getEmail(), landlord.getPhone(), landlord.getUsername(), landlord.getPassword());
+    }
+
+    public boolean validateLogin(Landlord landlord, String enteredPassword) {
+        // Retrieve the hashed password from the database (this is just a placeholder)
+        String storedHashedPassword = landlordRepository.findByUsername(landlord.getUsername()).getPassword();
+
+        // Verify the entered password against the stored hashed password
+        return passwordEncoder.matches(enteredPassword, storedHashedPassword);
     }
 
     public Landlord findLandlord(String username) {
@@ -31,10 +49,13 @@ public class LandlordService {
             oldLandlord = optionalLandlord.get();
             oldLandlord.setLandlordID(landlord.getLandlordID());
             oldLandlord.setEmail(landlord.getEmail());
+            oldLandlord.setPhone(landlord.getPhone());
             oldLandlord.setFirstName(landlord.getFirstName());
             oldLandlord.setLastName(landlord.getLastName());
             oldLandlord.setUsername(landlord.getUsername());
             oldLandlord.setPassword(landlord.getPassword());
+            landlordRepository.updateLandlord(oldLandlord.getFirstName(), oldLandlord.getLastName(), oldLandlord.getEmail(),
+                    oldLandlord.getPhone(), oldLandlord.getUsername(), oldLandlord.getPassword(), oldLandlord.getLandlordID());
         } else {
             return new Landlord();
         }
