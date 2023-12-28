@@ -14,30 +14,9 @@ public class LeaseService {
     @Autowired
     LeaseRepository leaseRepository;
 
-
-
-
-
-
-
-
-
     public List<Object[]> getAllLeasesByLandlord(int landlordid) {
         return leaseRepository.findLeaseByLandlordid(landlordid);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    
 
     public Lease findByTenantid(int tenantid) {
         return leaseRepository.findByTenantid(tenantid);
