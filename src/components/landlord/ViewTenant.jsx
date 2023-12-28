@@ -3,9 +3,12 @@ import { useLocation } from "react-router-dom";
 import ApartmentService from "../../service/ApartmentService";
 import TenantService from "../../service/TenantService";
 import PaymentService from "../../service/PaymentService";
+import useAuth from "../../hooks/useAuth";
+
 
 export default function ViewTenant() {
     const location = useLocation();
+    const { auth } = useAuth();
     const landlord = location.state.landlord;
     const tenant = location.state.tenant;
 
@@ -30,7 +33,7 @@ export default function ViewTenant() {
     })
 
     useEffect (()=>{
-        TenantService.findBuildingByTenant(tenant.id).then((response)=>{
+        TenantService.findBuildingByTenant(tenant.id, auth.accessToken).then((response)=>{
             setBuilding(()=>({
                 zip: response.data[0].zip,
                 buildingname: response.data[0].buildingname,
@@ -46,7 +49,7 @@ export default function ViewTenant() {
     }, []);
 
     useEffect (()=>{
-        TenantService.findApartmentByTenant(tenant.id).then((response)=>{
+        TenantService.findApartmentByTenant(tenant.id, auth.accessToken).then((response)=>{
             setApartment(()=>({
                 buildingid: response.data.buildingid,
                 apartmentnumber: response.data.apartmentnumber,
@@ -56,7 +59,7 @@ export default function ViewTenant() {
     }, []);
 
     useEffect (()=>{
-        PaymentService.findAllPaymentsByTenant(tenant.id).then((response)=>{
+        PaymentService.findAllPaymentsByTenant(tenant.id, auth.accessToken).then((response)=>{
             setPayments(()=>({
                 payments : response.data
             }));

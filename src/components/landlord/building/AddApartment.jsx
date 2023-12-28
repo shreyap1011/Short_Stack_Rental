@@ -1,9 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ApartmentService from "../../../service/ApartmentService";
+import useAuth from "../../../hooks/useAuth";
 
 export default function AddApartment() {
     let location = useLocation();
+    const { auth } = useAuth();
     let landlord = location.state.landlord;
     let building = location.state.building;
 
@@ -16,7 +18,7 @@ export default function AddApartment() {
             buildingid : building.id,
             apartmentnumber : apartment
         }
-        ApartmentService.addApartment(newApartment).then(()=> {
+        ApartmentService.addApartment(newApartment, auth.accessToken).then(()=> {
             alert("Apartment added successfully!");
             navigate("/landlord/viewBuilding", {state : {landlord: landlord, building: building}})
         }, () => {

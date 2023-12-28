@@ -9,28 +9,49 @@ const deleteLeaseUrl = "http://localhost:8080/api/deleteLease/";
 
 class LeaseService {
 
-    findLeaseByApartment(id) {
-        return axios.get(findLeaseByUrl, {params : {apartmentid : id}});
+    findLeaseByApartment(id, accessToken) {
+        return axios.get(findLeaseByUrl, {       
+            headers: {
+                Authorization : `Bearer ${accessToken}`,
+                
+            }, 
+            params : {apartmentid : id}});
     }
 
-    findLeaseByTenant(id) {
-        return axios.get(findLeaseByUrl, {params : {tenantid : id}});
+    findLeaseByTenant(id, accessToken) {
+        return axios.get(findLeaseByUrl, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, 
+            params : {tenantid : id}});
     }
 
-    getAllLeasesByLandlord(id) {
-        return axios.get(getLeasesByLandlordUrl + id);
+    getAllLeasesByLandlord(id, accessToken) {
+        return axios.get(getLeasesByLandlordUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    addLease(lease) {
-        return axios.post(addLeaseUrl, lease);
+    addLease(lease, accessToken) {
+        return axios.post(addLeaseUrl, lease, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    updateLease(lease) {
-        return axios.put(updateLeaseUrl, lease);
+    updateLease(lease, accessToken) {
+        return axios.put(updateLeaseUrl, lease, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    deleteLease(id) {
-        return axios.delete(deleteLeaseUrl + id);
+    deleteLease(id, accessToken) {
+        return axios.delete(deleteLeaseUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 }
 

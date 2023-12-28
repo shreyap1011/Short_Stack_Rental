@@ -6,14 +6,21 @@ const findPaymentsByTenantUrl = "http://localhost:8080/api/payments/";
 
 class PaymentService {
 
-    makePayment(tenantid, payment) { 
+    makePayment(tenantid, payment, accessToken) { 
         console.log("tenantid : " + tenantid);
         console.log("payment: " + payment );
-        return axios.post(makePaymentUrl, payment, {params : {tenantid : tenantid}});
+        return axios.post(makePaymentUrl, payment, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, 
+            params : {tenantid : tenantid}});
     }
 
-    findAllPaymentsByTenant(tenantid) {
-        return axios.get(findPaymentsByTenantUrl + tenantid);
+    findAllPaymentsByTenant(tenantid, accessToken) {
+        return axios.get(findPaymentsByTenantUrl + tenantid, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 }
 

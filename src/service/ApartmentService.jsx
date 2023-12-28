@@ -11,28 +11,46 @@ const deleteApartmentUrl = "http://localhost:8080/api/deleteApartment/";
 
 class ApartmentService {
 
-    findApartmentByBuildingID(id) {
-        return axios.get(findApartmentByBuildingIDUrl + id);
+    findApartmentByBuildingID(id, accessToken) {
+        return axios.get(findApartmentByBuildingIDUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    findApartmentByApartmentNumber(id) {
-        return axios.get(findApartmentByApartmentNumberUrl + id);
+    findApartmentByApartmentNumber(id, accessToken) {
+        return axios.get(findApartmentByApartmentNumberUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    getAllApartments() {
-        return axios.get(getAllApartmentsUrl);
+    getAllApartments(accessToken) {
+        return axios.get(getAllApartmentsUrl, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    addApartment(apartment) {
-        return axios.post(addApartmentUrl, apartment);
+    addApartment(apartment, accessToken) {
+        return axios.post(addApartmentUrl, apartment, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    updateApartment(apartment) {
-        return axios.put(updateApartmentUrl, apartment);
+    updateApartment(apartment, accessToken) {
+        return axios.put(updateApartmentUrl, apartment, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 
-    deleteApartment(id) {
-        return axios.delete(deleteApartmentUrl + id);
+    deleteApartment(id, accessToken) {
+        return axios.delete(deleteApartmentUrl + id, {
+            headers: {
+                Authorization : `Bearer ${accessToken}`
+            }, });
     }
 }
 

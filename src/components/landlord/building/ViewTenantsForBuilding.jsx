@@ -4,10 +4,12 @@ import ApartmentService from "../../../service/ApartmentService";
 import LeaseService from "../../../service/LeaseService";
 import TenantService from "../../../service/TenantService";
 import ViewTenantRow from "./ViewTenantRow";
+import useAuth from "../../../hooks/useAuth";
 import logoImage from '../../../img/griddle-white.png';
 
 export default function ViewTenantsForBuilding() {
     let location = useLocation();
+    const { auth } = useAuth();
     let landlord = location.state.landlord;
     let building = location.state.building;
 
@@ -16,7 +18,7 @@ export default function ViewTenantsForBuilding() {
     });
 
     useEffect (() => {
-        ApartmentService.findApartmentByBuildingID(building.id).then((response)=>{
+        ApartmentService.findApartmentByBuildingID(building.id, auth.accessToken).then((response)=>{
             setApartments(()=>({
                 apartments: response.data
             }));
@@ -30,7 +32,8 @@ export default function ViewTenantsForBuilding() {
     }
     let goToHomePage = (e) => {
         e.preventDefault();
-        navigate("/landlord", {state : {landlord}});
+        const username = landlord.username;
+        navigate("/landlord", {state : {username}});
     }
     let goToBalanceOverview = (e) => {
         e.preventDefault();
