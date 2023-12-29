@@ -14,8 +14,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+//import org.springframework.mail.SimpleMailMessage;
+//import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -34,8 +34,8 @@ public class TenantService {
     @Autowired
     private BillRepository billRepository;
 
-    @Autowired
-    private JavaMailSender mailSender;
+//    @Autowired
+//    private JavaMailSender mailSender;
 
     private final BCryptPasswordEncoder passwordEncoder;
 
@@ -132,8 +132,8 @@ public class TenantService {
         for (Tenant tenant : allTenants) {
             double amount = updateBalance(tenant);
             int[] num = tenantRepository.updateTenantBalance(amount, tenant.getId());
-            MailStructure outRent = new MailStructure("Your Rent Bill is ready to view", "The balance of your next rent bill is " + amount);
-//            sendMail(tenant.getEmail(), outRent);
+//            MailStructure outRent = new MailStructure("Your Rent Bill is ready to view", "The balance of your next rent bill is " + amount);
+////            sendMail(tenant.getEmail(), outRent);
         }
     }
 
@@ -155,9 +155,9 @@ public class TenantService {
         double billsTotal = bills.stream().mapToDouble(Bill::getAmount).sum();
         return billsTotal + lease.getRent();
     }
-
-    @Value("${spring.mail.username}")
-    private String fromMail;
+//
+//    @Value("${spring.mail.username}")
+//    private String fromMail;
 
 //    private void sendMail(String mail, MailStructure mailStructure) {
 //        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
