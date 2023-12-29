@@ -52,10 +52,10 @@ export default function LandlordLoginPage() {
   // };
   
   const { setAuth } = useAuth();
-  
+  const { auth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
- // const from = location.state?.from?.pathname || "";
+ const from = location.state?.from?.pathname || "/landlord/dashboard";
 
   const userRef = useRef(null);
   const errRef = useRef(null);
@@ -149,9 +149,9 @@ export default function LandlordLoginPage() {
                 />
               </label>
             </div>
-            <button onClick={handleLogin}>Login</button>
+            <button class='login-signup-button' onClick={handleLogin}>Login</button>
             {/* Registration link */}
-            <p>
+            <p class='login-signup-txt'>
               Don't have an account? <Link to="/landlordregistration">Register</Link>
             </p>
           </div>

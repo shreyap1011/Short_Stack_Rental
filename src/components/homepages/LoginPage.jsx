@@ -139,7 +139,7 @@ export default function LoginPage() {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
               </label>
             </div>
-            <button onClick={handleLogin}>Login</button>
+            <button class='login-signup-button' onClick={handleLogin}>Login</button>
             {/* Registration link  */}
             {/* <p>
               Don't have an account? <Link to="/registration">Register</Link>
