@@ -18,7 +18,7 @@
 }
 
 .landing-page {
-  color: rgb(115, 37, 37);
+  color:#5F321F;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -37,14 +37,18 @@
 
 .landing-page button {
   width: 250px;
-  background-color: rgb(93, 45, 11);
+  background-color: #5F321F;
   font-family: Georgia, 'Times New Roman', Times, serif;
   transition: transform 0.2s ease;
+  color: #F6EBCE;
+  font-weight: bold;
 }
 
 .landing-page button:hover {
   background-color: rgb(206, 157, 122);
-  color: black;
+  /* background-color: #F6EBCE; */
+  color: #5F321F;
+  /* color: black; */
   transform: scale(1.1);
 }
 
@@ -162,20 +166,29 @@ button:hover {
   background-color: #138496; /* Change to your preferred color */
 }
 
-/* Style for the register button */
-.register-button {
-  background-color: #007bff;
-  color: #fff;
+/* Style for the login/signup buttons */
+.login-signup-button {
+  background-color: #5F321F;
+  color: #F6EBCE;
+  font-weight: bold;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.register-button:hover {
-  background-color: #0056b3;
+.login-signup-button:hover {
+  background-color: #472a1e;
 }
 
+.login-signup-txt a{
+  color: #472a1e;
+}
+
+.login-signup-txt{
+  color:rgb(100, 100, 100);
+  font-weight: bold;
+}
 
 
 /*landing page css*/
@@ -426,8 +439,8 @@ button:hover-tenant {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(69, 12, 12);
-  color: bisque;
+  background-color: #5F321F;
+  color: #F6EBCE;
   width: 90%;
   padding-left: 5%;
   padding-right: 5%;

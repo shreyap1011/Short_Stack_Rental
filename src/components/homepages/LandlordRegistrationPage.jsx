@@ -68,11 +68,12 @@ const RegistrationContainer = () => {
                 Phone:
                 <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)}/>
             </label>
-            <input type='submit' value="Register"/>
+            {/* <input type='submit' value="Register"/> */}
+            <button class='login-signup-button' type='submit'>Register</button>
             </form>
 
             {/* Back to login link */}
-            <p>
+            <p class = 'login-signup-txt'>
             Already have an account? <Link to="/">Login</Link>
             </p>
         </div>
