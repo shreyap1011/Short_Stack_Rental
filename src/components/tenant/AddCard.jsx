@@ -4,8 +4,10 @@ import TenantService from "../../service/TenantService";
 import PaymentService from "../../service/PaymentService";
 import useAuth from "../../hooks/useAuth";
 import logoImage from '../../img/griddle-white.png';
+import emailjs from '@emailjs/browser';
 
 export default function AddCard() {
+    console.log(process.env.REACT_APP_EMAILJS_PUBLIC_KEY);
     let location = useLocation();
     let tenant = location.state.tenant;
     let username = tenant.username;
@@ -71,6 +73,9 @@ export default function AddCard() {
                 firstName: tenant.firstName,
                 lastName: tenant.lastName
             }
+            emailjs.send(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, 
+                {to_name: new_tenant.username, user_email: new_tenant.email, message: `Your new balance of ${new_tenant.balance} is due.`}, 
+                process.env.REACT_APP_EMAILJS_PUBLIC_KEY)
             TenantService.updateTenant(new_tenant, auth.accessToken);
             console.log(new_payment.amount.total + " " + new_payment.source.card.cardData);
             navigate("/tenant/dashboard", {state: {username}});
