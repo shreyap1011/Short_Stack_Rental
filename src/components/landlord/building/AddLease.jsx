@@ -42,9 +42,6 @@ export default function AddLease() {
     let handleStartDate = (e) => { setStartDate(e.target.value) }
     let handleEndDate = (e) => { setEndDate(e.target.value) }
     let handleRent = (e) => { setRent(e.target.value) }
-
-    let bills = [];
-
     // let [tenantid, setId] = useState('');
 
     let navigate = useNavigate();
@@ -93,11 +90,7 @@ export default function AddLease() {
     }
 
     let rowid = 0;
-    let deleteBill = (e) => {
-        e.preventDefault();
-        
-    }   
-
+    let bills = [];
     let addBill = (e) => {
         e.preventDefault();
         const description = document.getElementById("bill-description");
@@ -118,25 +111,12 @@ export default function AddLease() {
         bills.push(bill);
         console.log(bill.description + " " + bill.amount);
 
-        let deleteCell = document.createElement("td");
-        let deleteButton = document.createElement("button");
-        deleteButton.innerHTML = "Delete Charge";
-        deleteButton.onclick = deleteBill;
-        deleteCell.appendChild(deleteButton);
-
         row.appendChild(descriptionCell);
         row.appendChild(amountCell);
-        row.appendChild(deleteCell);
         document.getElementById("bills-table").appendChild(row);
 
         description.value = "";
         amount.value = "";
-    }
-    // "Add Monthly Charge" button
-    let createBill = (e) => {
-        e.preventDefault();
-        const testsDiv = document.getElementById("TestsDiv");
-        testsDiv.style.display = "block";
     }
 
     let goToHomePage = (e) => {
@@ -158,11 +138,9 @@ export default function AddLease() {
         </nav>
 
        
-<div>
+        <div>
         <h3>Create New Lease</h3>
         <form className="lease-form" onSubmit={handleSubmit}>
-
-
             <div className="form-row" id="tenant-info">
                 <h3>Tenant Information</h3>
                 <label>
@@ -181,7 +159,7 @@ export default function AddLease() {
                     Username: <input onChange={handleUsername} type="text" value={username}></input>
                 </label>
                 <label>
-                    Password: <input onChange={handlePassword} type="text" value={password}></input>
+                    Password: <input onChange={handlePassword} type="password" value={password}></input>
                 </label>
             </div>
 

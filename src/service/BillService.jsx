@@ -17,11 +17,13 @@ class BillService {
             }, });
     }
 
-    findBillsByLease(id, accessToken) {
-        return axios.get(findBillByLeaseUrl, {params : {leaseid : id}}, {
+    async findBillsByLease(id, accessToken) {
+        return await axios.get(findBillByLeaseUrl, {
             headers: {
                 Authorization : `Bearer ${accessToken}`
-            }, });
+            }, 
+            params : {leaseid : id}
+        });
     }
 
     getAllBills(accessToken) {

@@ -43,8 +43,6 @@ export default function AddBuilding() {
         }, ()=>{
             alert("Building could not be added");
         })
-
-  
     }
 
     let goToHomePage = (e) => {

@@ -129,7 +129,9 @@ export default function ViewTenant() {
             </ul>
         </nav>
         <div id="personal-info">
-            <h3>{tenant.firstName} {tenant.lastName}</h3>
+            <h2>{tenant.firstname} {tenant.lastname}</h2>
+            <h3>BALANCE: ${formatBalance(tenant.balance)}</h3>
+            
             <h4>ADDRESS:</h4>
             <p>{building.buildingname}</p>
             <p>{building.streetname}, {apartment.apartmentnumber}</p>
@@ -137,10 +139,9 @@ export default function ViewTenant() {
 
             <h4>CONTACT:</h4>
             <p>EMAIL: {tenant.email}</p>
-            <p>PHONE: {tenant.phone}</p>
-
-            <h4>BALANCE: ${formatBalance(tenant.balance)}</h4>
+            <p>PHONE: {tenant.phone}</p>      
         </div>
+
         <div>
             <h3>Recurring Charges</h3>
             <table>
@@ -160,12 +161,13 @@ export default function ViewTenant() {
                 }
             </table>
         </div>
+        
         <h3>Payments Made</h3>
         <table>
             <thead>
                 <tr>
                     <th>Date</th>
-                    <th>Charge</th>
+                    <th>Amount</th>
                     <th>Type</th>
                     <th>Description</th>
                 </tr>
