@@ -27,7 +27,7 @@ const Header = () =>{
   const navigate = useNavigate();
   const currentPath = window.location.pathname;
 
-  const shouldRenderHeader = !["/","/login", "/registration", "/landlordlogin", "/landlordregistration", "/landlord", "/landlord/addBuilding", "/landlord/viewBuilding", "/landlord/addLease", "/tenant/dashboard", "/landlord/balanceOverview", "/tenant/newPayment", "/tenant/paymentHistory", "/landlord/addApartment" ].includes(currentPath);
+  const shouldRenderHeader = !["/","/login", "/registration", "/landlordlogin", "/landlordregistration", "/landlord", "/landlord/addBuilding", "/landlord/viewBuilding", "/landlord/addLease", "/tenant/dashboard", "/landlord/balanceOverview", "/tenant/newPayment", "/tenant/paymentHistory", "/landlord/addApartment", "/landlord/viewTenant" ].includes(currentPath);
 
   return shouldRenderHeader ? (
     <header>

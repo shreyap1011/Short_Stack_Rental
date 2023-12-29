@@ -171,6 +171,7 @@ export default function TenantDash({tenant}) {
     let total_charges = leases.leases.rent;
 
     return (
+        <>
         <div id="dashboard-tenant">
             <div id="info-tenant" style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div id="left-info-container" style={{ flexGrow: 1, marginRight: '150px' }}>
@@ -227,38 +228,38 @@ export default function TenantDash({tenant}) {
                             </tr>
                         </tbody>
                     </table>
-
-
-
-
-                    <div id="table-head-tenant" style={{ marginTop: '50px' }}>
-                        <h3>Payment History</h3>
-                        <button className="pay-now-button" onClick={goToHistory}>View All</button>
-                    </div>
-                    <table className="tenant-custom-table">
-                    <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Amount</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                paymentsState.payments.map((payment) => {
-                                    return (
-                                        <tr>
-                                            <td>{payment.paymentdate}</td>
-                                            <td>${payment.amount}</td>
-                                            <td>{payment.note}</td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
+        
+        <div id="tenant-dash-pay-history">
+        <div id="table-head-tenant" style={{ marginTop: '50px' }}>
+            <h3>Payment History</h3>
+            <button className="pay-now-button" onClick={goToHistory}>View All</button>
+        </div>
+        <table className="tenant-custom-table">
+        <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    paymentsState.payments.map((payment) => {
+                        return (
+                            <tr>
+                                <td>{payment.paymentdate}</td>
+                                <td>${payment.amount}</td>
+                                <td>{payment.note}</td>
+                            </tr>
+                        )
+                    })
+                }
+            </tbody>
+        </table>
+        </div>
+        </>
     )
 }

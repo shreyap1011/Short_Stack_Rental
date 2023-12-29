@@ -104,17 +104,13 @@ button:hover {
 }
 
 .pay-now-button {
-  background-color: #dba686;
-  color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
 }
 
-.pay-now-button:hover {
-  background-color: #c68f71;
-}
 
 /*image*/
 
@@ -376,7 +372,7 @@ body-tenant {
 }
 
 button-tenant {
-  background-color: bisque;
+  background-color: rgb(66, 62, 181);
   color: black;
 }
 
@@ -439,8 +435,8 @@ button:hover-tenant {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #5F321F;
-  color: #F6EBCE;
+  background-color: #040404;
+  color: #ffffff;
   width: 90%;
   padding-left: 5%;
   padding-right: 5%;
@@ -671,4 +667,30 @@ table-tenant {
   background-color: darkred;
 }
 
+#personal-info-view-tenant {
+  display : flex;
+  justify-content: center;
+}
 
+#personal-info-view-tenant > div {
+  margin: 0px 20px 0px 20px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0px 0px 0px 0px;
+  width: 300px;
+}
+
+#view-tenant-tables {
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+}
+
+#view-tenant-tables > div{
+  margin: 40px 0px 40px 80px;
+}
+
+#tenant-dash-pay-history {
+  margin: 0% 20% 0% 20%;
+}

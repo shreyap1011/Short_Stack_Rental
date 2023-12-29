@@ -16,10 +16,6 @@ export default function ViewTenant() {
     const tenant = location.state.tenant;
 
     let navigate = useNavigate();
-    
-    let [landlordState, setLandlord] = useState({
-        landlord : {}
-    })
 
     let[building, setBuilding] = useState({
         zip : '',
@@ -110,10 +106,14 @@ export default function ViewTenant() {
             return balance;
         }
     }
-
+    let goToHomePage = (e) => {
+        e.preventDefault();
+        let username = landlord.username;
+        navigate("/landlord", {state : {username}});
+    }
+    
     let goToBalanceOverview = (e) => {
         e.preventDefault();
-        let landlord = landlordState.landlord;
         navigate("/landlord/balanceOverview", {state : {landlord}});
     }
     return (
@@ -123,28 +123,44 @@ export default function ViewTenant() {
                 <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
             </div>
             <ul className="nav-list">
-                <li><a href="/landlord">Home Page </a></li>
+                <li onClick={goToHomePage}>Home Page</li>
                 <li onClick={goToBalanceOverview}>Balance Overview</li>
                 <li><a href="/" >Logout</a></li>
             </ul>
         </nav>
-        <div id="personal-info">
+        
             <h2>{tenant.firstname} {tenant.lastname}</h2>
             <h3>BALANCE: ${formatBalance(tenant.balance)}</h3>
             
+        <div id="personal-info-view-tenant">
+            <div>
             <h4>ADDRESS:</h4>
             <p>{building.buildingname}</p>
             <p>{building.streetname}, {apartment.apartmentnumber}</p>
             <p>{building.city}, {building.state} {building.zip}</p>
+            </div>
 
+            <div>
             <h4>CONTACT:</h4>
             <p>EMAIL: {tenant.email}</p>
             <p>PHONE: {tenant.phone}</p>      
+            </div>
         </div>
 
-        <div>
+
+
+        <div id="view-tenant-tables">
+            <div>
             <h3>Recurring Charges</h3>
             <table>
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+
+            <tbody>
                 <tr>
                     <td>${leases.leases.rent}</td>
                     <td>Rent</td>
@@ -159,9 +175,10 @@ export default function ViewTenant() {
                         )
                     })
                 }
+            </tbody>
             </table>
         </div>
-        
+        <div>
         <h3>Payments Made</h3>
         <table>
             <thead>
@@ -187,6 +204,8 @@ export default function ViewTenant() {
                 }
             </tbody>
         </table>
+        </div>
+        </div>
         </>
     )
 }
