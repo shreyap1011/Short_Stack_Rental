@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ApartmentService from "../../../service/ApartmentService";
 import useAuth from "../../../hooks/useAuth";
+import logoImage from '../../../img/griddle-white.png';
 
 export default function AddApartment() {
     let location = useLocation();
@@ -25,16 +26,42 @@ export default function AddApartment() {
             alert("Apartment could not be added")
         })
     }
-
+    let goToHomePage = (e) => {
+        e.preventDefault();
+        const username = landlord.username;
+        navigate("/landlord", {state : {username}});
+    }
     return (
         <>
-        <h3>Add Unit to {building.buildingname}</h3>
-        <form onSubmit={handleSubmit}>
-            <label>
-                Number: <input onChange={handleApartment} type="text" value={apartment}/>
-            </label>
-            <input type="submit" value="Add Unit"/>
+        <nav className="navbar">
+            <div className="navbar-brand">
+                <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
+            </div>
+            <ul className="nav-list">
+                <li onClick={goToHomePage}>Home Page</li>
+                <li><a href="/" >Logout</a></li>
+            </ul>
+        </nav>
+       
+
+        <div className="form-container" style={{ marginTop: '200px' }}>
+        <h2>Add Unit to {building.buildingname}</h2>
+        <form className="unit-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+            <label htmlFor="apartmentNumber">Apartment Number:</label>
+            <input
+                type="text"
+                id="apartmentNumber"
+                onChange={handleApartment}
+                value={apartment}
+                required
+            />
+            </div>
+
+            <button type="submit">Add Unit</button>
         </form>
+        </div>
+
         </>
     )
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import PaymentService from "../../service/PaymentService";
 import useAuth from "../../hooks/useAuth";
+import logoImage from '../../img/griddle-white.png';
 
 export default function ViewPaymentHistory() {
     let location = useLocation();
@@ -68,9 +69,19 @@ export default function ViewPaymentHistory() {
 
     return(
         <>
+        <nav className="navbar">
+            <div className="navbar-brand">
+                <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
+            </div>
+            <ul className="nav-list">
+                <li onClick={viewCurrent}>Home Page</li>
+                <li><a href="/" >Logout</a></li>
+            </ul>
+        </nav>
+
         <h2>Payment History</h2>
-        <button onClick={viewCurrent}>View Current Charges</button>
-        <h3>CURRENT BALANCE: ${formatBalance(tenant.balance)}</h3>
+        {/* <button onClick={viewCurrent}>View Current Charges</button> */}
+        {/* <h3>CURRENT BALANCE: ${formatBalance(tenant.balance)}</h3> */}
         <table>
             <thead>
                 <tr>

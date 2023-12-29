@@ -216,14 +216,24 @@ export default function TenantDash({tenant}) {
                                 <td>${total_charges}</td>
                                 <td>TOTAL</td>
                             </tr>
-                            <tr>
-                                <td colSpan={2}><button onClick={newPayment}>Pay Now</button></td>
+                            <tr >
+                                <td colSpan={2} style={{ textAlign: 'center', padding: '10px' }}>
+                                    <button className="pay-now-button" 
+                                    style={{ fontSize: '16px', padding: '8px 16px' }} 
+                                    
+                                    
+                                    onClick={newPayment}>Pay Now</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
+
+
+
+
                     <div id="table-head-tenant" style={{ marginTop: '50px' }}>
                         <h3>Payment History</h3>
-                        <button onClick={goToHistory}>View All</button>
+                        <button className="pay-now-button" onClick={goToHistory}>View All</button>
                     </div>
                     <table className="tenant-custom-table">
                     <thead>

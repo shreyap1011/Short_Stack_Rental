@@ -59,7 +59,7 @@ export default function ViewTenantsForBuilding() {
             <p>{building.city}, {building.state} {building.zip}</p>
         </div>
         
-        <button onClick={addUnit}>Add Unit</button>
+        
         <table>
             <thead>
                 <tr>
@@ -80,6 +80,7 @@ export default function ViewTenantsForBuilding() {
                 }
             </tbody>
         </table>
+        <button onClick={addUnit}>Add Unit</button>
         
         </>
     )
