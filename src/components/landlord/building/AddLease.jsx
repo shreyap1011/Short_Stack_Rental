@@ -122,6 +122,9 @@ export default function AddLease() {
         let deleteButton = document.createElement("button");
         deleteButton.innerHTML = "Delete Charge";
         deleteButton.onclick = deleteBill;
+    
+        /*changing color */
+        deleteButton.className = "delete-button";
         deleteCell.appendChild(deleteButton);
 
         row.appendChild(descriptionCell);
@@ -166,7 +169,7 @@ export default function AddLease() {
             <div className="form-row" id="tenant-info">
                 <h3>Tenant Information</h3>
                 <label>
-                    First Name: <input onChange={handleFirstName} type="text" placeholder="John" value={firstName}></input>
+                    <i className="fas fa-user"></i> First Name: <input onChange={handleFirstName} type="text" placeholder="John" value={firstName}></input>
                 </label>
                 <label>
                     Last Name: <input onChange={handleLastName} type="text" placeholder="Doe" value={lastName}></input>
@@ -200,8 +203,27 @@ export default function AddLease() {
 
             <div id="bill">
 
-            <h3>Additional Charges</h3>
 
+                {/* <table>
+                    <tbody id="bills-table">
+                    </tbody>
+                </table>
+                <div id="add-bill">
+                </div> */}
+
+                <div id="TestsDiv">
+                    <h3>New Bill</h3>
+                    <label>
+                        Description: <input id="bill-description" type="text"></input>
+                    </label>
+                    <label>
+                        Amount: $<input id="bill-amount" type="number" min="0"></input>
+                    </label>
+                    <button onClick={addBill}>Add Bill</button>
+                </div>
+
+                
+            <h3>Additional Charges</h3>
                 <table>
                     <tbody id="bills-table">
                     </tbody>
@@ -209,25 +231,19 @@ export default function AddLease() {
                 <div id="add-bill">
                 </div>
 
-                <div id="TestsDiv">
-                <h3>New Bill</h3>
-                <label>
-                    Description: <input id="bill-description" type="text"></input>
-                </label>
-                <label>
-                    Amount: $<input id="bill-amount" type="number" min="0"></input>
-                </label>
-                <button onClick={addBill}>Add Bill</button>
-                </div>
-
-                <input type="submit" value="Create Lease"/>
+                {/* <div className="create-lease-button">
+                    <input type="submit" value="Create Lease"/>
+                </div> */}
             </div>
 
 
-            {/* <div className="create-lease-button">
-                <input type="submit" value="Create Lease"/>
-            </div> */}
+            <div className="create-lease-button">
+                    <input type="submit" value="Create Lease"/>
+            </div>
         </form>  
+
+
+
 </div>  
         </>
     )

@@ -99,6 +99,19 @@ button:hover {
   background-color: #0056b3;
 }
 
+.pay-now-button {
+  background-color: #dba686;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pay-now-button:hover {
+  background-color: #c68f71;
+}
+
 /*image*/
 
 .container {
@@ -262,6 +275,7 @@ table {
   width: 80%;
   border-collapse: collapse;
   margin-top: 10px;
+  margin: auto;
 }
 
 th, td {
@@ -594,7 +608,7 @@ table-tenant {
 }
 
 .form-row {
-  flex-basis: 48%; /* Adjust as needed based on your design */
+  flex-basis: 30%; /* Adjust as needed based on your design */
 }
 
 .form-row h3 {
@@ -608,3 +622,40 @@ table-tenant {
 .create-lease-button {
   margin-top: auto /* Add space above the button */
 }
+
+/*add bill*/
+#bill table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px; /* Add space below the table */
+}
+
+#bill th, #bill td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#bill th {
+  background-color: #f2f2f2;
+}
+
+#add-bill {
+  margin-top: 10px; /* Add space above the add-bill div */
+}
+
+/*delete button for bill*/
+
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: darkred;
+}
+
+
