@@ -44,15 +44,14 @@ export default function AddBuilding() {
             alert("Building could not be added");
         })
 
-
-      let goToHomePage = (e) => {
-          e.preventDefault();
-          const username = landlord.username;
-          navigate("/landlord", {state : {username}});
-      }
-
   
     }
+
+    let goToHomePage = (e) => {
+      e.preventDefault();
+      const username = landlord.username;
+      navigate("/landlord", {state : {username}});
+  }
     return(
         <>
         <nav className="navbar">
@@ -60,14 +59,14 @@ export default function AddBuilding() {
                 <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
             </div>
             <ul className="nav-list">
-               
+                <li onClick={goToHomePage}>Home Page</li>
                 <li><a href="/" >Logout</a></li>
             </ul>
         </nav>
 
 
         <div className="form-container">
-        <h2>New Building</h2>
+        <h2>Create New Building</h2>
         <form className="building-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="buildingName">Building Name:</label>

@@ -158,7 +158,7 @@ export default function AddCard() {
             </label>
             <input type="submit" value="Submit Payment"/>
         </form>
-        <button onClick={goBack}>Back</button>
+       
         </>
     )
 }

@@ -5,6 +5,7 @@ import TenantService from "../../../service/TenantService";
 import LeaseService from "../../../service/LeaseService";
 import BillService from "../../../service/BillService";
 import useAuth from "../../../hooks/useAuth";
+//import landingPageImage from '../../img/landingPage.png';
 
 export default function AddLease() {
     let location = useLocation();
@@ -146,7 +147,7 @@ export default function AddLease() {
 
     return (
         <>
-        <nav className="navbar">
+        <nav className="navbar" style={{ marginBottom: '70px' }}>
             <div className="navbar-brand">
                 <img src={logoImage} alt="Griddle Logo" className="logo-image-navbar" />
             </div>
@@ -156,16 +157,19 @@ export default function AddLease() {
             </ul>
         </nav>
 
-        <h3>New Lease</h3>
+       
+<div>
+        <h3>Create New Lease</h3>
+        <form className="lease-form" onSubmit={handleSubmit}>
 
-        <form onSubmit={handleSubmit}>
-            <div id="tenant-info">
+
+            <div className="form-row" id="tenant-info">
                 <h3>Tenant Information</h3>
                 <label>
-                    First Name: <input onChange={handleFirstName} type="text" value={firstName}></input>
+                    First Name: <input onChange={handleFirstName} type="text" placeholder="John" value={firstName}></input>
                 </label>
                 <label>
-                    Last Name: <input onChange={handleLastName} type="text" value={lastName}></input>
+                    Last Name: <input onChange={handleLastName} type="text" placeholder="Doe" value={lastName}></input>
                 </label>
                 <label>
                     Email: <input onChange={handleEmail} type="text" value={email}></input>
@@ -181,7 +185,7 @@ export default function AddLease() {
                 </label>
             </div>
 
-            <div id="lease-info">
+            <div className="form-row" id="lease-info">
                 <h3>Lease Information</h3>
                 <label>
                     Start Date: <input onChange={handleStartDate} type="date" value={startdate}></input>
@@ -215,13 +219,16 @@ export default function AddLease() {
                 </label>
                 <button onClick={addBill}>Add Bill</button>
                 </div>
+
+                <input type="submit" value="Create Lease"/>
             </div>
 
 
-
-
-            <input type="submit" value="Create Lease"/>    
-        </form>    
+            {/* <div className="create-lease-button">
+                <input type="submit" value="Create Lease"/>
+            </div> */}
+        </form>  
+</div>  
         </>
     )
 }
