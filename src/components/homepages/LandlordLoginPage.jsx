@@ -4,6 +4,8 @@ import useAuth from '../../hooks/useAuth';
 
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import buildingImage from '../../img/building.jpg';
+import personSVG from '../../img/person.svg'
+import lockSVG from '../../img/lock.svg'
 import logoImage from '../../img/logo.png';
 import '../../App.css';
 import LandlordService from '../../service/LandlordService';
@@ -136,17 +138,20 @@ export default function LandlordLoginPage() {
 
               <label>
                 Username:
-                <input ref={userRef} type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <img src={personSVG} alt ='person svg' class='person'></img>
+                <input ref={userRef} class='icon'type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
               </label>
             </div>
             <div>
               <label>
                 Password:
                 <input
+                  class = 'icon'
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <img src={lockSVG} alt ='lock svg' class='lock'></img>
               </label>
             </div>
             <button class='login-signup-button' onClick={handleLogin}>Login</button>
