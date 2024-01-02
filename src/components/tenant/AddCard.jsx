@@ -74,7 +74,7 @@ export default function AddCard() {
                 lastName: tenant.lastName
             }
             emailjs.send(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, 
-                {to_name: new_tenant.username, user_email: new_tenant.email, message: `Your new balance of ${new_tenant.balance} is due.`}, 
+                {to_name: new_tenant.username, user_email: new_tenant.email, message: `Thank you for your payment of ${new_payment.amount.total}. Your remaining balance is ${new_tenant.balance}.`}, 
                 process.env.REACT_APP_EMAILJS_PUBLIC_KEY)
             TenantService.updateTenant(new_tenant, auth.accessToken);
             console.log(new_payment.amount.total + " " + new_payment.source.card.cardData);
