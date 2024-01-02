@@ -1,5 +1,8 @@
 package com.shortstack.griddle.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AuthRequest {
     private String username;
     private String password;

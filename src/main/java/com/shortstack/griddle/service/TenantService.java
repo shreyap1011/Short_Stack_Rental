@@ -2,24 +2,15 @@ package com.shortstack.griddle.service;
 
 import com.shortstack.griddle.model.Bill;
 import com.shortstack.griddle.model.Lease;
-import com.shortstack.griddle.model.MailStructure;
 import com.shortstack.griddle.model.Tenant;
 import com.shortstack.griddle.repository.BillRepository;
 import com.shortstack.griddle.repository.LeaseRepository;
 import com.shortstack.griddle.repository.TenantRepository;
-import org.eclipse.angus.mail.util.logging.MailHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-//import org.springframework.mail.SimpleMailMessage;
-//import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
-import java.util.Properties;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
