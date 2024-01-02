@@ -52,8 +52,6 @@ public class TenantController {
                     jsonMap.put("username", ((String) row[5]).toString());
                     jsonMap.put("password", ((String) row[6]).toString());
                     jsonMap.put("balance", ((Number) row[7]).doubleValue());
-
-
                     return jsonMap;
                 })
                 .collect(Collectors.toList());

@@ -14,18 +14,7 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
 
 //    Transaction save(Transaction transaction);
 
-//    Native Snowflake query, ID auto generate.
+    //    Native Snowflake query, ID auto generate.
     @Query(value = "INSERT INTO TRANSACTION(TENANTID, TRANSACTIONID, TRANSACTIONTYPE, TRANSACTIONTIMESTAMP, ORDERID, TOTAL, STATUS, SOURCETYPE, CARDTYPE, LAST4) VALUES (:tenantid, :transactionId, :transactionType, :transactionTimestamp, :orderId, :total, :status, :sourceType, :cardType, :last4)", nativeQuery = true)
     void save(int tenantid, String transactionId, String transactionType, String transactionTimestamp, String orderId, double total, String status, String sourceType, String cardType, String last4);
-
-    //        this.tenantid = tenantid;
-//        this.transactionId = transactionId;
-//        this.transactionType = transactionType;
-//        this.transactionTimestamp = transactionTimestamp;
-//        this.orderId = orderId;
-//        this.total = total;
-//        this.status = status;
-//        this.sourceType = sourceType;
-//        this.cardType = cardType;
-//        this.last4 = last4;
 }

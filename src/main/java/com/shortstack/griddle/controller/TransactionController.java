@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -24,28 +25,30 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 public class TransactionController {
-    private final String key = "r9ZDzvjtd0tk3cUyXnyIAPAq6Q4llUGo";
-    private final String secret = "DZZMUzm0FOBPF6Tzycs7CczcBtF7YwgHhMlKNJJI7Rp";
-    private final String paymentUrl = "https://cert.api.fiservapps.com/ch/payments/v1/charges";
+    @Value("${commerceKey}")
+    private String commerceKey;
+    @Value("${commerceSecret}")
+    private String commerceSecret;
     @Autowired
     TransactionService transactionService;
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/makePayment")
     public String makePayment(@RequestParam int tenantid,@RequestBody(required = true) Map<String, Object> incomingRequest) throws URISyntaxException {
+
         long requestId = (long) (Math.random() * 10000000) + 1;
         long timestamp = System.currentTimeMillis();
         Gson gson = new Gson();
         String jsonString = incomingRequest.toString();
         IncomingRequest payload = gson.fromJson(jsonString, IncomingRequest.class);
         String jsonRequest = gson.toJson(payload);
-        String rawSignature = key + requestId + timestamp + jsonRequest;
-        String computedHmac = computeHmac(rawSignature, secret);
+        String rawSignature = commerceKey + requestId + timestamp + jsonRequest;
+        String computedHmac = computeHmac(rawSignature, commerceSecret);
         HttpRequest postRequest = HttpRequest.newBuilder()
                 .uri(new URI("https://cert.api.fiservapps.com/ch/payments/v1/charges"))
                 .header("Content-Type", "application/json")
                 .header("Client-Request-Id", String.valueOf(requestId))
-                .header("Api-Key", "r9ZDzvjtd0tk3cUyXnyIAPAq6Q4llUGo")
+                .header("Api-Key", commerceKey)
                 .header("Timestamp", String.valueOf(timestamp))
                 .header("Auth-Token-Type", "HMAC")
                 .header("Authorization", String.valueOf(computedHmac))
@@ -59,9 +62,9 @@ public class TransactionController {
             e.printStackTrace();
             return null;
         }
-//        TimeUnit.SECONDS.sleep(2);
         var test1 = postResponse.body();
         JsonObject responseObject = JsonParser.parseString(postResponse.body()).getAsJsonObject();
+        System.out.println(responseObject);
 
         // Extract properties from the JSON object
         String transactionType = responseObject

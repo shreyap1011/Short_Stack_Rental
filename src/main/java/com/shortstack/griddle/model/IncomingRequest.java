@@ -1,5 +1,8 @@
 package com.shortstack.griddle.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class IncomingRequest {
     private Amount amount;
     private Source source;
