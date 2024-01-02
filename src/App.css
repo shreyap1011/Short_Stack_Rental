@@ -2,6 +2,29 @@
   text-align: center;
 }
 
+.icon{
+  padding-left: 30px;
+}
+
+.person{
+  position: absolute;
+  height: 20px;
+  margin: 28px 0px 0px -180px;
+  filter: invert(16%) sepia(11%) saturate(6650%) hue-rotate(346deg) brightness(96%) contrast(82%);
+}
+
+.lock{
+  position: absolute;
+  height: 25px;
+  margin: 3px 0px 0px -286px;
+  filter: invert(16%) sepia(11%) saturate(6650%) hue-rotate(346deg) brightness(96%) contrast(82%);
+
+}
+
+.tenant{
+  margin: 25px 0px 0px -180px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

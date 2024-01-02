@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
-
 import TenantService from '../../service/TenantService';
-
 import buildingImage from '../../img/building.jpg';
 import logoImage from '../../img/logo.png';
 import '../../App.css';
 import AuthContext from '../../context/AuthProvider';
+import personSVG from '../../img/person.svg';
+import lockSVG from '../../img/lock.svg';
 
 const LOGIN_URL = 'http://localhost:8080/api/authenticate';
 
@@ -130,16 +130,18 @@ export default function LoginPage() {
             <div>
               <label>
                 Username:
-                <input ref={userRef} type="text" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+                <img src={personSVG} alt ='person svg' class='person'></img>
+                <input ref={userRef} type="text" class = 'icon' value={username} onChange={(e) => setUsername(e.target.value)} required/>
               </label>
             </div>
             <div>
               <label>
                 Password:
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                <img src={lockSVG} alt ='lock svg' class='lock tenant'></img>
+                <input type="password" class = 'icon' value={password} onChange={(e) => setPassword(e.target.value)} required/>
               </label>
             </div>
-            <button class='login-signup-button' onClick={handleLogin}>Login</button>
+            <button class='login-signup-button'  onClick={handleLogin}>Login</button>
             {/* Registration link  */}
             {/* <p>
               Don't have an account? <Link to="/registration">Register</Link>
