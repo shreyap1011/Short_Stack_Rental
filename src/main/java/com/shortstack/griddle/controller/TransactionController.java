@@ -122,7 +122,7 @@ public class TransactionController {
 
         transactionService.createTransaction(tenantid, transactionId, transactionType, transactionTimestamp, orderId, total, status, sourceType, cardType, last4);
         if (status.equals("APPROVED")) {
-            transactionService.createPayment(tenantid, total, transactionTimestamp.substring(0, 9), sourceType, cardType + " " + last4);
+            transactionService.createPayment(tenantid, total, transactionTimestamp.substring(0, 10), sourceType, cardType + " " + last4);
             return "payment sucesss";
         } else {
             return "payment denied";
