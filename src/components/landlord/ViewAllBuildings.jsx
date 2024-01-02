@@ -33,8 +33,6 @@ export default function ViewAllBuildings({landlord}) {
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Landlord ID</th>
                     <th>Building Name</th>
                     <th>Street Name</th>
                     <th>City</th>
@@ -48,8 +46,6 @@ export default function ViewAllBuildings({landlord}) {
                     buildings.buildings.map((building) => {
                         return(
                             <tr>
-                                <td>{building.id}</td>
-                                <td>{building.landlordid}</td>
                                 <td>{building.buildingname}</td>
                                 <td>{building.streetname}</td>
                                 <td>{building.city}</td>

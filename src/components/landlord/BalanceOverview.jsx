@@ -110,12 +110,14 @@ export default function BalanceOverview() {
         <table>
             <thead>
                 <tr> 
+                    <th></th>
                     <th>STATUS</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Balance</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -123,7 +125,10 @@ export default function BalanceOverview() {
                     state.tenants.map((tenant) => {
                         total_balances += tenant.balance;
                         return (
-                            <tr onClick={()=>{viewTenant(tenant)}}>
+                            <tr >
+                                <td>
+                                    <button onClick={()=>{viewTenant(tenant)}}>Details</button>
+                                </td>
                                 <td>{findStatus(tenant.balance)}</td>
                                 <td>{tenant.firstname}</td>
                                 <td>{tenant.lastname}</td>
@@ -135,7 +140,7 @@ export default function BalanceOverview() {
                     })
                 }
                 <tr>
-                    <td colSpan={5}>TOTAL BALANCES</td>
+                    <td colSpan={6} style={{ textAlign: 'right' }}>TOTAL BALANCES</td>
                     <td>${formatBalance(total_balances)}</td>
                 </tr>
             </tbody>
