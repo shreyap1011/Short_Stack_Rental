@@ -1,0 +1,719 @@
+.App {
+  text-align: center;
+}
+
+.icon{
+  padding-left: 30px;
+}
+
+.person{
+  position: absolute;
+  height: 20px;
+  margin: 28px 0px 0px -180px;
+  filter: invert(16%) sepia(11%) saturate(6650%) hue-rotate(346deg) brightness(96%) contrast(82%);
+}
+
+.lock{
+  position: absolute;
+  height: 25px;
+  margin: 3px 0px 0px -286px;
+  filter: invert(16%) sepia(11%) saturate(6650%) hue-rotate(346deg) brightness(96%) contrast(82%);
+
+}
+
+.tenant{
+  margin: 25px 0px 0px -180px;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.landing-page {
+  color:#5F321F;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.landing-page h1{
+  font-size: 50px;
+}
+.landing-page p {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.landing-page img{
+  height: 200px;
+  width: auto;
+}
+
+.landing-page button {
+  width: 250px;
+  background-color: #5F321F;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  transition: transform 0.2s ease;
+  color: #F6EBCE;
+  font-weight: bold;
+}
+
+.landing-page button:hover {
+  background-color: rgb(206, 157, 122);
+  /* background-color: #F6EBCE; */
+  color: #5F321F;
+  /* color: black; */
+  transform: scale(1.1);
+}
+
+
+/* Add styles for the entire login container */
+.login-container, .registration-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Style the login box */
+.login-box, .registration-box {
+  background-color: #f5f5f5;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 50px;
+  border-radius: 8px;
+ /* width: 300px;*/
+  box-shadow: 6px 3px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the input fields */
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Style the login button */
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.pay-now-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
+/*image*/
+
+.container {
+  display: flex;
+}
+
+.building-container {
+  width: 50%;
+}
+
+.building-image {
+  width: 100%;
+  height: auto;
+}
+
+.login-container, .registration-container {
+  width: 50%;
+}
+
+
+
+.logo-image {
+  width: 300px; /* Adjust the width as needed */
+  height: auto;
+}
+
+
+
+/* Add styles for the user type buttons */
+.user-type-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Adjust the gap as needed */
+}
+
+/* Style for the landlord and tenant buttons */
+.user-type-button {
+  background-color: #17a2b8; /* Change to your preferred color */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-type-button:hover {
+  background-color: #138496; /* Change to your preferred color */
+}
+
+/* Style for the login/signup buttons */
+.login-signup-button {
+  background-color: #5F321F;
+  color: #F6EBCE;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-signup-button:hover {
+  background-color: #472a1e;
+}
+
+.login-signup-txt a{
+  color: #472a1e;
+}
+
+.login-signup-txt{
+  color:rgb(100, 100, 100);
+  font-weight: bold;
+}
+
+
+/*landing page css*/
+.landing-page {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./img/landingPage.png'); /* Replace with the path to your image */
+  background-size: cover;
+  opacity: 60%;
+  filter: blur(10px); /* Adjust the blur intensity */
+  z-index: -1; /* Place the background image behind other elements */
+}
+
+.logo-image {
+  width: 150px; /* Adjust the width as needed */
+  margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+/*nav bar*/
+
+
+.navbar {
+  background-color: #1c1c1c;
+  padding: 10px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 1.5em;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+}
+
+.nav-list li {
+  margin-right: 20px;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.nav-list a:hover {
+  color: #1f788e;
+}
+
+.logo-image-navbar {
+  max-width: 150px;
+  margin-right: 10px;
+}
+
+/* */
+.nav-list li:last-child {
+  margin-right: 0;
+}
+
+/* */
+.nav-list li:last-child a {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.nav-list li:last-child a:hover {
+  color: #1f788e;
+}
+
+
+
+
+/*table container*/
+
+.table-container {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 80%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  margin: auto;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+button {
+  margin-top: 10px;
+}
+
+/*form container*/
+
+.form-container {
+  width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.building-form {
+  display: grid;
+  gap: 10px;
+}
+
+.form-group {
+  display: grid;
+  gap: 5px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+/*nav bar home page hover*/
+.nav-item {
+  cursor: pointer;
+  transition: color 0.3s ease; /* Add transition for smooth color change */
+}
+
+.nav-item:hover {
+  color: #007bff; /* Change color to your desired hover color */
+}
+
+
+/*tenant css*/
+body-tenant {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(246, 243, 240);
+  padding: 0px 10% 10% 5%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#dashboard-tenant {
+  display: flex;
+}
+
+button-tenant {
+  background-color: rgb(66, 62, 181);
+  color: black;
+}
+
+button:hover-tenant {
+  background-color: rgb(125, 101, 70);    
+  color: white;
+}
+
+
+#info-tenant {
+  margin-right: 5%;
+}
+
+#contact--tenant {
+  background-color: rgb(69, 12, 12);
+  border-radius: 10px;
+  padding: 10px 20px 20px 20px;
+  margin-bottom: 20px;
+  color: bisque;
+}
+
+#contact-card-tenant p {
+  margin: 0%;
+}
+
+#balance-summary-tenant {
+  align-items: center;
+  background-color: rgb(69, 12, 12);
+  color: bisque;
+  border-radius: 10px;
+  padding: 10px 20px 20px 20px;
+}
+
+#balance-summary-tenant table{
+  border-style: hidden;
+  background-color: rgb(69, 12, 12);
+  color: bisque;
+}
+
+#balance-summary-tenant td {
+  border-style: hidden;
+}
+
+#balance-tenant {
+  display: inline-flex;
+  align-items: center;
+}
+
+#top-right-head-tenant {
+  margin: 0px;
+  padding: 5px ;
+  text-align: center;
+}
+
+#top-right-head-tenant > h2 {
+  margin: 0px auto;
+}
+
+#table-head-tenant {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #040404;
+  color: #ffffff;
+  width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-bottom: 0;
+}
+
+table-tenant {
+  margin: 0px auto 20px;
+  background-color: white;
+}
+
+.tenant-custom-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+}
+
+
+/*testing tenant side*/
+
+#dashboard-tenant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-balance-container {
+  margin: 20px 0;
+}
+
+#top-right-head-tenant {
+  text-align: center;
+  margin: 0;
+  padding: 5px;
+}
+
+#balance-tenant {
+  /* Additional styling for balance, if needed */
+}
+
+
+#contact-card-tenant {
+  border: 2px solid rgb(69, 12, 12);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#contact-card-tenant h3 {
+  border-bottom: 2px solid rgb(69, 12, 12);
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+/*card detail form for tenant*/
+.payment-form {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px;
+  max-width: 100%;
+  margin: auto;
+}
+
+/* Apply styles only to elements within the form with the class "payment-form" */
+.payment-form h2 {
+  color: #333;
+  text-align: center;
+}
+
+.payment-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.payment-form input,
+.payment-form select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.payment-form select {
+  appearance: none;
+}
+
+.payment-form input[type="submit"] {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  display: block;
+  margin-top: 15px;
+}
+
+.payment-form input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.payment-form h3 {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #333;
+}
+
+/*lease form*/
+
+.lease-form {
+  /*padding-top: 30px;*/
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 1300px;
+  max-width: 100%;
+  margin: auto; /* Center the form */
+}
+
+/* Apply styles only to elements within the form with the class "lease-form" */
+.lease-form h3 {
+  color: #333;
+  text-align: center;
+}
+
+.lease-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.lease-form input,
+.lease-form select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.lease-form input[type="number"] {
+  width: calc(100% - 20px); /* Adjust for the $ sign in the input field */
+}
+
+.lease-form input[type="submit"],
+.lease-form button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  display: block;
+  margin-top: 15px;
+}
+
+.lease-form input[type="submit"]:hover,
+.lease-form button:hover {
+  background-color: #45a049;
+}
+
+.lease-form {
+  display: flex;
+  flex-direction: row; /* Set to row to make it horizontal */
+  justify-content: space-between; /* Add space between the two sections */
+  align-items: flex-start; /* Align items to the top of the container */
+}
+
+.form-row {
+  flex-basis: 30%; /* Adjust as needed based on your design */
+}
+
+.form-row h3 {
+  margin-bottom: 10px; /* Add space below the headings */
+}
+
+.form-row label {
+  margin-right: 10px;
+}
+
+.create-lease-button {
+  margin-top: auto /* Add space above the button */
+}
+
+/*add bill*/
+#bill table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px; /* Add space below the table */
+}
+
+#bill th, #bill td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#bill th {
+  background-color: #f2f2f2;
+}
+
+#add-bill {
+  margin-top: 10px; /* Add space above the add-bill div */
+}
+
+/*delete button for bill*/
+
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: darkred;
+}
+
+#personal-info-view-tenant {
+  display : flex;
+  justify-content: center;
+}
+
+#personal-info-view-tenant > div {
+  margin: 0px 20px 0px 20px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0px 0px 0px 0px;
+  width: 300px;
+}
+
+#view-tenant-tables {
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+}
+
+#view-tenant-tables > div{
+  margin: 40px 0px 40px 80px;
+}
+
+#tenant-dash-pay-history {
+  margin: 0% 20% 0% 20%;
+}
